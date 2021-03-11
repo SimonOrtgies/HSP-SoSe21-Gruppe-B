@@ -10,7 +10,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            hjgdetvcgfsxngxdfgfxhx
+            Console.WriteLine("hjgdetvcgfsxngxdfgfxhx");
+            Console.ReadKey();
         }
     }
 }
