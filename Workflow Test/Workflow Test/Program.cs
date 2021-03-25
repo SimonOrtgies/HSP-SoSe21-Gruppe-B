@@ -15,7 +15,7 @@ namespace Hello_World_Mecke
         {
             // Ausgabe Benutzer 1
 
-            Console.WriteLine("ABCDEFG");
+            Console.WriteLine("Moin Moin");
 
             // Ausgabe Benutzer 2
             Console.WriteLine("Nǐ hǎo, shìjiè");
