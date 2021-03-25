@@ -14,7 +14,7 @@ namespace Hello_World_Mecke
         static void Main(string[] args) // Hier beginnt das Hauptprogramm 
         {
             // Ausgabe Benutzer 1
-            Console.WriteLine("See you Later alligator");
+            Console.WriteLine("Goodbye Crocodile");
 
             // Ausgabe Benutzer 2
             Console.WriteLine("Nǐ hǎo, shìjiè");
