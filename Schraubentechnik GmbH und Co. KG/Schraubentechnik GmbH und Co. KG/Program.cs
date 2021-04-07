@@ -6,7 +6,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Willkommen beim Schraubenprogramm");
         }
     }
 }
