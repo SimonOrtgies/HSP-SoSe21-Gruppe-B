@@ -4,7 +4,44 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
+        {
+            int AnzahlProgramme = 0;
+
+            while(AnzahlProgramme < 3)
+            {
+                Console.WriteLine("(1)Gewindeart auswählen");
+                Console.WriteLine("(2)Thema2");
+                Console.WriteLine("(3)Thema3");
+
+                string Programmnummer = Console.ReadLine();
+
+                Console.Clear();
+
+                switch (Programmnummer)
+                {
+                    case "1":
+                        Gewindeart();
+                        AnzahlProgramme++;
+                        break;
+                    case "2":
+                        Thema2();
+                        AnzahlProgramme++;
+                        break;
+                    case "3":
+                        Thema3();
+                        AnzahlProgramme++;
+                        break;
+                    default:
+                        Console.WriteLine("wählen Sie ein mögliches Programm aus");
+                        break;
+                };
+
+            }
+            
+
+        }
+        static void Gewindeart()
         {
             Boolean Rechtsgewinde = true;
             string i;
@@ -52,6 +89,16 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Console.WriteLine("Geben Sie die Gewindegröße ein");
 
 
+        }
+
+        static void Thema2()
+        {
+            Console.WriteLine("Thema2");
+        }
+
+        static void Thema3()
+        {
+            Console.WriteLine("Thema3");
         }
     }
 }
