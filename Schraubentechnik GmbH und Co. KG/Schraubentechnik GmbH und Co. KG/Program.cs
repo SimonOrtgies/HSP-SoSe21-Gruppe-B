@@ -4,101 +4,143 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 {
     class Program
     {
-        static void Main()
+        
+        
+
+
+        static void Main(string[] args)
         {
-            int AnzahlProgramme = 0;
 
-            while(AnzahlProgramme < 3)
-            {
-                Console.WriteLine("(1)Gewindeart auswählen");
-                Console.WriteLine("(2)Thema2");
-                Console.WriteLine("(3)Thema3");
+            Schraube s = frageNachMassen();
+            Schraube s2 = frageNachMassen();
+            s.printSchraube();
+            s2.printSchraube();
 
-                string Programmnummer = Console.ReadLine();
 
-                Console.Clear();
-
-                switch (Programmnummer)
-                {
-                    case "1":
-                        Gewindeart();
-                        AnzahlProgramme++;
-                        break;
-                    case "2":
-                        Thema2();
-                        AnzahlProgramme++;
-                        break;
-                    case "3":
-                        Thema3();
-                        AnzahlProgramme++;
-                        break;
-                    default:
-                        Console.WriteLine("wählen Sie ein mögliches Programm aus");
-                        break;
-                };
-
-            }
             
+
+            //Console.WriteLine("M ");
+
+            
+
+
+
+            //Boolean Rechtsgewinde = true;
+            //string i;
+            //int j = 1;
+            
+            
+            //Console.WriteLine("Willkommen beim Schraubenprogramm");
+
+            //// Abfrage Rechtsgewinde - Linksgewinde
+
+            //Boolean eingabeGueltig = false;
+
+            //do
+            //{
+            //    Console.WriteLine("Rechtsgewinde(r) oder Linksgewinde(l)");
+            //    i = Console.ReadLine();
+            //    if (i == "r")
+            //    {
+            //        Rechtsgewinde = true;
+            //        eingabeGueltig = true;
+            //    }
+            //    else if (i == "l")
+            //    {
+            //        Rechtsgewinde = false;
+            //        eingabeGueltig = true;
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("ungültige eingabe!");
+            //    }
+            //} while (!eingabeGueltig);
+                
+                
+
+            ////KONTROLLE
+            //if(Rechtsgewinde == true)
+            //{
+            //    Console.WriteLine("Rechtsgewinde");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Linksgewinde");
+            //}
+
+            ////Eingabe Gewindegröße
+
+            //Console.WriteLine("Geben Sie die Gewindegröße ein");
+
 
         }
-        static void Gewindeart()
+
+        static public Schraube frageNachMassen()
         {
-            Boolean Rechtsgewinde = true;
-            string i;
-            int j = 1;
-            
-            
+
+            Schraube schraube = new Schraube();
+
             Console.WriteLine("Willkommen beim Schraubenprogramm");
-
-            // Abfrage Rechtsgewinde - Linksgewinde
-
-            while (j == 1 )
+            Boolean gueltig;
+            do
             {
                 Console.WriteLine("Rechtsgewinde(r) oder Linksgewinde(l)");
-                i = Console.ReadLine();
-                if(i == "r")
+                gueltig = true;
+                string input = Console.ReadLine();
+                Gewinderichtung r = Gewinderichtung.Linksgewinde; // Damit er etwas hat falls nichts zugewiesen wird
+                if (input.Equals("l"))
                 {
-                    Rechtsgewinde = true;
-                    j = 0;
+                    r = Gewinderichtung.Linksgewinde;
                 }
-                else if(i == "l")
+                else if (input.Equals("r"))
                 {
-                    Rechtsgewinde = false;
-                    j = 0;
+                    r = Gewinderichtung.Linksgewinde;
                 }
-                else 
+                else
                 {
-                    Console.WriteLine("Ungültige Eingabe!");
+                    Console.WriteLine("ungültige eingabe!");
+                    gueltig = false;
                 }
-            }
-                
-                
 
-            //KONTROLLE
-            if(Rechtsgewinde == true)
+                schraube.gewinderichtung = r; // speichert die Gewinderichtung in dem neuen Objekt schraube 
+            } while (!gueltig);
+
+
+            
+            do
             {
-                Console.WriteLine("Rechtsgewinde");
-            }
-            else
-            {
-                Console.WriteLine("Linksgewinde");
-            }
+                gueltig = true;
+                try
+                {
+                    MetrischeGewindegroesse g = null; // initialisierung 
+                    Console.WriteLine("Gib die Gewindegrösse ein mein Kerl!");
+                    float input = (float)Convert.ToDouble(Console.ReadLine());
+                    g = MassTabelle.getMetrischeGewindeG(input);
+                    if (g == null)
+                    {
+                        Console.WriteLine("Nicht vorhanden");
+                        gueltig = false;
+                    }
+                    else
+                    {
+                        schraube.metrischeGewindegroesse = g;
+                        string s = g.printGewinde();
+                        Console.WriteLine(s);
+                    }
 
-            //Eingabe Gewindegröße
-
-            Console.WriteLine("Geben Sie die Gewindegröße ein");
 
 
-        }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Bist du behindert gib einfach Zahl ein??");
+                    gueltig = false;
+                }
 
-        static void Thema2()
-        {
-            Console.WriteLine("Thema2");
-        }
+            } while (!gueltig);
 
-        static void Thema3()
-        {
-            Console.WriteLine("Thema3");
+            
+            return schraube;
         }
     }
 }
