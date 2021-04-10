@@ -4,54 +4,143 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 {
     class Program
     {
+        
+        
+
+
         static void Main(string[] args)
         {
-            Boolean Rechtsgewinde = true;
-            string i;
-            int j = 1;
+
+            Schraube s = frageNachMassen();
+            Schraube s2 = frageNachMassen();
+            s.printSchraube();
+            s2.printSchraube();
+
+
+            
+
+            //Console.WriteLine("M ");
+
+            
+
+
+
+            //Boolean Rechtsgewinde = true;
+            //string i;
+            //int j = 1;
             
             
+            //Console.WriteLine("Willkommen beim Schraubenprogramm");
+
+            //// Abfrage Rechtsgewinde - Linksgewinde
+
+            //Boolean eingabeGueltig = false;
+
+            //do
+            //{
+            //    Console.WriteLine("Rechtsgewinde(r) oder Linksgewinde(l)");
+            //    i = Console.ReadLine();
+            //    if (i == "r")
+            //    {
+            //        Rechtsgewinde = true;
+            //        eingabeGueltig = true;
+            //    }
+            //    else if (i == "l")
+            //    {
+            //        Rechtsgewinde = false;
+            //        eingabeGueltig = true;
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("ungültige eingabe!");
+            //    }
+            //} while (!eingabeGueltig);
+                
+                
+
+            ////KONTROLLE
+            //if(Rechtsgewinde == true)
+            //{
+            //    Console.WriteLine("Rechtsgewinde");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Linksgewinde");
+            //}
+
+            ////Eingabe Gewindegröße
+
+            //Console.WriteLine("Geben Sie die Gewindegröße ein");
+
+
+        }
+
+        static public Schraube frageNachMassen()
+        {
+
+            Schraube schraube = new Schraube();
+
             Console.WriteLine("Willkommen beim Schraubenprogramm");
-
-            // Abfrage Rechtsgewinde - Linksgewinde
-
-            while (j == 1 )
+            Boolean gueltig;
+            do
             {
                 Console.WriteLine("Rechtsgewinde(r) oder Linksgewinde(l)");
-                i = Console.ReadLine();
-                if(i == "r")
+                gueltig = true;
+                string input = Console.ReadLine();
+                Gewinderichtung r = Gewinderichtung.Linksgewinde; // Damit er etwas hat falls nichts zugewiesen wird
+                if (input.Equals("l"))
                 {
-                    Rechtsgewinde = true;
-                    j = 0;
+                    r = Gewinderichtung.Linksgewinde;
                 }
-                else if(i == "l")
+                else if (input.Equals("r"))
                 {
-                    Rechtsgewinde = false;
-                    j = 0;
+                    r = Gewinderichtung.Linksgewinde;
                 }
-                else 
+                else
                 {
-                    Console.WriteLine("Ungültige Eingabe!");
+                    Console.WriteLine("ungültige eingabe!");
+                    gueltig = false;
                 }
-            }
-                
-                
 
-            //KONTROLLE
-            if(Rechtsgewinde == true)
+                schraube.gewinderichtung = r; // speichert die Gewinderichtung in dem neuen Objekt schraube 
+            } while (!gueltig);
+
+
+            
+            do
             {
-                Console.WriteLine("Rechtsgewinde");
-            }
-            else
-            {
-                Console.WriteLine("Linksgewinde");
-            }
+                gueltig = true;
+                try
+                {
+                    MetrischeGewindegroesse g = null; // initialisierung 
+                    Console.WriteLine("Gib die Gewindegrösse ein mein Kerl!");
+                    float input = (float)Convert.ToDouble(Console.ReadLine());
+                    g = MassTabelle.getMetrischeGewindeG(input);
+                    if (g == null)
+                    {
+                        Console.WriteLine("Nicht vorhanden");
+                        gueltig = false;
+                    }
+                    else
+                    {
+                        schraube.metrischeGewindegroesse = g;
+                        string s = g.printGewinde();
+                        Console.WriteLine(s);
+                    }
 
-            //Eingabe Gewindegröße
-
-            Console.WriteLine("Geben Sie die Gewindegröße ein");
 
 
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Bist du behindert gib einfach Zahl ein??");
+                    gueltig = false;
+                }
+
+            } while (!gueltig);
+
+            
+            return schraube;
         }
     }
 }
