@@ -87,14 +87,14 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 Console.WriteLine("Rechtsgewinde(r) oder Linksgewinde(l)");
                 gueltig = true;
                 string input = Console.ReadLine();
-                Gewinderichtung r = Gewinderichtung.Linksgewinde; // Damit er etwas hat falls nichts zugewiesen wird
+                Gewinderichtung r = Gewinderichtung.Rechtsgewinde; // Damit er etwas hat falls nichts zugewiesen wird
                 if (input.Equals("l"))
                 {
                     r = Gewinderichtung.Linksgewinde;
                 }
                 else if (input.Equals("r"))
                 {
-                    r = Gewinderichtung.Linksgewinde;
+                    r = Gewinderichtung.Rechtsgewinde;
                 }
                 else
                 {
