@@ -16,11 +16,11 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public float gewindeLaenge;
 
         public Schraube (Gewinderichtung g, float schaftL, float gewindeL)
-            {
+        {
             gewinderichtung = g;
             schaftLaenge = schaftL;
             gewindeLaenge = gewindeL;
-            }
+        }
 
         public Schraube(float schaftL, float gewindeL)
         {

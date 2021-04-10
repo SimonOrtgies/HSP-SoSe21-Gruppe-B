@@ -8,6 +8,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 {
     enum Gewinderichtung
     {
-        Rechtsgewinde, Linksgewinde
+        Rechtsgewinde, 
+        Linksgewinde
     }
 }
