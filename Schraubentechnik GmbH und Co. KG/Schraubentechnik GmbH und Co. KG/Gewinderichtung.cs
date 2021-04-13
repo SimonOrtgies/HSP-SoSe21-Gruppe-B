@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Schraubentechnik_GmbH_und_Co._KG
 {
-    enum Gewinderichtung
+    public enum Gewinderichtung    //Enummeration: "Aufzählung" schraube ist entweder Links oder Rechtsgewinde
     {
         Rechtsgewinde, 
         Linksgewinde

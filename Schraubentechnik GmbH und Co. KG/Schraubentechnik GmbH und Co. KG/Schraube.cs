@@ -8,35 +8,38 @@ using System.Threading.Tasks;
 namespace Schraubentechnik_GmbH_und_Co._KG
 {
 
-    class Schraube
+    public class Schraube  //Objekt SChraube
     {
-        public Gewinderichtung gewinderichtung;
+        public Gewinderichtung gewinderichtung; //Variablen/Informationen die die Schraube beeinhaltet
         public MetrischeGewindegroesse metrischeGewindegroesse;
-        public float schaftLaenge;
+        public Schaftlaenge schaftLaenge;
         public float gewindeLaenge;
 
-        public Schraube (Gewinderichtung g, float schaftL, float gewindeL)
+        public Schraube (Gewinderichtung g, Schaftlaenge schaftL, float gewindeL)  //Aufbau der Struktur
         {
             gewinderichtung = g;
             schaftLaenge = schaftL;
             gewindeLaenge = gewindeL;
         }
 
-        public Schraube(float schaftL, float gewindeL)
+        public Schraube(Schaftlaenge schaftL, float gewindeL)
         {
             gewinderichtung = Gewinderichtung.Rechtsgewinde;
             schaftLaenge = schaftL;
             gewindeLaenge = gewindeL;
         }
-        public Schraube()
+        public Schraube()   //Leeres Objekt, siehe Überladung und so
         {
             
         }
 
-        public void printSchraube()
+        public void printSchraube() //Unterprogramm zur Ausgabe der Schraubeninformationen
         {
-            Console.WriteLine("INFOS über die Schraube");
-            //...
+            Console.WriteLine("");
+            Console.WriteLine("INFOS über die Schraube:");
+            Console.WriteLine("Gewinderichtung: " + gewinderichtung);
+            Console.WriteLine("Gewindegröße: M" + metrischeGewindegroesse.bezeichnung);
+            Console.WriteLine("Schaftlänge: " + schaftLaenge.schaftlaenge + " mm");
         }
     }
 }

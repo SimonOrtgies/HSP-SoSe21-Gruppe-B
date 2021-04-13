@@ -11,10 +11,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         static void Main(string[] args)
         {
 
-            Schraube s = frageNachMassen();
-            Schraube s2 = frageNachMassen();
-            s.printSchraube();
-            s2.printSchraube();
+            Schraube s = frageNachMassen(); //Objekt Schraube führt UNterprogramm aus
+            //Schraube s2 = frageNachMassen();  //Um weitere Schraube zu erstellen in einem Programm
+
+
+            s.printSchraube();  //Ausgabe der Daten die in der Schraube gespeichert sind (noch nicht fertig)
+            //s2.printSchraube();
 
 
             
@@ -78,69 +80,20 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         static public Schraube frageNachMassen()
         {
 
-            Schraube schraube = new Schraube();
+            Schraube schraube = new Schraube(); //Neues Objekt des Typ Schraube wird erstellt 
 
             Console.WriteLine("Willkommen beim Schraubenprogramm");
-            Boolean gueltig;
-            do
-            {
-                Console.WriteLine("Rechtsgewinde(r) oder Linksgewinde(l)");
-                gueltig = true;
-                string input = Console.ReadLine();
-                Gewinderichtung r = Gewinderichtung.Rechtsgewinde; // Damit er etwas hat falls nichts zugewiesen wird
-                if (input.Equals("l"))
-                {
-                    r = Gewinderichtung.Linksgewinde;
-                }
-                else if (input.Equals("r"))
-                {
-                    r = Gewinderichtung.Rechtsgewinde;
-                }
-                else
-                {
-                    Console.WriteLine("ungültige eingabe!");
-                    gueltig = false;
-                }
+            //Variable um nach gültige EIngabe zu urteilen
 
-                schraube.gewinderichtung = r; // speichert die Gewinderichtung in dem neuen Objekt schraube 
-            } while (!gueltig);
+            schraube.gewinderichtung = UserAbfrage.getGewinderichtung();
 
+            schraube.metrischeGewindegroesse = UserAbfrage.getMetrischegewindegroesse();    //Objekt Schraube wird die gewindegröße
 
-            
-            do
-            {
-                gueltig = true;
-                try
-                {
-                    MetrischeGewindegroesse g = null; // initialisierung 
-                    Console.WriteLine("Gib die Gewindegrösse ein mein Kerl!");
-                    float input = (float)Convert.ToDouble(Console.ReadLine());
-                    g = MassTabelle.getMetrischeGewindeG(input);
-                    if (g == null)
-                    {
-                        Console.WriteLine("Nicht vorhanden");
-                        gueltig = false;
-                    }
-                    else
-                    {
-                        schraube.metrischeGewindegroesse = g;
-                        string s = g.printGewinde();
-                        Console.WriteLine(s);
-                    }
+            schraube.schaftLaenge = UserAbfrage.getSchaftlaenge(schraube);
 
 
 
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Bist du behindert gib einfach Zahl ein??");
-                    gueltig = false;
-                }
-
-            } while (!gueltig);
-
-            
-            return schraube;
+            return schraube;    //Rückgabe des Objekt Schraube an Main (mit allen Informationen)
         }
     }
 }
