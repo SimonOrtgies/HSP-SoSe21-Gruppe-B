@@ -138,5 +138,10 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             return s;
         }
 
+        public static float getGewindelaenge()
+        {
+
+        }
+
     }
 }

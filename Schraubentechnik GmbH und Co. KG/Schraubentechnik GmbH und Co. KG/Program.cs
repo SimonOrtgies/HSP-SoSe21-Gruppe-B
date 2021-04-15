@@ -12,67 +12,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         {
 
             Schraube s = frageNachMassen(); //Objekt Schraube führt UNterprogramm aus
-            //Schraube s2 = frageNachMassen();  //Um weitere Schraube zu erstellen in einem Programm
 
 
             s.printSchraube();  //Ausgabe der Daten die in der Schraube gespeichert sind (noch nicht fertig)
-            //s2.printSchraube();
-
-
-            
-
-            //Console.WriteLine("M ");
-
-            
-
-
-
-            //Boolean Rechtsgewinde = true;
-            //string i;
-            //int j = 1;
-            
-            
-            //Console.WriteLine("Willkommen beim Schraubenprogramm");
-
-            //// Abfrage Rechtsgewinde - Linksgewinde
-
-            //Boolean eingabeGueltig = false;
-
-            //do
-            //{
-            //    Console.WriteLine("Rechtsgewinde(r) oder Linksgewinde(l)");
-            //    i = Console.ReadLine();
-            //    if (i == "r")
-            //    {
-            //        Rechtsgewinde = true;
-            //        eingabeGueltig = true;
-            //    }
-            //    else if (i == "l")
-            //    {
-            //        Rechtsgewinde = false;
-            //        eingabeGueltig = true;
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("ungültige eingabe!");
-            //    }
-            //} while (!eingabeGueltig);
-                
-                
-
-            ////KONTROLLE
-            //if(Rechtsgewinde == true)
-            //{
-            //    Console.WriteLine("Rechtsgewinde");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Linksgewinde");
-            //}
-
-            ////Eingabe Gewindegröße
-
-            //Console.WriteLine("Geben Sie die Gewindegröße ein");
 
 
         }
@@ -91,7 +33,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             schraube.schaftLaenge = UserAbfrage.getSchaftlaenge(schraube);
 
-
+            schraube.gewindeLaenge = UserAbfrage.getGewindelenge();
 
             return schraube;    //Rückgabe des Objekt Schraube an Main (mit allen Informationen)
         }
