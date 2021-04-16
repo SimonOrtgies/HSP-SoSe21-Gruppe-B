@@ -153,29 +153,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 if (input.Equals("n"))  //Wenn nein
                 {
                     Gewindelaenge.benutzerdefinierteGewindelaenge(schraube);
-                    //do
-                    //{
-                    //    gueltigInnen1 = true;
-                    //   Console.WriteLine("Ist die Gewindelänge bekannt(1) oder soll die minimal nötige Gewindelänge genutzt werden(2)?"); //Abfrage ob Gewindelänge bekannt
-                    //    int input2 = Convert.ToInt32(Console.ReadLine());  //Benutzereingabe
-                    //    if (input2 == 1)
-                    //    {
-                    //        Gewindelaenge.bekannteGewindelaenge(schraube); //Unterprogramm in Gewindelaenge.cs
-                    //        
-                    //    }
-                    //    else if (input2 == 2)
-                    //    {
-                    //        g.gewindeLaenge = Gewindelaenge.minGewindeLaengeRechnung(schraube.metrischeGewindegroesse.mutterhoehe); //minimal nötige Gewindelänge aus dem Unterprogramm in Gewindelaenge.cs mithilfe der mutterhoehe
-                    //        Console.WriteLine("Die Gewindelänge beträgt " + g.gewindeLaenge + " mm");
-                    //    }
-                    //    else
-                    //    {
-                    //        Console.WriteLine("Ungültige Eingabe");
-                    //        gueltigInnen1 = false;
-                    //    }
-                    //
-                    //} while (!gueltigInnen1);
-                                    
+                                                        
                 }
                 else if (input.Equals("j")) //Gewindelänge wird gleich der Schaftlänge gesetzt
                 {
