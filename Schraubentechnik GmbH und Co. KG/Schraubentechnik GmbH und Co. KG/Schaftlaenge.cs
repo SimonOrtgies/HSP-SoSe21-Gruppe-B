@@ -42,7 +42,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         public static float berechneSchaftlaenge(float mutterhoehe, float klemmlaenge)  //Unterprogramm um Schaftlänge zu berechnen
         {
-            float s = mutterhoehe + klemmlaenge + 4;    //Berchenung (Formel ist wirrwarr)
+            float s = mutterhoehe + klemmlaenge + 0.25f * mutterhoehe;    //Berchenung (Formel ist wirrwarr)
             float min = 3 * mutterhoehe;    //Erneute minSchaftlängen berechnung, weil so einfacher
             float max = 100;    //Erneute maxSchaftlängen festlegen
             if(s < min) //Wenn schaftlänge zu kurz
