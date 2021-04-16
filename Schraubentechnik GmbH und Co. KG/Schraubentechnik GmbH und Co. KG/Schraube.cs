@@ -15,6 +15,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public Schaftlaenge schaftLaenge;
         public Gewindelaenge gewindeLaenge;
         public string festigkeitsklasse;
+        public int anzahl;
 
         public Schraube (Gewinderichtung g, Schaftlaenge schaftL, Gewindelaenge gewindeL)  //Aufbau der Struktur
         {
@@ -29,7 +30,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             schaftLaenge = schaftL;
             gewindeLaenge = gewindeL;
         }
-        public Schraube()   //Leeres Objekt, siehe Überladung und so
+        public Schraube()   //Leerer Konstruktor
         {
           
         }
@@ -43,6 +44,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Console.WriteLine("Schaftlänge: " + schaftLaenge.schaftlaenge + " mm");
             Console.WriteLine("Gewindelänge: " + gewindeLaenge.gewindeLaenge + " mm");
             Console.WriteLine("Festigkeitsklasse: " + festigkeitsklasse);
+            Console.WriteLine("Anzahl: " + anzahl);
         }
     }
 }

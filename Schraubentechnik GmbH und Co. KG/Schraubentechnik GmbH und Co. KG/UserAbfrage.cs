@@ -258,5 +258,45 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             return f; // gibt die Festigkeitsklasse zurück zurück
         }
 
+        public static int getAnzahl()
+        {
+            Boolean gueltig;    //Gültigkeits Variable
+            int anzahl = 1; //Variable für die ANzahl, anfangs auf 1 gesetzt. damit man was hat
+            int max = 1000000; //Maximal abnehmbare ANzahl
+            int min = 1;    //Minimal abnehmbare ANzahl
+
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Wie viele Exemplare dieser Schraube werden benötigt?");
+                    gueltig = true;
+                    int input = Convert.ToInt32(Console.ReadLine());
+
+                    if (input > max)    //Test ob zu viele Schrauben gewollt werden
+                    {
+                        Console.WriteLine("Es sind maximal " + max + " Schrauben möglich!");
+                        gueltig = false;
+                    }else if(input < min)   //Test ob zu wenig Schrauben gewollt werden
+                    {
+                        Console.WriteLine("Es sind minimal " + min + " Schrauben nötig!");
+                        gueltig = false;
+                    }
+                    else
+                    {
+                        anzahl = input; // Setzen der Anzahl, wenn die vorherigen Tests negativ waren
+                    }
+                }
+                catch (Exception e) //(sinngemäß: testen und verarbeiten) rahmt einen Block von Anweisungen (try statements) ein und legt Reaktionen (catch statementes) fest, die im Fehlerfall ausgeführt werden.
+                {   //Wenn anstatt einer Zahl ein Buchstabe eingegeben wird, würde das Programm abstürzen. Durch try und catch wird der Fall abgefangen und folgendes ausgeführt:
+                    Console.WriteLine("Ungültige Eingabe");
+                    gueltig = false;
+                }
+
+
+            } while (!gueltig);
+            return anzahl;  //Rückgabe der Anzahl
+        }
+
     }
 }

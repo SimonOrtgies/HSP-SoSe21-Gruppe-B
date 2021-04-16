@@ -43,7 +43,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         static public MetrischeGewindegroesse getMetrischeGewindeG(float input)  //Unterprogramm zum Durchsuchen der obigen Tabelle
         {
             //Durchsuchen der Tabelle nach der Bezeichnung
-            for(int i = 0; i < 500; i++)  //Bereich von i anpassen wenn Tabelle erweitert wird
+            for(int i = 0; i < 21; i++)  //Bereich von i anpassen wenn Tabelle erweitert wird
             {
                 if(tabelle[i].bezeichnung == input)
                 {

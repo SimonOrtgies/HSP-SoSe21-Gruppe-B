@@ -48,12 +48,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             float max = 100;    //Erneute maxSchaftlängen festlegen
             if(s < min) //Wenn schaftlänge zu kurz
             {
-                Console.WriteLine("Zu kurze Klemmlänge für diese Größe, mindestens " + min + " mm nötig");
+                Console.WriteLine("Zu kurze Klemmlänge für diese Größe, mindestens " + (min-1.25*mutterhoehe) + " mm nötig");
                 s = -1;     //Gewollte fehler Rückmeldung
 
             }else if(s > max)    //WEnn Schaftlänge zu groß
             {
-                Console.WriteLine("Zu lange Klemmlänge für diese Größe, maximal " + max + " mm möglich");
+                Console.WriteLine("Zu lange Klemmlänge für diese Größe, maximal " + (max-1.25*mutterhoehe) + " mm möglich");
                 s = -1;//Gewollte fehler Rückmeldung
             }
             else
@@ -61,6 +61,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 Console.WriteLine("Die berechnete Schaftlänge beträgt: " + s + " mm");
             }
             return s;
+
         }
 
     

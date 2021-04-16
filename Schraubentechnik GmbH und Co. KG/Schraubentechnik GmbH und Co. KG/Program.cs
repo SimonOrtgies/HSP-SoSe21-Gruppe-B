@@ -37,6 +37,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             schraube.festigkeitsklasse = UserAbfrage.getFestigkeit();
 
+            schraube.anzahl = UserAbfrage.getAnzahl();
+
             return schraube;    //Rückgabe des Objekt Schraube an Main (mit allen Informationen)
         }
     }
