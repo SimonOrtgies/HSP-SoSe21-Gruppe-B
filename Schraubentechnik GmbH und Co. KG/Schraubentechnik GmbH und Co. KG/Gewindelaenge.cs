@@ -54,7 +54,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             return g;
         }
         
-        public static float benutzerdefinierteGewindelaenge(Schraube schraube)
+        public static float benutzerdefinierteGewindelaenge(Schraube schraube)  //Unterprogramm für eingegebene Schrauben, abrufbar von UserAbfrage.cs
         {
             Boolean gueltig;
             Gewindelaenge g = new Gewindelaenge(schraube.schaftLaenge, schraube.metrischeGewindegroesse);
@@ -68,7 +68,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 
                     if (input2 == 1)
                     {
-                        bekannteGewindelaenge(schraube); //Unterprogramm in Gewindelaenge.cs
+                        bekannteGewindelaenge(schraube); //Unterprogramm weiter unten
 
                     }
                     else if (input2 == 2)
@@ -92,7 +92,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             return g.gewindeLaenge;
         }
-        public static float bekannteGewindelaenge(Schraube schraube)    //Unterprogramm von UserAbfrage.cs um den Code "clean" zu halten
+        public static float bekannteGewindelaenge(Schraube schraube)
         {
             Boolean gueltig;
             Gewindelaenge g = new Gewindelaenge(schraube.schaftLaenge, schraube.metrischeGewindegroesse);
