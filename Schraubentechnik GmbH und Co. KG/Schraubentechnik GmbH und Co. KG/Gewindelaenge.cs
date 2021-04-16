@@ -32,8 +32,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         }
 
         public static float berechneGewindeLaenge(float mutterhoehe, float schaftlaenge, float g)  //Unterprogramm um Gewindelänge zu berechnen
-        {
-            
+        {            
             float min = 2 * mutterhoehe;    //Erneute minGewindelängenBerechnung, weil so einfacher
             float max = schaftlaenge;    //Erneute maxGewindelängen festlegen
             if (g < min) //Wenn Gewindelänge zu kurz
@@ -68,7 +67,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 
                     if (input2 == 1)
                     {
-                        bekannteGewindelaenge(schraube); //Unterprogramm weiter unten
+                        g.gewindeLaenge = bekannteGewindelaenge(schraube); //Unterprogramm weiter unten
 
                     }
                     else if (input2 == 2)

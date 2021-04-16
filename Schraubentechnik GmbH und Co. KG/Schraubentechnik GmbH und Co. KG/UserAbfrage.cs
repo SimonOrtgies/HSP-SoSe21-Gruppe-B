@@ -23,10 +23,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 if (input.Equals("l"))
                 {
                     r = Gewinderichtung.Linksgewinde;   //Gewinderichtung.Linksgewinde ist funktion von Gewinderichtung.cs
+                    Console.WriteLine("Es wurde ein Linksgewinde gewählt");
                 }
                 else if (input.Equals("r"))
                 {
                     r = Gewinderichtung.Rechtsgewinde;
+                    Console.WriteLine("Es wurde ein Rechtsgewinde gewählt");
                 }
                 else
                 {
@@ -152,7 +154,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 string input = Console.ReadLine();
                 if (input.Equals("n"))  //Wenn nein
                 {
-                    Gewindelaenge.benutzerdefinierteGewindelaenge(schraube);  //Unterprogramm in Gewindelaenge.cs
+                    g.gewindeLaenge = Gewindelaenge.benutzerdefinierteGewindelaenge(schraube);  //Unterprogramm in Gewindelaenge.cs
                                                         
                 }
                 else if (input.Equals("j")) //Gewindelänge wird gleich der Schaftlänge gesetzt
