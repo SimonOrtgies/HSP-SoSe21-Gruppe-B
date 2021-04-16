@@ -212,7 +212,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             return g;
         }
 
-
         public static string getFestigkeit()
         {
             //AB HIER Festigkeitsklasse
