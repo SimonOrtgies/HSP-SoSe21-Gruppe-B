@@ -53,5 +53,33 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             }
             return g;
         }
+        //MÖGLICHES SCHREIBEN EINES UNTERPROGRAMMES STATT VERKETTETER SCHLEIFEN
+        //public static float bekannteGewindelaenge(Schraube schraube)
+        //{
+        //   Boolean gueltigInnen;
+        //    Gewindelaenge g = new Gewindelaenge(schraube.schaftLaenge, schraube.metrischeGewindegroesse);
+        //    do
+        //    {
+        //        try     //try und catch zum fehler abfangen
+        //        {
+        //            gueltigInnen = true;
+        //            Console.WriteLine("Wie lang ist die Gewindelänge (in mm)?");
+        //            float input3 = (float)Convert.ToDouble(Console.ReadLine());
+        //            g.gewindeLaenge = berechneGewindeLaenge(schraube.metrischeGewindegroesse.mutterhoehe, schraube.schaftLaenge.schaftlaenge, input3);   //Unterprogramm Schaftlänge in Schaftlaenge.cs aufrufen
+        //            if (g.gewindeLaenge == -1)    //Automatischer Fehlercode wenn gewählte Gewindelänge zu groß/klein (siehe Schaftlänge)
+        //            {
+        //                gueltigInnen = false;
+        //            }
+        //        }
+        //        catch (Exception) //Fehler werden abgefangen
+        //        {
+        //            Console.WriteLine("Bitte eine Zahl eingeben");
+        //            gueltigInnen = false;
+        //        }
+        //
+        //    } while (!gueltigInnen);
+        //
+        //    return g;
+        //}
     }
 }
