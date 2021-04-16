@@ -152,7 +152,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 string input = Console.ReadLine();
                 if (input.Equals("n"))  //Wenn nein
                 {
-                    Gewindelaenge.benutzerdefinierteGewindelaenge(schraube);
+                    Gewindelaenge.benutzerdefinierteGewindelaenge(schraube);  //Unterprogramm in Gewindelaenge.cs
                                                         
                 }
                 else if (input.Equals("j")) //Gewindelänge wird gleich der Schaftlänge gesetzt
