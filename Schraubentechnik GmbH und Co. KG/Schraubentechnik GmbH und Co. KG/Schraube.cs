@@ -14,6 +14,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public MetrischeGewindegroesse metrischeGewindegroesse;
         public Schaftlaenge schaftLaenge;
         public float gewindeLaenge;
+        public string festigkeitsklasse;
 
         public Schraube (Gewinderichtung g, Schaftlaenge schaftL, float gewindeL)  //Aufbau der Struktur
         {
@@ -30,7 +31,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         }
         public Schraube()   //Leeres Objekt, siehe Überladung und so
         {
-            
+          
         }
 
         public void printSchraube() //Unterprogramm zur Ausgabe der Schraubeninformationen
@@ -40,6 +41,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Console.WriteLine("Gewinderichtung: " + gewinderichtung);
             Console.WriteLine("Gewindegröße: M" + metrischeGewindegroesse.bezeichnung);
             Console.WriteLine("Schaftlänge: " + schaftLaenge.schaftlaenge + " mm");
+            Console.WriteLine("Festigkeitsklasse: " + festigkeitsklasse);
         }
     }
 }

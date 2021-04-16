@@ -138,9 +138,55 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             return s;
         }
 
-        public static float getGewindelaenge()
-        {
+        //public static float getGewindelaenge()
+        //{
 
+        // }
+
+
+        public static string getFestigkeit()
+        {
+            //AB HIER Festigkeitsklasse
+            Boolean gueltig;    //Variable um nach gültige Eingabe zu urteilen
+            string f = "5.8"; // Damit er etwas hat falls nichts zugewiesen wird
+            do
+            {
+                Console.WriteLine("Wählen Sie ihre Festigkeitsklasse:5.8(1), 6.8(2), 8.8(3), 9.8(4), 10.9(5), 12.9(6)");
+                gueltig = true;
+                string input = Console.ReadLine();
+
+                if (input.Equals("1"))
+                {
+                    f = "5.8";  
+                }
+                else if (input.Equals("2"))
+                {
+                    f = "6.8";
+                }
+                else if (input.Equals("3"))
+                {
+                    f = "8.8";
+                }
+                else if (input.Equals("4"))
+                {
+                    f = "9.8";
+                }
+                else if (input.Equals("5"))
+                {
+                    f = "10.8";
+
+                }
+                else if (input.Equals("6"))
+                {
+                    f = "12.9";
+                }
+                else
+                {
+                    Console.WriteLine("Ungültige Eingabe!");
+                    gueltig = false;
+                }
+            } while (!gueltig); //Abfrage ob Eingabe gültig war
+            return f; // gibt die Festigkeitsklasse zurück zurück
         }
 
     }
