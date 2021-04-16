@@ -55,6 +55,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 Console.WriteLine("Zu lange Klemmlänge für diese Größe, maximal " + max + " mm möglich");
                 s = -1;//Gewollte fehler Rückmeldung
             }
+            Console.WriteLine("Die berechnete Schaftlänge beträgt: " + s + " mm");
                 return s;
         }
 
