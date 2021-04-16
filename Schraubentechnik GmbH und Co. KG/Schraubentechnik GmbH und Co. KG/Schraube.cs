@@ -13,17 +13,17 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public Gewinderichtung gewinderichtung; //Variablen/Informationen die die Schraube beeinhaltet
         public MetrischeGewindegroesse metrischeGewindegroesse;
         public Schaftlaenge schaftLaenge;
-        public float gewindeLaenge;
+        public Gewindelaenge gewindeLaenge;
         public string festigkeitsklasse;
 
-        public Schraube (Gewinderichtung g, Schaftlaenge schaftL, float gewindeL)  //Aufbau der Struktur
+        public Schraube (Gewinderichtung g, Schaftlaenge schaftL, Gewindelaenge gewindeL)  //Aufbau der Struktur
         {
             gewinderichtung = g;
             schaftLaenge = schaftL;
             gewindeLaenge = gewindeL;
         }
 
-        public Schraube(Schaftlaenge schaftL, float gewindeL)
+        public Schraube(Schaftlaenge schaftL, Gewindelaenge gewindeL)
         {
             gewinderichtung = Gewinderichtung.Rechtsgewinde;
             schaftLaenge = schaftL;
@@ -41,6 +41,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Console.WriteLine("Gewinderichtung: " + gewinderichtung);
             Console.WriteLine("Gewindegröße: M" + metrischeGewindegroesse.bezeichnung);
             Console.WriteLine("Schaftlänge: " + schaftLaenge.schaftlaenge + " mm");
+            Console.WriteLine("Gewindelänge: " + gewindeLaenge.gewindeLaenge + " mm");
             Console.WriteLine("Festigkeitsklasse: " + festigkeitsklasse);
         }
     }

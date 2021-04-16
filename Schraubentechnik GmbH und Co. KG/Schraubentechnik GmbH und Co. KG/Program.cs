@@ -33,7 +33,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             schraube.schaftLaenge = UserAbfrage.getSchaftlaenge(schraube);
 
-            //schraube.gewindeLaenge = UserAbfrage.getGewindelenge();
+            schraube.gewindeLaenge = UserAbfrage.getGewindelaenge(schraube);
 
             schraube.festigkeitsklasse = UserAbfrage.getFestigkeit();
 

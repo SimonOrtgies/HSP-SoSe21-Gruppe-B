@@ -138,10 +138,79 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             return s;
         }
 
-        //public static float getGewindelaenge()
-        //{
+        public static Gewindelaenge getGewindelaenge(Schraube schraube)
+        {
+            //AB HIER GEWINDELÄNGE
+            Boolean gueltig;
+            Boolean gueltigInnen1;   //Für die innere Schleife 1. Ordnung
+            Boolean gueltigInnen2;   //Für die innere Schleife 2. Ordnung                   
+            Gewindelaenge g = new Gewindelaenge(schraube.schaftLaenge,schraube.metrischeGewindegroesse) ;   //Neues Objekt Gewindelänge wird erstellt, mit der Schaftlänge und der Gewindegröße als Eingangsparameter um die minGewindelänge aus der mutterhöhe und der Schaftlänge berechnen zu können.
 
-        // }
+            do
+            {
+                gueltig = true;
+                Console.WriteLine("Soll das Gewinde über die volle Schaftlänge gehen? (j/n)"); //Abfrage ob schaftLaenge=gewindeLaenge
+                string input = Console.ReadLine();
+                if (input.Equals("n"))  //Wenn nein
+                {
+                    do
+                    {
+                        gueltigInnen1 = true;
+                        Console.WriteLine("Ist die Gewindelänge bekannt(1) oder soll die minimal nötige Gewindelänge genutzt werden(2)?"); //Abfrage ob Gewindelänge bekannt
+                        int input2 = Convert.ToInt32(Console.ReadLine());  //Benutzereingabe
+                        if (input2 == 1)
+                        {
+                            do
+                            {
+                                try     //try und catch zum fehler abfangen
+                                {
+                                    gueltigInnen2 = true;
+                                    Console.WriteLine("Wie lang ist die Gewindelänge (in mm)?");
+                                    float input3 = (float)Convert.ToDouble(Console.ReadLine());
+                                    g.gewindeLaenge = Gewindelaenge.berechneGewindeLaenge(schraube.metrischeGewindegroesse.mutterhoehe, schraube.schaftLaenge.schaftlaenge, input3);   //Unterprogramm Schaftlänge in Schaftlaenge.cs aufrufen
+                                    if (g.gewindeLaenge == -1)    //Automatischer Fehlercode wenn gewählte Gewindelänge zu groß/klein (siehe Schaftlänge)
+                                    {
+                                        gueltigInnen2 = false;
+                                    }
+                                }
+                                catch (Exception e) //Fehler werden abgefangen
+                                {
+                                    Console.WriteLine("Bitte eine Zahl eingeben");
+                                    gueltigInnen2 = false;
+                                }
+
+                            } while (!gueltigInnen2);
+
+                            return g;
+                        }
+                        else if (input2 == 2)
+                        {
+                            g.gewindeLaenge = Gewindelaenge.minGewindeLaengeRechnung(schraube.metrischeGewindegroesse.mutterhoehe); //minimal nötige Gewindelänge aus dem Unterprogramm in Gewindelaenge.cs mithilfe der mutterhoehe
+                            Console.WriteLine("Die Gewindelänge beträgt " + g.gewindeLaenge + " mm");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ungültige Eingabe");
+                            gueltigInnen1 = false;
+                        }
+
+                    } while (!gueltigInnen1);
+                                    
+                }
+                else if (input.Equals("j")) //Gewindelänge wird gleich der Schaftlänge gesetzt
+                {
+                    g.gewindeLaenge = Gewindelaenge.maxGewindeLaengeRechnung(schraube.schaftLaenge.schaftlaenge);  //maximal mögliche Gewindelänge (Schaftlänge) aus dem Unterprogramm in Gewindelaenge.cs mithilfe der Schaftlänge
+                    Console.WriteLine("Die Gewindelänge beträgt: "+ g.gewindeLaenge + " mm");
+                    return g;
+                }
+                else    //Falls falsche Eingabe
+                {
+                    Console.WriteLine("Ungültige Eingabe!");
+                    gueltig = false;
+                }
+            } while (!gueltig);
+            return g;
+        }
 
 
         public static string getFestigkeit()

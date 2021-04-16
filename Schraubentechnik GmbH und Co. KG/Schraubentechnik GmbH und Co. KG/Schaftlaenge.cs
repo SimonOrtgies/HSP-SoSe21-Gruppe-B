@@ -25,12 +25,13 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             if(s >= minSchaftlaenge && s <= maxSchaftlaenge)    //Eingabe muss zwischen min und max Schaftlange liegen
             {
                 schaftlaenge = s;   //Setzen der Schaftlänge
-                return true;    //Boolean gueltig in Program.cs wird true
+                Console.WriteLine("Die gewählte Schaftlänge beträgt: " + s + " mm"); //Edit: Information über Eingabewert
+                return true;    //Boolean gueltig in UserAbfrage.cs wird true
             }
             else
             {
                 Console.WriteLine("Die Länge der Schraube muss zwischen " + minSchaftlaenge + " mm und " + maxSchaftlaenge + " mm liegen"); //Hinweis in welchen Bereich die Schaftlänge nur liegen darf
-                return false;   //Boolean gueltig in Program.cs wird false
+                return false;   //Boolean gueltig in UserAbfrage.cs wird false
             }
         }
 
@@ -55,8 +56,11 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 Console.WriteLine("Zu lange Klemmlänge für diese Größe, maximal " + max + " mm möglich");
                 s = -1;//Gewollte fehler Rückmeldung
             }
-            Console.WriteLine("Die berechnete Schaftlänge beträgt: " + s + " mm");
-                return s;
+            else
+            {
+                Console.WriteLine("Die berechnete Schaftlänge beträgt: " + s + " mm");
+            }
+            return s;
         }
 
     
