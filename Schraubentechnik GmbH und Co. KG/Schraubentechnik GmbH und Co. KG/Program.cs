@@ -10,12 +10,25 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         static void Main(string[] args)
         {
+            int anzahl = 1;
+            Console.WriteLine("Wie viele verschiedene Schrauben sollen erstellt werden?");
+            anzahl = Convert.ToInt32(Console.ReadLine());
+            
+            Schraube[] s = new Schraube[anzahl];
 
-            Schraube s = frageNachMassen(); //Objekt Schraube führt UNterprogramm aus
+            // Schraube s = frageNachMassen(); //Objekt Schraube führt UNterprogramm aus
+            for (int i = 0; i < anzahl; i++)
+            {
+                s[i] = frageNachMassen();
+                //Objekt Schraube führt UNterprogramm aus
+            }
 
-
-            s.printSchraube();  //Ausgabe der Daten die in der Schraube gespeichert sind (noch nicht fertig)
-
+            //Schraube s[] = frageNachMassen(); //Objekt Schraube führt UNterprogramm aus
+            for (int i = 0; i < anzahl; i++)
+            {
+                s[i].printSchraube(i);
+                //Objekt Schraube führt UNterprogramm aus
+            }
 
         }
 

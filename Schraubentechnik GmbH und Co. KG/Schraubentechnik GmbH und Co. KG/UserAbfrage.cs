@@ -36,8 +36,10 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     gueltig = false;
                 }  
             } while (!gueltig); //Abfrage ob Wingabe gültig war
-            return r; // gibt die Gewinderichtung zurück
+
+            return r; // gibt die Gewinderichtung zurück  
         }
+
 
         public static MetrischeGewindegroesse getMetrischegewindegroesse()
         {   

@@ -17,28 +17,15 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public string festigkeitsklasse;
         public int anzahl;
 
-        public Schraube (Gewinderichtung g, Schaftlaenge schaftL, Gewindelaenge gewindeL)  //Aufbau der Struktur
+        public Schraube()   //Konstruktor kann gelöscht werden, weil es diesen standardmäßig existiert, solange es keinen anderen konstruktor (der gefüllt ist) gibt
         {
-            gewinderichtung = g;
-            schaftLaenge = schaftL;
-            gewindeLaenge = gewindeL;
+
         }
 
-        public Schraube(Schaftlaenge schaftL, Gewindelaenge gewindeL)
-        {
-            gewinderichtung = Gewinderichtung.Rechtsgewinde;
-            schaftLaenge = schaftL;
-            gewindeLaenge = gewindeL;
-        }
-        public Schraube()   //Leerer Konstruktor
-        {
-          
-        }
-
-        public void printSchraube() //Unterprogramm zur Ausgabe der Schraubeninformationen
+        public void printSchraube(int name) //Unterprogramm zur Ausgabe der Schraubeninformationen
         {
             Console.WriteLine("");
-            Console.WriteLine("INFOS über die Schraube:");
+            Console.WriteLine("INFOS über die Schraube " + (name+1) + ":");
             Console.WriteLine("Gewinderichtung: " + gewinderichtung);
             Console.WriteLine("Gewindegröße: M" + metrischeGewindegroesse.bezeichnung);
             Console.WriteLine("Schaftlänge: " + schaftLaenge.schaftlaenge + " mm");
