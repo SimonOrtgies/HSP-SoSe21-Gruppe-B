@@ -25,7 +25,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public void printSchraube(int name) //Unterprogramm zur Ausgabe der Schraubeninformationen
         {
             Console.WriteLine("");
-            Console.WriteLine("INFOS über die Schraube " + (name+1) + ":");
+            Console.WriteLine("Informationen über die Schraube " + (name+1) + ":");
             Console.WriteLine("Gewinderichtung: " + gewinderichtung);
             Console.WriteLine("Gewindegröße: M" + metrischeGewindegroesse.bezeichnung);
             Console.WriteLine("Schaftlänge: " + schaftLaenge.schaftlaenge + " mm");

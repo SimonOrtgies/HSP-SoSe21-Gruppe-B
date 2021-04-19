@@ -36,7 +36,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Console.WriteLine("Willkommen beim Schraubenprogramm von Schraubentechnik GmbH und Co. KG.");
             Console.WriteLine("");
             Console.WriteLine("Hier können Sie Ihre individuellen Schrauben mit folgenden Parametern erstellen:");
-            Console.WriteLine("-Anzahl individuueller Schrauben");
+            Console.WriteLine("-Anzahl individueller Schrauben");
             Console.WriteLine("-Gewinderichtung");
             Console.WriteLine("-Gewindegröße");
             Console.WriteLine("-Schaftlänge");
@@ -50,7 +50,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         {
             int anzahl = 0;
             Boolean gueltig;
-            Console.WriteLine("Wie viele verschiedene Schrauben sollen erstellt werden?");
+            Console.WriteLine("Wie viele individuell verschiedene Schrauben sollen erstellt werden?");
             do
             {
                 gueltig = true;
