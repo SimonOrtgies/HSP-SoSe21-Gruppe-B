@@ -17,8 +17,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public Gewindelaenge gewindeLaenge;
         public string festigkeitsklasse;
         public int anzahl;
-        public float volumen;
-        public float preis;
+        public double volumen;
+        public double masse;
+        public double preis;
 
         public Schraube()   //Konstruktor kann gelöscht werden, weil es diesen standardmäßig existiert, solange es keinen anderen konstruktor (der gefüllt ist) gibt
         {
@@ -36,8 +37,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Console.WriteLine("Gewindelänge: " + gewindeLaenge.gewindeLaenge + " mm");
             Console.WriteLine("Festigkeitsklasse: " + festigkeitsklasse);
             Console.WriteLine("Anzahl: " + anzahl);
-            Console.WriteLine("Volumen" + volumen + "mm^2");
-            Console.WriteLine("Preis" + preis + "Euro");
+            Console.WriteLine("Volumen: " + volumen + "mm^3");
+            Console.WriteLine("Masse: " + masse + "Kg");
+            Console.WriteLine("Preis: " + preis + "Euro");
         }
     }
 }

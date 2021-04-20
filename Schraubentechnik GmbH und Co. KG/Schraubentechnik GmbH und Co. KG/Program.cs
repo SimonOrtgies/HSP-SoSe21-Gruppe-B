@@ -95,21 +95,24 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             return schraube;    //Rückgabe des Objekt Schraube an Main (mit allen Informationen)
         }
 
-        static float getVolumen(Schraube schraube)
+        static double getVolumen(Schraube schraube)
         {
-            float V = schraube.anzahl * ( schraube.gewindeLaenge.gewindeLaenge * schraube.metrischeGewindegroesse.flanken * schraube.metrischeGewindegroesse.flanken * 3, 14159  / 4 + (schraube.schaftLaenge.schaftlaenge - schraube.gewindeLaenge.gewindeLaenge) * schraube.metrischeGewindegroesse.bezeichnung); // Volumenberechnung ohne Schraubenkopf
+            
+            double pi = 3.14159;
+            double V = schraube.anzahl * ( schraube.gewindeLaenge.gewindeLaenge * schraube.metrischeGewindegroesse.flanken * schraube.metrischeGewindegroesse.flanken * pi  / 4 + (schraube.schaftLaenge.schaftlaenge - schraube.gewindeLaenge.gewindeLaenge) * schraube.metrischeGewindegroesse.bezeichnung * pi /4); // Volumenberechnung ohne Schraubenkopf
             return V;
         }
 
-        static float getMasse(Schraube schraube)
+        static double getMasse(Schraube schraube)
         {
-            float m = 0,00000785 * schraube.volumen;
+            double dichte = 0.00000785;
+            double m = dichte * schraube.volumen;
             return m;
         }
 
-        static float getPreis(Schraube schraube)
+        static double getPreis(Schraube schraube)
         {
-            float p = schraube.masse * 5; // Preisberechnung
+            double p = schraube.masse * 5; // Preisberechnung
             return p;
         }
     }
