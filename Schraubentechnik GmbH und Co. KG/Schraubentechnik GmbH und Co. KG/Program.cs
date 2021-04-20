@@ -32,6 +32,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 //Objekt Schraube führt UNterprogramm aus
             }
 
+
             
         }
 
@@ -62,7 +63,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 {
                     anzahl = Convert.ToInt32(Console.ReadLine());
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine("Ungültige Eingabe!");
                     gueltig = false;
