@@ -31,7 +31,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 //Objekt Schraube führt UNterprogramm aus
             }
 
-            getVolumen(s[1]);
+            
         }
 
         static void StartAusgabe()
@@ -100,9 +100,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             return V;
         }
 
-        static float getPreis()
+        static float getPreis(Schraube schraube)
         {
-            float p = 123; // Preisberechnung
+            float p = 5 * 1; // Preisberechnung
             return p;
         }
     }
