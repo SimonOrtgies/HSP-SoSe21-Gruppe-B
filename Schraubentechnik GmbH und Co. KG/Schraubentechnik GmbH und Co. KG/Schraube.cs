@@ -36,10 +36,10 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Console.WriteLine("Schaftlänge: " + schaftLaenge.schaftlaenge + " mm");
             Console.WriteLine("Gewindelänge: " + gewindeLaenge.gewindeLaenge + " mm");
             Console.WriteLine("Festigkeitsklasse: " + festigkeitsklasse);
-            Console.WriteLine("Anzahl: " + anzahl);
-            Console.WriteLine("Volumen: " + volumen + "mm^3");
-            Console.WriteLine("Masse: " + masse + "Kg");
-            Console.WriteLine("Preis: " + preis + "Euro");
+            Console.WriteLine("Anzahl: " + anzahl + " Stück");
+            Console.WriteLine("Volumen: " + volumen + " mm^3");
+            Console.WriteLine("Masse: " + masse + " Kg");
+            Console.WriteLine("Preis: " + preis + " Euro");
         }
     }
 }
