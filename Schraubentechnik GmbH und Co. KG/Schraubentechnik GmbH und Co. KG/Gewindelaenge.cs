@@ -22,7 +22,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         
         public static float minGewindeLaengeRechnung(float mutterhoehe)
         {
-            float g = 2 * mutterhoehe; //wirrwarr Rechnung
+            float g = 2 * mutterhoehe; //minimale Gewindelänge, kann noch verändert werden
             return g;
         }
         public static float maxGewindeLaengeRechnung(float schaftlaenge)
@@ -33,8 +33,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         public static float berechneGewindeLaenge(float mutterhoehe, float schaftlaenge, float g)  //Unterprogramm um Gewindelänge zu berechnen
         {            
-            float min = 2 * mutterhoehe;    //Erneute minGewindelängenBerechnung, weil so einfacher
-            float max = schaftlaenge;    //Erneute maxGewindelängen festlegen
+            float min = minGewindeLaengeRechnung(mutterhoehe);    //Erneute minGewindelängenBerechnung, weil so einfacher
+            float max = maxGewindeLaengeRechnung(schaftlaenge);    //Erneute maxGewindelängen festlegen
             if (g < min) //Wenn Gewindelänge zu kurz
             {
                 Console.WriteLine("Zu kurze Gewindelänge für diese Größe, mindestens " + min + " mm nötig");
