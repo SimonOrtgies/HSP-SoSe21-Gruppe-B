@@ -18,6 +18,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             {
                 Console.WriteLine("Parameter Für Schraube " + (i + 1) + " eingeben:");
                 s[i] = frageNachMassen();
+                s[i].volumen = getVolumen(s[i]);
+                s[i].preis = getPreis(s[i]);
                 Console.WriteLine("");
                 //Objekt Schraube führt UNterprogramm aus
             }
@@ -29,7 +31,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 //Objekt Schraube führt UNterprogramm aus
             }
 
-            Volumen(s[1]);
+            getVolumen(s[1]);
         }
 
         static void StartAusgabe()
@@ -90,15 +92,16 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             return schraube;    //Rückgabe des Objekt Schraube an Main (mit allen Informationen)
         }
 
-        static float Volumen(Schraube schraube)
+        static float getVolumen(Schraube schraube)
         {
-            float Volumen = schraube.anzahl * (schraube.gewindeLaenge.gewindeLaenge * schraube.metrischeGewindegroesse.flanken + (schraube.schaftLaenge.schaftlaenge - schraube.gewindeLaenge.gewindeLaenge) * schraube.metrischeGewindegroesse.bezeichnung );
-            return Volumen;
+            float V = schraube.anzahl * (schraube.gewindeLaenge.gewindeLaenge * schraube.metrischeGewindegroesse.flanken + (schraube.schaftLaenge.schaftlaenge - schraube.gewindeLaenge.gewindeLaenge) * schraube.metrischeGewindegroesse.bezeichnung ); // Volumenberechnung ohne Schraubenkopf
+            return V;
         }
 
-        static float Preis()
+        static float getPreis()
         {
-
+            float p = 123; // Preisberechnung
+            return p;
         }
     }
 }

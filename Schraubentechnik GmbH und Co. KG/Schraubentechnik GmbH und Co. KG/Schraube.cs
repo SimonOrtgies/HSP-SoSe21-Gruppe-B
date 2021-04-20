@@ -16,6 +16,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public Gewindelaenge gewindeLaenge;
         public string festigkeitsklasse;
         public int anzahl;
+        public float volumen;
+        public float preis;
 
         public Schraube()   //Konstruktor kann gelöscht werden, weil es diesen standardmäßig existiert, solange es keinen anderen konstruktor (der gefüllt ist) gibt
         {
