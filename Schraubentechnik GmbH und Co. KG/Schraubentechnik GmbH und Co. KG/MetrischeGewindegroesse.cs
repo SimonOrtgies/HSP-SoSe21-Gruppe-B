@@ -10,7 +10,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
     {
         public float bezeichnung;   //Variablen/Infomrationen die die Klasse enthält
         public float steigung;
-        public float flanken;
+        public float flanken;       //Für Volumenberechnung nötig
         public float aussengewinde;
         public float mutterhoehe;   //Für mindest Schaftlänge und Längenrechner notwendig
         
@@ -23,7 +23,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             mutterhoehe = mu;
         }
 
-        public String printGewinde()    //Unterprogramm zur AUsgabe der Daten als Übersicht
+        public String printGewinde()    //Unterprogramm zur Ausgabe der Daten als Übersicht
         {
             return "M" + bezeichnung + " Steigung: " + steigung + " Flankendurchmesser: " + flanken + " Aussengewindedurchmesser " + aussengewinde;
         }
