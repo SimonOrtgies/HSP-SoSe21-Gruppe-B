@@ -99,7 +99,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         {
             
             double pi = 3.14159;
-            double V = schraube.anzahl * ( schraube.gewindeLaenge.gewindeLaenge * schraube.metrischeGewindegroesse.flanken * schraube.metrischeGewindegroesse.flanken * pi  / 4 + (schraube.schaftLaenge.schaftlaenge - schraube.gewindeLaenge.gewindeLaenge) * schraube.metrischeGewindegroesse.bezeichnung * pi /4); // Volumenberechnung ohne Schraubenkopf
+            double faktorschraubenkopf = 1.5;
+            double schraubenkopf = schraube.metrischeGewindegroesse.mutterhoehe * schraube.metrischeGewindegroesse.bezeichnung * faktorschraubenkopf * schraube.metrischeGewindegroesse.bezeichnung * faktorschraubenkopf * pi /4; //Volumen Schraubenkopf
+            double V = schraubenkopf + schraube.anzahl * ( schraube.gewindeLaenge.gewindeLaenge * schraube.metrischeGewindegroesse.flanken * schraube.metrischeGewindegroesse.flanken * pi  / 4 + (schraube.schaftLaenge.schaftlaenge - schraube.gewindeLaenge.gewindeLaenge) * schraube.metrischeGewindegroesse.bezeichnung * schraube.metrischeGewindegroesse.bezeichnung * pi /4); // Volumenberechnung
             return V;
         }
 
