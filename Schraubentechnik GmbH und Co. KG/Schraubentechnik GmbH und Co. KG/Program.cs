@@ -79,6 +79,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             schraube.gewinderichtung = UserAbfrage.getGewinderichtung();
 
+            schraube.schraubenkopf = UserAbfrage.getSchraubenkopf();
+
             schraube.metrischeGewindegroesse = UserAbfrage.getMetrischegewindegroesse();    //Objekt Schraube wird die gewindegröße
 
             schraube.schaftLaenge = UserAbfrage.getSchaftlaenge(schraube);

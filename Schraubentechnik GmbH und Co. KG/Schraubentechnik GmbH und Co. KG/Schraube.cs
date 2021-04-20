@@ -11,6 +11,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
     public class Schraube  //Objekt SChraube
     {
         public Gewinderichtung gewinderichtung; //Variablen/Informationen die die Schraube beeinhaltet
+        public string schraubenkopf;
         public MetrischeGewindegroesse metrischeGewindegroesse;
         public Schaftlaenge schaftLaenge;
         public Gewindelaenge gewindeLaenge;
@@ -29,6 +30,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Console.WriteLine("");
             Console.WriteLine("Informationen über die Schraube " + (name+1) + ":");
             Console.WriteLine("Gewinderichtung: " + gewinderichtung);
+            Console.WriteLine("Schraubenkopfart:" + schraubenkopf);
             Console.WriteLine("Gewindegröße: M" + metrischeGewindegroesse.bezeichnung);
             Console.WriteLine("Schaftlänge: " + schaftLaenge.schaftlaenge + " mm");
             Console.WriteLine("Gewindelänge: " + gewindeLaenge.gewindeLaenge + " mm");
