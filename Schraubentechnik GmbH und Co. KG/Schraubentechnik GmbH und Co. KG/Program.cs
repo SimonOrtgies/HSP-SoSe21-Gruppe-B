@@ -29,6 +29,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 //Objekt Schraube führt UNterprogramm aus
             }
 
+            Volumen(s);
         }
 
         static void StartAusgabe()
@@ -87,6 +88,16 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             schraube.anzahl = UserAbfrage.getAnzahl();
 
             return schraube;    //Rückgabe des Objekt Schraube an Main (mit allen Informationen)
+        }
+
+        static float Volumen(Schraube schraube)
+        {
+            float Volumen = schraube.anzahl * (schraube.gewindeLaenge * MetrischeGewindegroesse.flanken + (schraube.schaftLaenge.schaftlaenge - schraube.gewindeLaenge) * schraube.metrischeGewindegroesse );
+        }
+
+        static float Preis()
+        {
+
         }
     }
 }
