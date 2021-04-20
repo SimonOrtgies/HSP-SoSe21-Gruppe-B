@@ -218,6 +218,43 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             } while (!gueltig); //Abfrage ob Eingabe gültig war
             return f; // gibt die Festigkeitsklasse zurück zurück
         }
+        public static string getSchraubenkopf()
+        {
+            //AB HIER Schraubenkopfwahl
+            Boolean gueltig;    //Variable um nach gültige Eingabe zu urteilen
+            string k = "Sechskant"; // Damit er etwas hat falls nichts zugewiesen wird
+            do
+            {
+                Console.WriteLine("Wählen Sie ihren Schraubenkopf:Sechskant(1), Zylinderkopf mit Innensechskant(2),Senkkopf mit Innensechskant (3), Linsenkopf mit Schlitz(4)");
+                gueltig = true;
+                string input = Console.ReadLine();
+
+                if (input.Equals("1"))
+                {
+                    k = "Sechskant";
+                }
+                else if (input.Equals("2"))
+                {
+                    k = "Zylinderkopf mit Innensechskant";
+                }
+                else if (input.Equals("3"))
+                {
+                    k = "Senkkopf mit Innensechskant";
+                }
+                else if (input.Equals("4"))
+                {
+                    k = "Linsenkopf mit Schlitz";
+                }
+
+                else
+                {
+                    Console.WriteLine("Ungültige Eingabe!");
+                    gueltig = false;
+                }
+            } while (!gueltig); //Abfrage ob Eingabe gültig war
+            return k;
+        } // gibt den Schraubenkopf  zurück
+
 
         public static int getAnzahl()
         {
