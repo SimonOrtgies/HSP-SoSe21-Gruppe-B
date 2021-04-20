@@ -30,6 +30,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             }
 
             Volumen(s);
+            Preis();
         }
 
         static void StartAusgabe()
@@ -92,7 +93,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         static float Volumen(Schraube schraube)
         {
-            float Volumen = schraube.anzahl * (schraube.gewindeLaenge * MetrischeGewindegroesse.flanken + (schraube.schaftLaenge.schaftlaenge - schraube.gewindeLaenge) * schraube.metrischeGewindegroesse );
+            float Volumen = schraube.anzahl * (schraube.gewindeLaenge * metrischeGewindegroesse.flanken + (schraube.schaftLaenge.schaftlaenge - schraube.gewindeLaenge) * schraube.metrischeGewindegroesse );
         }
 
         static float Preis()
