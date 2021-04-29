@@ -22,14 +22,14 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 s[i].masse = getMasse(s[i]);
                 s[i].preis = getPreis(s[i]);
                 Console.WriteLine("");
-                //Objekt Schraube führt UNterprogramm aus
+                //Objekt Schraube führt Unterprogramm aus
             }
 
             for (int i = 0; i < anzahl; i++)
             {
                 s[i].printSchraube(i);
                 Console.WriteLine("");
-                //Objekt Schraube führt UNterprogramm aus
+                //Objekt Schraube führt Unterprogramm aus
             }
 
 
