@@ -8,9 +8,11 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 {
     class Program
     {
-
+        [STAThread]
         static void Main(string[] args)
         {
+            new GUI_Zugriff();  //Gui wird Gestartet
+                   
             StartAusgabe();
 
             int anzahl;
@@ -38,6 +40,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Console.ReadKey();
 
         }
+
+
 
         static void StartAusgabe()
         {
