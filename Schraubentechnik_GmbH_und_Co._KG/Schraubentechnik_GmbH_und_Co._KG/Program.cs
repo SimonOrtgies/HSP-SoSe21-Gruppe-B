@@ -9,31 +9,39 @@ namespace Schraubentechnik_GmbH_und_Co._KG
     class Program
     {
         [STAThread]
+
         static void Main(string[] args)
         {
-            new GUI_Zugriff();  //Gui wird Gestartet
+            Schraube s = new Schraube();
+            s.metrischeGewindegroesse = null;  //Um zu überprüfen ob schon eine Gewindegröße gesetzt wurde
+            new GUI_Zugriff(s);
+        }
+        static void Main2(string[] args)
+        {
+
+            //new GUI_Zugriff();  //Gui wird Gestartet
                    
             StartAusgabe();
 
             int anzahl;
             anzahl = Schraubenanzahl();
 
-            Schraube[] s = new Schraube[anzahl];    //Schraubenarray
+            Schraube[] sALT = new Schraube[anzahl];    //Schraubenarray
 
             for (int i = 0; i < anzahl; i++)
             {
                 Console.WriteLine("Parameter Für Schraube " + (i + 1) + " eingeben:");
-                s[i] = frageNachMassen();
-                s[i].volumen = getVolumen(s[i]);
-                s[i].masse = getMasse(s[i]);
-                s[i].preis = getPreis(s[i]);
+                sALT[i] = frageNachMassen();
+                sALT[i].volumen = getVolumen(sALT[i]);
+                sALT[i].masse = getMasse(sALT[i]);
+                sALT[i].preis = getPreis(sALT[i]);
                 Console.WriteLine("");
                 //Objekt Schraube führt UNterprogramm aus
             }
 
             for (int i = 0; i < anzahl; i++)
             {
-                s[i].printSchraube(i);
+                sALT[i].printSchraube(i);
                 Console.WriteLine("");        //Objekt Schraube führt UNterprogramm aus
             }
 

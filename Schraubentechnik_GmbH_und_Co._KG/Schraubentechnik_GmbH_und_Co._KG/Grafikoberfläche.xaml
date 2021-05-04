@@ -6,14 +6,92 @@
              xmlns:local="clr-namespace:Schraubentechnik_GmbH_und_Co._KG"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+
     <Grid Background="White">
-        <TabControl x:Name="tabControl" Height="355" Margin="0,34,35,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="579">
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
+        <Label x:Name="label" Content="Schrauben.Profis" HorizontalAlignment="Left" Margin="28,16,0,0" VerticalAlignment="Top"/>
+
+        <TreeView x:Name="tv_Gliederung_Copy" Margin="20,74,648,46">
+            <TreeViewItem x:Name="tvi_Gewinderichtung" Header="Gewinderichtung" Selected="tvi_Gewinderichtung_Selected"/>
+            <TreeViewItem x:Name="tvi_Schraubenkopf" Header="Schraubenkopf" IsExpanded="True" Selected="tvi_Schraubenkopf_Selected"/>
+            <TreeViewItem x:Name="tvi_Dimensionen" Header="Dimensionen" IsExpanded="True" Selected="tvi_Dimensionen_Selected">
+                <TreeViewItem x:Name="tvi_Gewindegröße" Header="Gewindegröße"/>
+                <TreeViewItem x:Name="tvi_Schaftlänge" Header="Schaftlänge"/>
+                <TreeViewItem x:Name="tvi_Gewindelänge" Header="Gewindelänge"/>
+            </TreeViewItem>
+            <TreeViewItem x:Name="tvi_Festigkeitsklasse" Header="Festigkeitsklasse" Selected="tvi_Festigkeitsklasse_Selected"/>
+            <TreeViewItem Header="Anzahl"/>
+        </TreeView>
+
+        <Grid x:Name="grd_Gewinderichtung" Margin="190,74,102,46" Background="#FF6DA050">
+            <RadioButton x:Name="rBtn_Rechtsgewinde" Content="Rechtsgewinde" HorizontalAlignment="Left" Margin="33,57,0,0" VerticalAlignment="Top" Checked="rBtn_Rechtsgewinde_Checked" Uid="1"/>
+            <RadioButton x:Name="rBtn_Linksgewinde" Content="Linksgewinde" HorizontalAlignment="Left" Margin="225,57,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lab_Gewinderichtung" Content="Gewinderichtung auswählen:" HorizontalAlignment="Left" Margin="25,19,0,0" VerticalAlignment="Top" Width="173"/>
+        </Grid>
+
+        <Grid x:Name="grd_Schraubenkopf" Margin="190,74,102,46" Background="#FFFC3E3E" >
+            <ComboBox x:Name="cBx_Schraubenkopf" HorizontalAlignment="Left" Margin="210,14,0,0" VerticalAlignment="Top" Width="205" Text="Bitte auswählen..">
+                <ComboBoxItem Content="Sechskant" HorizontalAlignment="Left"/>
+                <ComboBoxItem Content="Zylinderkopf mit Innensechskant" HorizontalAlignment="Left"/>
+                <ComboBoxItem Content="Senkkopf mit Innensechskant" HorizontalAlignment="Left"/>
+                <ComboBoxItem Content="Linsenkopf mit Schlitz" HorizontalAlignment="Left"/>
+            </ComboBox>
+            <Label x:Name="label1" Content="Schraubenkopf auswählen" HorizontalAlignment="Left" Margin="43,10,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        
+        
+        <Grid x:Name="grd_Dimensionen" Margin="190,74,102,46" Background="#FF2993EC" Visibility="Visible">
+            <Label x:Name="label2" Content="Dimensionen:" HorizontalAlignment="Left" Margin="30,26,0,0" VerticalAlignment="Top"/>
+
+            <Label x:Name="label3" Content="Gewindegröße:" HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top"/>
+            
+            <TextBox x:Name="txB_Schaftlaenge" HorizontalAlignment="Left" Height="23" Margin="158,173,0,0" TextWrapping="Wrap" Text="Schaftlänge" VerticalAlignment="Top" Width="85" GotFocus="txB_Schaftlaenge_GotFocus" IsReadOnly="False" LostFocus="txB_Schaftlaenge_LostFocus" Visibility="Hidden"/>
+
+            <Button x:Name="btn_weiterDimensionen" Content="Weiter" Margin="405,300,28,10" Click="btn_weiterDimensionen_Click"/>
+            
+            <ComboBox x:Name="cBx_Gewindegroesse" HorizontalAlignment="Left" Margin="132,76,0,0" VerticalAlignment="Top" Width="120" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="220" Text="Bitte auswählen...">
+                <ComboBoxItem x:Name="cBI_m1" Content="M1" HorizontalAlignment="Left"  Width="118" Selected="cBI_m1_Selected"/>
+                <ComboBoxItem x:Name="cBI_m1_2" Content="M1,2" HorizontalAlignment="Left"  Width="118" Selected="cBI_m1_2_Selected"/>
+                <ComboBoxItem x:Name="cBI_m1_6" Content="M1,6" HorizontalAlignment="Left"  Width="118" Selected="cBI_m1_6_Selected"/>
+                <ComboBoxItem x:Name="cBI_m2" Content="M2" HorizontalAlignment="Left"  Width="118" Selected="cBI_m2_Selected"/>
+                <ComboBoxItem x:Name="cBI_m2_5" Content="M2,5" HorizontalAlignment="Left"  Width="118" Selected="cBI_m2_5_Selected"/>
+                <ComboBoxItem x:Name="cBI_m3" Content="M3" HorizontalAlignment="Left"  Width="118" Selected="cBI_m3_Selected"/>
+                <ComboBoxItem x:Name="cBI_m3_5" Content="M3,5" HorizontalAlignment="Left"  Width="118" Selected="cBI_m3_5_Selected"/>
+                <ComboBoxItem x:Name="cBI_m4" Content="M4" HorizontalAlignment="Left"  Width="118" Selected="cBI_m4_Selected"/>
+                <ComboBoxItem x:Name="cBI_m5" Content="M5" HorizontalAlignment="Left"  Width="118" Selected="cBI_m5_Selected"/>
+                <ComboBoxItem x:Name="cBI_m6" Content="M6" HorizontalAlignment="Left"  Width="118" Selected="cBI_m6_Selected"/>
+                <ComboBoxItem x:Name="cBI_m7" Content="M7" HorizontalAlignment="Left"  Width="118" Selected="cBI_m7_Selected"/>
+                <ComboBoxItem x:Name="cBI_m8" Content="M8" HorizontalAlignment="Left"  Width="118" Selected="cBI_m8_Selected"/>
+                <ComboBoxItem x:Name="cBI_m10" Content="M10" HorizontalAlignment="Left"  Width="118" Selected="cBI_m10_Selected"/>
+                <ComboBoxItem x:Name="cBI_m12" Content="M12" HorizontalAlignment="Left"  Width="118" Selected="cBI_m12_Selected"/>
+                <ComboBoxItem x:Name="cBI_m14" Content="M14" HorizontalAlignment="Left"  Width="118" Selected="cBI_m14_Selected"/>
+                <ComboBoxItem x:Name="cBI_m16" Content="M16" HorizontalAlignment="Left"  Width="118" Selected="cBI_m16_Selected"/>
+                <ComboBoxItem x:Name="cBI_m20" Content="M20" HorizontalAlignment="Left"  Width="118" Selected="cBI_m20_Selected"/>
+                <ComboBoxItem x:Name="cBI_m24" Content="M24" HorizontalAlignment="Left"  Width="118" Selected="cBI_m24_Selected"/>
+                <ComboBoxItem x:Name="cBI_m30" Content="M30" HorizontalAlignment="Left"  Width="118" Selected="cBI_m30_Selected"/>
+                <ComboBoxItem x:Name="cBI_m36" Content="M36" HorizontalAlignment="Left"  Width="118" Selected="cBI_m36_Selected"/>
+                <ComboBoxItem x:Name="cBI_m42" Content="M42" HorizontalAlignment="Left"  Width="118" Selected="cBI_m42_Selected"/>  
+            </ComboBox>
+            
+            <Label x:Name="label5" Content="Schaftlänge bekannt?" HorizontalAlignment="Left" Margin="30,132,0,0" VerticalAlignment="Top"/>
+            
+            <RadioButton x:Name="rBtn_SchaftlaengeJa" Content="Ja" HorizontalAlignment="Left" Margin="188,138,0,0" VerticalAlignment="Top" Checked="rBtn_SchaftlaengeJa_Checked"/>
+            <RadioButton x:Name="rBtn_SchaftlaengeNein" Content="Nein" HorizontalAlignment="Left" Margin="284,138,0,0" VerticalAlignment="Top" Checked="rBtn_SchaftlaengeNein_Checked"/>
+            
+            <TextBox x:Name="txB_Klemmlaenge" HorizontalAlignment="Left" Height="23" Margin="284,173,0,0" TextWrapping="Wrap" Text="Klemmlänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Klemmlaenge_GotFocus" LostFocus="txB_Klemmlaenge_LostFocus" Visibility="Hidden"/>
+            
+            <Label x:Name="lab_SchaftlaengeHinweis" Content="Label" HorizontalAlignment="Left" Margin="158,196,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        </Grid>
+
+        <Grid x:Name="grd_Festigkeitsklasse" Margin="190,74,102,46" Background="#FFC258F3" Visibility="Hidden">
+            <Label x:Name="label4" Content="Festigkeitsklasse" HorizontalAlignment="Left" Margin="33,27,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton" Content="8.8" HorizontalAlignment="Left" Margin="174,80,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton1" Content="10.8" HorizontalAlignment="Left" Margin="307,80,0,0" Height="15" VerticalAlignment="Top" />
+            <RadioButton x:Name="radioButton2" Content="12.9" HorizontalAlignment="Left" Margin="380,80,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton3" Content="5.8" HorizontalAlignment="Left" Margin="33,80,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton4" Content="6.8" HorizontalAlignment="Left" Margin="96,80,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton5" Content="9.8" HorizontalAlignment="Left" Margin="239,80,0,0" VerticalAlignment="Top"/>
+        </Grid>
+
     </Grid>
 </UserControl>
