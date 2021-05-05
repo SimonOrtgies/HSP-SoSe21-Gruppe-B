@@ -22,6 +22,14 @@ namespace Schraubentechnik_GmbH_und_Co._KG
     {
         Schraube s;
         Boolean slGuelitg = false; //Kontrollboolean, ob die Schaftlänge gesetzt werden kann
+        Boolean FinishGewinderichtung = false;
+        Boolean FinishSchraubenkopf = false;
+        Boolean FinishGewindegroesse = false;
+        Boolean FinishSchaftlaenge = false;
+        Boolean FinishGewindelaenge = false;
+        Boolean FinishFestigkeitsklasse = false;
+        Boolean FinishAnzahl = false;
+
 
         public Grafikoberfläche(Schraube s)
         {
@@ -35,34 +43,81 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             grd_Dimensionen.Visibility = Visibility.Hidden;
             grd_Festigkeitsklasse.Visibility = Visibility.Hidden;
             grd_Gewinderichtung.Visibility = Visibility.Visible;
+            grd_Anzahl.Visibility = Visibility.Hidden;
         }
-
-        private void rBtn_Rechtsgewinde_Checked(object sender, RoutedEventArgs e)   //Funktioniert
-        {
-            RadioButton rB = (RadioButton)sender;
-            //Console.WriteLine(rB.Uid);  ///ID für unterscheidung
-            s.gewinderichtung = Gewinderichtung.Rechtsgewinde;
-            
-            
-        }
-
         private void tvi_Schraubenkopf_Selected(object sender, RoutedEventArgs e)
         {
             grd_Gewinderichtung.Visibility = Visibility.Hidden; //Altes grid verstecken
             grd_Dimensionen.Visibility = Visibility.Hidden;
             grd_Festigkeitsklasse.Visibility = Visibility.Hidden;
             grd_Schraubenkopf.Visibility = Visibility.Visible;  //Neuesgrid sichtbar schalten
+            grd_Anzahl.Visibility = Visibility.Hidden;
         }
-
         private void tvi_Dimensionen_Selected(object sender, RoutedEventArgs e)
         {
             grd_Gewinderichtung.Visibility = Visibility.Hidden; //Altes grid verstecken
             grd_Schraubenkopf.Visibility = Visibility.Hidden;
             grd_Festigkeitsklasse.Visibility = Visibility.Hidden;
             grd_Dimensionen.Visibility = Visibility.Visible;  //Neuesgrid sichtbar schalten
-
-
+            grd_Anzahl.Visibility = Visibility.Hidden;
         }
+        private void tvi_Anzahl_Selected(object sender, RoutedEventArgs e)
+        {
+            grd_Anzahl.Visibility = Visibility.Visible;
+            grd_Festigkeitsklasse.Visibility = Visibility.Hidden;
+            grd_Dimensionen.Visibility = Visibility.Hidden;
+            grd_Schraubenkopf.Visibility = Visibility.Hidden;
+            grd_Gewinderichtung.Visibility = Visibility.Hidden;
+        }
+        private void tvi_Festigkeitsklasse_Selected(object sender, RoutedEventArgs e)
+        {
+            grd_Gewinderichtung.Visibility = Visibility.Hidden; //Altes grid verstecken
+            grd_Schraubenkopf.Visibility = Visibility.Hidden;
+            grd_Dimensionen.Visibility = Visibility.Hidden;
+            grd_Festigkeitsklasse.Visibility = Visibility.Visible;   //Neuesgrid sichtbar schalten
+            grd_Anzahl.Visibility = Visibility.Hidden;
+        }
+
+        //AB hier Gewinderichtung
+        private void rBtn_Rechtsgewinde_Checked(object sender, RoutedEventArgs e)   //Funktioniert
+        {
+            s.gewinderichtung = Gewinderichtung.Rechtsgewinde;
+            FinishGewinderichtung = true;
+        }
+
+        private void rBtn_Linksgewinde_Checked(object sender, RoutedEventArgs e)
+        {
+            s.gewinderichtung = Gewinderichtung.Linksgewinde;
+            FinishGewinderichtung = true;
+        }
+        //Ende Gewinderichtung
+
+        //Ab hier SChraubenkopf
+        private void cBI_Sechskant_Selected(object sender, RoutedEventArgs e)
+        {
+            s.schraubenkopf = "Sechskant";
+            FinishSchraubenkopf = true;
+        }
+
+        private void cBI_Zylinderkopf_Selected(object sender, RoutedEventArgs e)
+        {
+            s.schraubenkopf = "Zylinderkopf mit Innensechskant";
+            FinishSchraubenkopf = true;
+        }
+
+        private void cBI_Senkkopf_Selected(object sender, RoutedEventArgs e)
+        {
+            s.schraubenkopf = "Senkkopf mit Innensechskant";
+            FinishSchraubenkopf = true;
+        }
+
+        private void cBI_Linsenkopf_Selected(object sender, RoutedEventArgs e)
+        {
+            s.schraubenkopf = "Linsenkopf mit Schlitz";
+            FinishSchraubenkopf = true;
+        }
+        //Ende Schraubenkopf
+
 
         private void txB_Gewindegroesse_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -70,34 +125,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             string g = tb.Text;
         }
 
-        private void tvi_Festigkeitsklasse_Selected(object sender, RoutedEventArgs e)
-        {
-            grd_Gewinderichtung.Visibility = Visibility.Hidden; //Altes grid verstecken
-            grd_Schraubenkopf.Visibility = Visibility.Hidden;
-            grd_Dimensionen.Visibility = Visibility.Hidden;
-            grd_Festigkeitsklasse.Visibility = Visibility.Visible;   //Neuesgrid sichtbar schalten
-        }
 
-        private void btn_weiterDimensionen_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
 
-            }
-            catch
-            {
-                MessageBox.Show("Ungültige Eingabe bei Gewindegröße!");
-            }
-            try
-            {
-                float sl = Convert.ToSingle(txB_Schaftlaenge.Text);
-            }
-            catch
-            {
-                txB_Schaftlaenge.Background = Brushes.Red;
-                MessageBox.Show("Ungültige Eingabe bei Schaftlänge!");
-            }
-        }
+
 
 
         //Gewindegrößen abspeichern ab hier:
@@ -256,6 +286,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             txB_Klemmlaenge.Background = Brushes.White; //Freigeben der KLemmlängenbox
             txB_Klemmlaenge.IsReadOnly = false;
             slGuelitg = true;
+            FinishGewindegroesse = true;
 
             Boolean gueltig = false;
 
@@ -273,11 +304,13 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                         lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
                         txB_Schaftlaenge.Background = Brushes.Red;
                         txB_Schaftlaenge.Text = "";
+                        FinishSchaftlaenge = false;
                     }
                 }
                 catch (Exception)
                 {
                     lab_SchaftlaengeHinweis.Content = "Bitte eine Zahl eingeben";
+                    FinishSchaftlaenge = false;
                 }
             }
         }
@@ -337,6 +370,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                         txB_Schaftlaenge.Background = Brushes.Green;
                         lab_SchaftlaengeHinweis.Visibility = Visibility.Hidden;
                         s.schaftLaenge.schaftlaenge = sl;   //Setzen der Schaftlänge in der Scharube s
+                        FinishSchaftlaenge = true;
                     }
                     else
                     {
@@ -344,6 +378,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                         lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
                         txB_Schaftlaenge.Background = Brushes.Red;
                         txB_Schaftlaenge.Text = "";
+                        FinishSchaftlaenge = false;
                     }
                 
                 }
@@ -352,6 +387,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     lab_SchaftlaengeHinweis.Content = "Bitte eine Zahl eingeben";
                     lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
                     txB_Schaftlaenge.Background = Brushes.Red;
+                    txB_Schaftlaenge.Text = "";
+                    FinishSchaftlaenge = false;
                 }
             }
             
@@ -393,6 +430,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                         lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
                         txB_Klemmlaenge.Background = Brushes.Red;
                         txB_Klemmlaenge.Text = "";
+                        FinishSchaftlaenge = false;
                     }
                     else
                     {
@@ -402,7 +440,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                         Console.WriteLine(objSl.schaftlaenge);
                         float sl = objSl.schaftlaenge;
                         s.schaftLaenge = objSl; //Schaftlänge der Schraube zuweisen
-                        //Console.WriteLine(s.schaftLaenge);
+                        FinishSchaftlaenge = true;
                     }
                 }
                 catch (Exception) //Fehler werden abgefangen
@@ -410,20 +448,182 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     lab_SchaftlaengeHinweis.Content = "Bitte eine Zahl eingeben";
                     lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
                     txB_Schaftlaenge.Background = Brushes.Red;
+                    FinishSchaftlaenge = false;
                 }
             }
             
         }
-
+        
         //Ende Schaftlänge
+        private void cBx_Gewindegroesse_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void txB_Schaftlaenge_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void rBtn_5_8_Checked(object sender, RoutedEventArgs e)
+        {
+            s.festigkeitsklasse = "5.8";
+            FinishFestigkeitsklasse = true;
+        }
+
+        private void rBtn_6_8_Checked(object sender, RoutedEventArgs e)
+        {
+            s.festigkeitsklasse = "6.8";
+            FinishFestigkeitsklasse = true;
+        }
+
+        private void rBtn_8_8_Checked(object sender, RoutedEventArgs e)
+        {
+            s.festigkeitsklasse = "8.8";
+            FinishFestigkeitsklasse = true;
+        }
+
+        private void rBtn_9_8_Checked(object sender, RoutedEventArgs e)
+        {
+            s.festigkeitsklasse = "9.8";
+            FinishFestigkeitsklasse = true;
+        }
+
+        private void rBtn_10_8_Checked(object sender, RoutedEventArgs e)
+        {
+            s.festigkeitsklasse = "10.8";
+            FinishFestigkeitsklasse = true;
+        }
+
+        private void rBtn_12_9_Checked(object sender, RoutedEventArgs e)
+        {
+            s.festigkeitsklasse = "12.9";
+            FinishFestigkeitsklasse = true;
+        }
+
+        private void tBx_Anzahl_LostFocus(object sender, RoutedEventArgs e)
+        {
+            int max = 1000000;
+            int min = 25;
+            try
+            {
+                int a = Convert.ToInt32(tBx_Anzahl.Text);
+                if (a > max)    //Test ob zu viele Schrauben gewollt werden
+                {
+                    lab_Anzahl_Warnung.Content = "Es sind maximal " + max + " Schrauben möglich!";
+                    lab_Anzahl_Warnung.Visibility = Visibility.Visible;
+                    tBx_Anzahl.Background = Brushes.Red;
+                    tBx_Anzahl.Text = "";
+                    FinishAnzahl = false;
+                }
+                else if (a < min)   //Test ob zu wenig Schrauben gewollt werden
+                {
+                    lab_Anzahl_Warnung.Content = "Es sind minimal " + min + " Schrauben nötig!";
+                    lab_Anzahl_Warnung.Visibility = Visibility.Visible;
+                    tBx_Anzahl.Background = Brushes.Red;
+                    tBx_Anzahl.Text = "";
+                    FinishAnzahl = false;
+                }
+                else
+                {
+                    tBx_Anzahl.Background = Brushes.Green;
+                    lab_Anzahl_Warnung.Visibility = Visibility.Hidden;
+                    s.anzahl = a; // Setzen der Anzahl, wenn die vorherigen Tests negativ waren
+                    FinishAnzahl = true;
+                }
+
+                
+            }
+            catch
+            {
+                lab_Anzahl_Warnung.Content = "Bitte geben Sie eine ganze Zahl ein";
+                lab_Anzahl_Warnung.Visibility = Visibility.Visible;
+                tBx_Anzahl.Background = Brushes.Red;
+                tBx_Anzahl.Text = "";
+                FinishAnzahl = false;
+            }
+        }
+
+        private void Btn_Fertigstellen_Click(object sender, RoutedEventArgs e)
+        {
+            Gewindelaenge gl = new Gewindelaenge(s.schaftLaenge, s.metrischeGewindegroesse);
+            gl.gewindeLaenge = 10;
+            s.gewindeLaenge = gl;
 
 
+            FinishGewindelaenge = true;
+
+            if(FinishGewinderichtung == false || 
+                FinishSchraubenkopf == false || 
+                FinishGewindegroesse == false || 
+                FinishSchaftlaenge == false || 
+                FinishGewindelaenge == false || 
+                FinishFestigkeitsklasse == false || 
+                FinishAnzahl == false)
+            {
+                lab_EingabenUeberpruefen.Content = "Bitte Eingaben Überprüfen";
+                lab_EingabenUeberpruefen.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lab_EingabenUeberpruefen.Visibility = Visibility.Hidden;
+                s.volumen = Program.getVolumen(s);
+                s.masse = Program.getMasse(s);
+                s.preis = Program.getPreis(s);
+                Console.WriteLine(s.preis);
+
+                txB_BerechungenGewinderichtung.Text = Convert.ToString(s.gewinderichtung);
+                txB_BerechungenSchraubenkopf.Text = s.schraubenkopf;
+                txB_BerechungenGewindegroesse.Text = Convert.ToString(s.metrischeGewindegroesse.bezeichnung);
+                txB_BerechungenSchaftlaenge.Text = Convert.ToString(s.schaftLaenge.schaftlaenge);
+                txB_BerechungenGewindelaenge.Text = Convert.ToString(s.gewindeLaenge.gewindeLaenge);
+                txB_BerechungenFestigkeitsklasse.Text = s.festigkeitsklasse;
+                txB_BerechungenAnzahl.Text = Convert.ToString(s.anzahl);
+
+                txB_BerechungenVolumen.Text = Convert.ToString(Math.Round(s.volumen/1000,3));
+                txB_BerechungenMasse.Text = Convert.ToString(s.masse);
+                txB_BerechungenPreis.Text = Convert.ToString(s.preis);
 
 
-       
+                grd_Berechnungen.Visibility = Visibility.Visible;
+            }
+        }
 
+        private void btn_FestigkeitsklasseWeiter_Click(object sender, RoutedEventArgs e)
+        {
+            if(FinishFestigkeitsklasse == true)
+            {
+                tvi_Anzahl_Selected(tvi_Anzahl, null);
+            }
+            
+        }
 
+        private void btn_SchraubenkopfWeiter_Click(object sender, RoutedEventArgs e)
+        {
+            if(FinishSchraubenkopf == true)
+            {
+                tvi_Dimensionen_Selected(tvi_Dimensionen, null);
+            }
+            
+        }
 
+        private void btn_GewinderichtungWeiter_Click(object sender, RoutedEventArgs e)
+        {
+            if(FinishGewinderichtung == true)
+            {
+                tvi_Schraubenkopf_Selected(tvi_Schraubenkopf, null);
+            }
+            
+        }
+
+        private void btn_weiterDimensionen_Click(object sender, RoutedEventArgs e)
+        {
+            if(FinishGewindegroesse == true && FinishSchaftlaenge == true && FinishGewindelaenge == true)
+            {
+                tvi_Festigkeitsklasse_Selected(tvi_Festigkeitsklasse, null);
+            }
+            
+        }
     }
 
 }

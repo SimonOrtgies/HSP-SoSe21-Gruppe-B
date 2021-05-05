@@ -70,5 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Schrauben.Profis - Kopie.jpg" />
+    <Content Include="Schrauben.Profis 2 - Kopie.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
