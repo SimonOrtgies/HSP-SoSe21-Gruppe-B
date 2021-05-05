@@ -9,8 +9,8 @@
 
 
     <Grid x:Name="grd_Main" Background="White">
-        <Label x:Name="label" Content="Schrauben.Profis" HorizontalAlignment="Left" Margin="600,31,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="img_Logo" Margin="10,10,570,370" Source="Schrauben.Profis 2 - Kopie.png" Visibility="Visible" Cursor="Cross"/>
+  
+        <Image x:Name="img_Logo" Margin="10,10,570,370" Source="Schrauben.Profis 2 - Kopie.png" Visibility="Visible" Cursor="Cross" Width="207"/>
 
 
         <TreeView x:Name="tv_Gliederung_Copy" Margin="20,74,648,46">
@@ -122,7 +122,6 @@
             <TextBox x:Name="txB_BerechungenMasse" HorizontalAlignment="Left" Height="23" Margin="91,229,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="txB_BerechungenPreis" HorizontalAlignment="Left" Height="23" Margin="91,271,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         </Grid>
-        <Image HorizontalAlignment="Left" Height="197" Margin="600,31,-113,0" VerticalAlignment="Top" Width="313" Source="Schrauben.Profis - Kopie.jpg"/>
 
 
 
