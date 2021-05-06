@@ -37,6 +37,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             this.s = s; //Zuweisung der übergebenen Variable auf die memberVariable schrauben
             InitializeComponent();
         }
+
         #region Treeview
         private void tvi_Gewinderichtung_Selected(object sender, RoutedEventArgs e)
         {
@@ -95,7 +96,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         private void txB_Schaftlaenge_TextChanged(object sender, RoutedEventArgs e)
         {
 
-
+        }
 
         #region Schraubenkopf Auswahl
         private void cBI_Sechskant_Selected(object sender, RoutedEventArgs e)
@@ -708,6 +709,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Boolean test = false;
 
             float gl = Convert.ToSingle(g);
+
             s.gewindeLaenge.gewindeLaenge = gl;
             Console.WriteLine(gl);
 
@@ -720,7 +722,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     test = true;
                     if (test == true)
                     {
-                        float gl = Convert.ToSingle(g);
+                        gl = Convert.ToSingle(g);
                         s.gewindeLaenge.gewindeLaenge = gl;
                         Console.WriteLine(gl);
                     }
