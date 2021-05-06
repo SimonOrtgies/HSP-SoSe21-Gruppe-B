@@ -82,9 +82,13 @@
             <RadioButton x:Name="rBtn_SchaftlaengeJa" Content="Ja" HorizontalAlignment="Left" Margin="188,138,0,0" VerticalAlignment="Top" Checked="rBtn_SchaftlaengeJa_Checked"/>
             <RadioButton x:Name="rBtn_SchaftlaengeNein" Content="Nein" HorizontalAlignment="Left" Margin="284,138,0,0" VerticalAlignment="Top" Checked="rBtn_SchaftlaengeNein_Checked"/>
 
-            <TextBox x:Name="txB_Klemmlaenge" HorizontalAlignment="Left" Height="23" Margin="284,173,0,0" TextWrapping="Wrap" Text="Klemmlänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Klemmlaenge_GotFocus" LostFocus="txB_Klemmlaenge_LostFocus" Visibility="Hidden"/>
+            <TextBox x:Name="txB_Klemmlaenge" HorizontalAlignment="Left" Height="23" Margin="284,173,0,0" TextWrapping="Wrap" Text="Klemmlänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Klemmlaenge_GotFocus" LostFocus="txB_Klemmlaenge_LostFocus" Visibility="Visible"/>
 
             <Label x:Name="lab_SchaftlaengeHinweis" Content="Label" HorizontalAlignment="Left" Margin="158,196,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <Label x:Name="lab_Gewindelaenge" Content="Gewindelänge :" HorizontalAlignment="Left" Margin="52,222,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="rBtn_gesamte_Schaftlaenge" Content="gesamte Schaftlänge" HorizontalAlignment="Left" Margin="320,228,0,0" VerticalAlignment="Top" Checked="rBtn_gesamte_Schaftlaenge_Checked"/>
+            <RadioButton x:Name="rBtn_benutzerdefiniert" Content="benutzerdefiniert" HorizontalAlignment="Left" Margin="188,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.682,0.933" Checked="rBtn_benutzerdefiniert_Checked"/>
+            <TextBox x:Name="txB_Gewindelaenge" HorizontalAlignment="Left" Height="23" Margin="188,257,0,0" TextWrapping="Wrap" Text="Gewindelänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Gewindelaenge_GotFocus" LostFocus="txB_Gewindelaenge_LostFocus"/>
         </Grid>
 
         <Grid x:Name="grd_Festigkeitsklasse" Margin="190,74,102,46" Background="#FFC258F3" Visibility="Hidden">
