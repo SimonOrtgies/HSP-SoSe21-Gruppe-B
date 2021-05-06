@@ -376,6 +376,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         {
             Boolean gueltig = false;
 
+           
+
             if (slGuelitg == true)
             {
                 Schaftlaenge objSl = new Schaftlaenge(s.metrischeGewindegroesse);
@@ -680,8 +682,20 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         #region Btn Fertigstellen
         private void Btn_Fertigstellen_Click(object sender, RoutedEventArgs e)
         {
+            if (hatWertSchaftlaenge == true && hatWertGewindelaenge == true)
+            {
+                if (s.schaftLaenge.schaftlaenge >= s.gewindeLaenge.gewindeLaenge)
+                {
+                    FinishGewindelaenge = true;
 
-            //SPÄTER LÖSCHEN
+                }
+                else if (s.schaftLaenge.schaftlaenge < s.gewindeLaenge.gewindeLaenge)
+                {
+                    FinishGewindelaenge = false;
+                    lab_EingabenUeberpruefen.Content = "Bitte Eingaben Überprüfen";
+                    lab_EingabenUeberpruefen.Visibility = Visibility.Visible;
+                }
+            }
 
             if (FinishGewinderichtung == false ||
                 FinishSchraubenkopf == false ||
@@ -768,7 +782,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         private void btn_weiterDimensionen_Click(object sender, RoutedEventArgs e)
         {
-            lab_GewindelaengeHinweis.Visibility = Visibility.Hidden;
+            
             if (hatWertSchaftlaenge ==true && hatWertGewindelaenge == true)
             {
                 if (s.schaftLaenge.schaftlaenge >= s.gewindeLaenge.gewindeLaenge)
