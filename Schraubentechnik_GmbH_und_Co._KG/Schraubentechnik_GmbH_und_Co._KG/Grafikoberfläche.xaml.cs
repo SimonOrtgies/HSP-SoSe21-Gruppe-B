@@ -36,7 +36,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             this.s = s; //Zuweisung der übergebenen Variable auf die memberVariable schrauben
             InitializeComponent();
         }
-
+        #region Treeview
         private void tvi_Gewinderichtung_Selected(object sender, RoutedEventArgs e)
         {
             grd_Schraubenkopf.Visibility = Visibility.Hidden;
@@ -77,8 +77,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             grd_Festigkeitsklasse.Visibility = Visibility.Visible;   //Neuesgrid sichtbar schalten
             grd_Anzahl.Visibility = Visibility.Hidden;
         }
+        #endregion
 
-        //AB hier Gewinderichtung
+        #region Gewinderichtung
         private void rBtn_Rechtsgewinde_Checked(object sender, RoutedEventArgs e)   //Funktioniert
         {
             s.gewinderichtung = Gewinderichtung.Rechtsgewinde;
@@ -90,9 +91,20 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             s.gewinderichtung = Gewinderichtung.Linksgewinde;
             FinishGewinderichtung = true;
         }
-        //Ende Gewinderichtung
 
-        //Ab hier SChraubenkopf
+        #endregion
+
+        private void txB_Schaftlaenge_TextChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cBx_Gewindegroesse_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #region Schraubenkopf Auswahl
         private void cBI_Sechskant_Selected(object sender, RoutedEventArgs e)
         {
             s.schraubenkopf = "Sechskant";
@@ -116,9 +128,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             s.schraubenkopf = "Linsenkopf mit Schlitz";
             FinishSchraubenkopf = true;
         }
-        //Ende Schraubenkopf
+        #endregion
 
-
+        #region Gewindegroessen Auswahl
         private void txB_Gewindegroesse_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -126,13 +138,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         }
 
 
-
-
-
-
-        //Gewindegrößen abspeichern ab hier:
-        
-        private void cBI_m1_Selected(object sender, RoutedEventArgs e)  //Funktioniert
+        private void cBI_m1_Selected(object sender, RoutedEventArgs e) 
         {
             float g = 1;
             s.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
@@ -314,9 +320,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 }
             }
         }
-        //Gewindegrößen abspeichern hier ende
-
-        //Ab hier Schaftlänge 
+        #endregion
+ 
+        #region Schaftlaenge
         private void rBtn_SchaftlaengeJa_Checked(object sender, RoutedEventArgs e)
         {
             txB_Schaftlaenge.Visibility = Visibility.Visible;
@@ -453,18 +459,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             }
             
         }
-        
-        //Ende Schaftlänge
-        private void cBx_Gewindegroesse_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        #endregion
 
-        }
-
-        private void txB_Schaftlaenge_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+        #region Festigkeit
         private void rBtn_5_8_Checked(object sender, RoutedEventArgs e)
         {
             s.festigkeitsklasse = "5.8";
@@ -500,7 +497,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             s.festigkeitsklasse = "12.9";
             FinishFestigkeitsklasse = true;
         }
+        #endregion
 
+        #region Anzahl
         private void tBx_Anzahl_LostFocus(object sender, RoutedEventArgs e)
         {
             int max = 1000000;
@@ -543,7 +542,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 FinishAnzahl = false;
             }
         }
+        #endregion
 
+        #region Btn Fertigstellen
         private void Btn_Fertigstellen_Click(object sender, RoutedEventArgs e)
         {
             Gewindelaenge gl = new Gewindelaenge(s.schaftLaenge, s.metrischeGewindegroesse);
@@ -588,7 +589,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 grd_Berechnungen.Visibility = Visibility.Visible;
             }
         }
+        #endregion
 
+        #region Btn Weiter
         private void btn_FestigkeitsklasseWeiter_Click(object sender, RoutedEventArgs e)
         {
             if(FinishFestigkeitsklasse == true)
@@ -624,6 +627,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             }
             
         }
+        #endregion
+
     }
 
 }
