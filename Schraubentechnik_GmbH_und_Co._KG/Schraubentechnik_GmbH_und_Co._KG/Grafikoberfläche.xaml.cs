@@ -92,33 +92,32 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         #endregion
 
-        // Was ist das ????
-        private void txB_Schaftlaenge_TextChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         #region Schraubenkopf Auswahl
         private void cBI_Sechskant_Selected(object sender, RoutedEventArgs e)
         {
+            lab_SchraubenkopfHinweis.Visibility = Visibility.Hidden;
             s.schraubenkopf = "Sechskant";
             FinishSchraubenkopf = true;
         }
 
         private void cBI_Zylinderkopf_Selected(object sender, RoutedEventArgs e)
         {
+            lab_SchraubenkopfHinweis.Visibility = Visibility.Hidden;
             s.schraubenkopf = "Zylinderkopf mit Innensechskant";
             FinishSchraubenkopf = true;
         }
 
         private void cBI_Senkkopf_Selected(object sender, RoutedEventArgs e)
         {
+            lab_SchraubenkopfHinweis.Visibility = Visibility.Hidden;
             s.schraubenkopf = "Senkkopf mit Innensechskant";
             FinishSchraubenkopf = true;
         }
 
         private void cBI_Linsenkopf_Selected(object sender, RoutedEventArgs e)
         {
+            lab_SchraubenkopfHinweis.Visibility = Visibility.Hidden;
             s.schraubenkopf = "Linsenkopf mit Schlitz";
             FinishSchraubenkopf = true;
         }
@@ -489,36 +488,42 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         {
             s.festigkeitsklasse = "5.8";
             FinishFestigkeitsklasse = true;
+            lab_FestigkeitsklasseHinweis.Visibility = Visibility.Hidden;
         }
 
         private void rBtn_6_8_Checked(object sender, RoutedEventArgs e)
         {
             s.festigkeitsklasse = "6.8";
             FinishFestigkeitsklasse = true;
+            lab_FestigkeitsklasseHinweis.Visibility = Visibility.Hidden;
         }
 
         private void rBtn_8_8_Checked(object sender, RoutedEventArgs e)
         {
             s.festigkeitsklasse = "8.8";
             FinishFestigkeitsklasse = true;
+            lab_FestigkeitsklasseHinweis.Visibility = Visibility.Hidden;
         }
 
         private void rBtn_9_8_Checked(object sender, RoutedEventArgs e)
         {
             s.festigkeitsklasse = "9.8";
             FinishFestigkeitsklasse = true;
+            lab_FestigkeitsklasseHinweis.Visibility = Visibility.Hidden;
         }
 
         private void rBtn_10_8_Checked(object sender, RoutedEventArgs e)
         {
             s.festigkeitsklasse = "10.8";
             FinishFestigkeitsklasse = true;
+            lab_FestigkeitsklasseHinweis.Visibility = Visibility.Hidden;
         }
 
         private void rBtn_12_9_Checked(object sender, RoutedEventArgs e)
         {
             s.festigkeitsklasse = "12.9";
             FinishFestigkeitsklasse = true;
+            lab_FestigkeitsklasseHinweis.Visibility = Visibility.Hidden;
         }
         #endregion
 
@@ -570,12 +575,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         #region Btn Fertigstellen
         private void Btn_Fertigstellen_Click(object sender, RoutedEventArgs e)
         {
-            Gewindelaenge gl = new Gewindelaenge(s.schaftLaenge, s.metrischeGewindegroesse);
-            gl.gewindeLaenge = 10;
-            s.gewindeLaenge = gl;
 
-
-            FinishGewindelaenge = true;
+            FinishGewindelaenge = true; //SPÄTER LÖSCHEN
 
             if (FinishGewinderichtung == false ||
                 FinishSchraubenkopf == false ||
@@ -620,6 +621,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             if (FinishFestigkeitsklasse == true)
             {
                 tvi_Anzahl_Selected(tvi_Anzahl, null);
+                lab_FestigkeitsklasseHinweis.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lab_FestigkeitsklasseHinweis.Content = "Bitte Festigkeitsklasse auswählen";
+                lab_FestigkeitsklasseHinweis.Visibility = Visibility.Visible;
             }
 
         }
@@ -629,6 +636,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             if (FinishSchraubenkopf == true)
             {
                 tvi_Dimensionen_Selected(tvi_Dimensionen, null);
+                lab_SchraubenkopfHinweis.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lab_SchraubenkopfHinweis.Content = "Bitte Schraubenkopf auswählen";
+                lab_SchraubenkopfHinweis.Visibility = Visibility.Visible;
             }
 
         }
@@ -711,11 +724,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             float gl = Convert.ToSingle(g);
 
             s.gewindeLaenge.gewindeLaenge = gl;
+
             Console.WriteLine(gl);
 
             if (glGueltig == true)
             {
-                Gewindelaenge objGl = new Gewindelaenge(s.schaftLaenge,s.metrischeGewindegroesse);
+                //Gewindelaenge objGl = new Gewindelaenge(s.schaftLaenge,s.metrischeGewindegroesse);
                 
                 try     //Erneut try und catch zum fehler abfangen
                 {
@@ -735,6 +749,11 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     FinishGewindelaenge = false;
                 }
             }
+        }
+
+        private void btn_Zurueck_Click(object sender, RoutedEventArgs e)
+        {
+            grd_Berechnungen.Visibility = Visibility.Hidden;
         }
     }
 }
