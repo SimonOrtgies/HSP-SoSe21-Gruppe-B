@@ -9,7 +9,7 @@
 
 
     <Grid x:Name="grd_Main" Background="White">
-  
+
         <Image x:Name="img_Logo" Margin="10,10,570,370" Source="Schrauben.Profis 2 - Kopie.png" Visibility="Visible" Cursor="Cross" Width="207"/>
 
 
@@ -30,6 +30,7 @@
             <RadioButton x:Name="rBtn_Linksgewinde" Content="Linksgewinde" HorizontalAlignment="Left" Margin="225,57,0,0" VerticalAlignment="Top" Checked="rBtn_Linksgewinde_Checked"/>
             <Label x:Name="lab_Gewinderichtung" Content="Gewinderichtung auswählen:" HorizontalAlignment="Left" Margin="25,19,0,0" VerticalAlignment="Top" Width="173"/>
             <Button x:Name="btn_GewinderichtungWeiter" Content="Weiter" HorizontalAlignment="Left" Margin="403,300,0,0" VerticalAlignment="Top" Width="75" Click="btn_GewinderichtungWeiter_Click"/>
+            <Label x:Name="lab_GewinderichtungHinweis" Content="Label" HorizontalAlignment="Left" Margin="203,297,0,0" VerticalAlignment="Top" Width="195" Visibility="Visible"/>
         </Grid>
 
         <Grid x:Name="grd_Schraubenkopf" Margin="190,74,102,46" Background="#FFFC3E3E" Visibility="Hidden" >
@@ -44,16 +45,16 @@
         </Grid>
 
 
-        <Grid x:Name="grd_Dimensionen" Margin="190,74,102,46" Background="#FF2993EC" Visibility="Visible">
+        <Grid x:Name="grd_Dimensionen" Margin="190,74,102,46" Background="#FF2993EC" Visibility="Hidden">
             <Label x:Name="label2" Content="Dimensionen:" HorizontalAlignment="Left" Margin="30,26,0,0" VerticalAlignment="Top"/>
 
             <Label x:Name="label3" Content="Gewindegröße:" HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top"/>
 
-            <TextBox x:Name="txB_Schaftlaenge" HorizontalAlignment="Left" Height="23" Margin="158,173,0,0" TextWrapping="Wrap" Text="Schaftlänge" VerticalAlignment="Top" Width="85" GotFocus="txB_Schaftlaenge_GotFocus" IsReadOnly="False" LostFocus="txB_Schaftlaenge_LostFocus" Visibility="Hidden" TextChanged="txB_Schaftlaenge_TextChanged"/>
+            <TextBox x:Name="txB_Schaftlaenge" HorizontalAlignment="Left" Height="23" Margin="158,173,0,0" TextWrapping="Wrap" Text="Schaftlänge" VerticalAlignment="Top" Width="85" GotFocus="txB_Schaftlaenge_GotFocus" IsReadOnly="False" LostFocus="txB_Schaftlaenge_LostFocus" Visibility="Hidden"/>
 
             <Button x:Name="btn_weiterDimensionen" Content="Weiter" Margin="405,300,28,10" Click="btn_weiterDimensionen_Click"/>
 
-            <ComboBox x:Name="cBx_Gewindegroesse" HorizontalAlignment="Left" Margin="132,76,0,0" VerticalAlignment="Top" Width="120" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="220" Text="Bitte auswählen..." SelectionChanged="cBx_Gewindegroesse_SelectionChanged">
+            <ComboBox x:Name="cBx_Gewindegroesse" HorizontalAlignment="Left" Margin="132,76,0,0" VerticalAlignment="Top" Width="120" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="220" Text="Bitte auswählen...">
                 <ComboBoxItem x:Name="cBI_m1" Content="M1" HorizontalAlignment="Left"  Width="118" Selected="cBI_m1_Selected"/>
                 <ComboBoxItem x:Name="cBI_m1_2" Content="M1,2" HorizontalAlignment="Left"  Width="118" Selected="cBI_m1_2_Selected"/>
                 <ComboBoxItem x:Name="cBI_m1_6" Content="M1,6" HorizontalAlignment="Left"  Width="118" Selected="cBI_m1_6_Selected"/>
@@ -106,8 +107,8 @@
             <Button x:Name="Btn_Fertigstellen" Content="Fertigstellen" HorizontalAlignment="Left" Margin="408,300,0,0" VerticalAlignment="Top" Width="75" Click="Btn_Fertigstellen_Click"/>
             <Label x:Name="lab_EingabenUeberpruefen" Content="Label" HorizontalAlignment="Left" Margin="228,294,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         </Grid>
-        
-        
+
+
         <Grid x:Name="grd_Berechnungen" HorizontalAlignment="Left" Height="330" Margin="20,74,0,0" VerticalAlignment="Top" Width="678" Background="#FFF3CE25" Visibility="Hidden">
             <Label Content="Checkout" HorizontalAlignment="Left" Margin="42,26,0,0" VerticalAlignment="Top" Height="32" Width="110"/>
             <Label x:Name="lab_Berechnungen_Gewinderichtung" Content="rgll" HorizontalAlignment="Left" Margin="230,108,0,0" VerticalAlignment="Top"/>

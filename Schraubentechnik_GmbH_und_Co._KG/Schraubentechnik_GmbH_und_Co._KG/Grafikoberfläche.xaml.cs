@@ -39,42 +39,36 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         #region Treeview
         private void tvi_Gewinderichtung_Selected(object sender, RoutedEventArgs e)
         {
-            grd_Schraubenkopf.Visibility = Visibility.Hidden;
-            grd_Dimensionen.Visibility = Visibility.Hidden;
-            grd_Festigkeitsklasse.Visibility = Visibility.Hidden;
+            HideAllTreviewItem();
             grd_Gewinderichtung.Visibility = Visibility.Visible;
-            grd_Anzahl.Visibility = Visibility.Hidden;
         }
         private void tvi_Schraubenkopf_Selected(object sender, RoutedEventArgs e)
         {
-            grd_Gewinderichtung.Visibility = Visibility.Hidden; //Altes grid verstecken
-            grd_Dimensionen.Visibility = Visibility.Hidden;
-            grd_Festigkeitsklasse.Visibility = Visibility.Hidden;
+            HideAllTreviewItem();
             grd_Schraubenkopf.Visibility = Visibility.Visible;  //Neuesgrid sichtbar schalten
-            grd_Anzahl.Visibility = Visibility.Hidden;
         }
         private void tvi_Dimensionen_Selected(object sender, RoutedEventArgs e)
         {
-            grd_Gewinderichtung.Visibility = Visibility.Hidden; //Altes grid verstecken
-            grd_Schraubenkopf.Visibility = Visibility.Hidden;
-            grd_Festigkeitsklasse.Visibility = Visibility.Hidden;
+            HideAllTreviewItem();
             grd_Dimensionen.Visibility = Visibility.Visible;  //Neuesgrid sichtbar schalten
-            grd_Anzahl.Visibility = Visibility.Hidden;
         }
         private void tvi_Anzahl_Selected(object sender, RoutedEventArgs e)
         {
+            HideAllTreviewItem();
             grd_Anzahl.Visibility = Visibility.Visible;
-            grd_Festigkeitsklasse.Visibility = Visibility.Hidden;
-            grd_Dimensionen.Visibility = Visibility.Hidden;
-            grd_Schraubenkopf.Visibility = Visibility.Hidden;
-            grd_Gewinderichtung.Visibility = Visibility.Hidden;
         }
         private void tvi_Festigkeitsklasse_Selected(object sender, RoutedEventArgs e)
         {
-            grd_Gewinderichtung.Visibility = Visibility.Hidden; //Altes grid verstecken
+            HideAllTreviewItem();
+            grd_Festigkeitsklasse.Visibility = Visibility.Visible;   //Neuesgrid sichtbar schalten
+        }
+
+        private void HideAllTreviewItem()
+        {
+            grd_Gewinderichtung.Visibility = Visibility.Hidden;
             grd_Schraubenkopf.Visibility = Visibility.Hidden;
             grd_Dimensionen.Visibility = Visibility.Hidden;
-            grd_Festigkeitsklasse.Visibility = Visibility.Visible;   //Neuesgrid sichtbar schalten
+            grd_Festigkeitsklasse.Visibility = Visibility.Hidden;
             grd_Anzahl.Visibility = Visibility.Hidden;
         }
         #endregion
@@ -83,26 +77,20 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         private void rBtn_Rechtsgewinde_Checked(object sender, RoutedEventArgs e)   //Funktioniert
         {
             s.gewinderichtung = Gewinderichtung.Rechtsgewinde;
+            lab_GewinderichtungHinweis.Visibility = Visibility.Hidden;
             FinishGewinderichtung = true;
         }
 
         private void rBtn_Linksgewinde_Checked(object sender, RoutedEventArgs e)
         {
             s.gewinderichtung = Gewinderichtung.Linksgewinde;
+            lab_GewinderichtungHinweis.Visibility = Visibility.Hidden;
             FinishGewinderichtung = true;
         }
 
         #endregion
 
-        private void txB_Schaftlaenge_TextChanged(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-        private void cBx_Gewindegroesse_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         #region Schraubenkopf Auswahl
         private void cBI_Sechskant_Selected(object sender, RoutedEventArgs e)
@@ -291,12 +279,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             txB_Schaftlaenge.IsReadOnly = false;
             txB_Klemmlaenge.Background = Brushes.White; //Freigeben der KLemmlängenbox
             txB_Klemmlaenge.IsReadOnly = false;
-            slGuelitg = true;
+            slGuelitg = true;   //Wird auf true gesetzt, sobald eine Gewindegröße gesetzt wird, verhindert das man eine Schaftlänge4 vor dem Gewinde setzt
             FinishGewindegroesse = true;
 
             Boolean gueltig = false;
 
-            if (slGuelitg == true)  //Testen ob die Schaftlänge nach wechseln der Gewindegröße noch immer gültig ist
+            if(rBtn_SchaftlaengeJa.IsChecked == true)
             {
                 Schaftlaenge objSl = new Schaftlaenge(s.metrischeGewindegroesse);
                 try
@@ -318,7 +306,11 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     lab_SchaftlaengeHinweis.Content = "Bitte eine Zahl eingeben";
                     FinishSchaftlaenge = false;
                 }
+            }else if(rBtn_SchaftlaengeNein.IsChecked == true)   //WEnn eingabe immer noch gültig ist, muss dennoch die Schaftlänge neu aus der KLemmlänge berechnet werden
+            {
+                txB_Klemmlaenge_LostFocus(txB_Klemmlaenge, null);   //Berechnung durch lostFocus funktion
             }
+                
         }
         #endregion
  
@@ -328,6 +320,11 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             txB_Schaftlaenge.Visibility = Visibility.Visible;
             txB_Klemmlaenge.Visibility = Visibility.Hidden;
             lab_SchaftlaengeHinweis.Visibility = Visibility.Hidden;
+            if (txB_Schaftlaenge.Text != "Schaftlänge")     //Wenn zwischen den rBtn gewechselt wird, soll wieder ein leeres fehlt bereitgestellt werden
+            {
+                txB_Schaftlaenge.Text = "Schaftlänge";
+                txB_Schaftlaenge.Background = Brushes.White;
+            }
         }
 
         private void rBtn_SchaftlaengeNein_Checked(object sender, RoutedEventArgs e)
@@ -335,6 +332,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             txB_Schaftlaenge.Visibility = Visibility.Hidden;
             txB_Klemmlaenge.Visibility = Visibility.Visible;
             lab_SchaftlaengeHinweis.Visibility = Visibility.Hidden;
+            if (txB_Klemmlaenge.Text != "Klemmlänge")
+            {
+                txB_Klemmlaenge.Text = "Klemmlänge";
+                txB_Klemmlaenge.Background = Brushes.White;
+            }
+            
         }
 
             //Wenn schaftlänge bekannt:
@@ -357,8 +360,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         }
         private void txB_Schaftlaenge_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox tb = (TextBox)sender;
-            string g = tb.Text;
             Boolean gueltig = false;
             
             if(slGuelitg == true)
@@ -366,7 +367,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 Schaftlaenge objSl = new Schaftlaenge(s.metrischeGewindegroesse);
                 try
                 {
-                    float sl = Convert.ToSingle(g);
+                    float sl = Convert.ToSingle(txB_Schaftlaenge.Text);
                     gueltig = objSl.setSchaftlaenge(sl); //setSchaftlaenge überprüft ob die Eingabe im gültigen Bereich liegt. Berechnungen finden in Schaftlaenge.cs statt
 
                     if(gueltig == true)
@@ -420,15 +421,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         private void txB_Klemmlaenge_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox tb = (TextBox)sender;
-            string g = tb.Text;
-
             if(slGuelitg == true)
             {
                 Schaftlaenge objSl = new Schaftlaenge(s.metrischeGewindegroesse);
                 try     //Erneut try und catch zum fehler abfangen
                 {
-                    float kl = Convert.ToSingle(g);
+                    float kl = Convert.ToSingle(txB_Klemmlaenge.Text);
                     objSl.schaftlaenge = Schaftlaenge.berechneSchaftlaenge(s.metrischeGewindegroesse.mutterhoehe, kl);   //Unterprogramm Schaftlänge in Schaftlaenge.cs aufrufen
                     if (objSl.schaftlaenge == -1)    //WEnn schaftlänge zu groß/klein kommt dieser Fehlercode wieder
                     {
@@ -615,6 +613,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             if(FinishGewinderichtung == true)
             {
                 tvi_Schraubenkopf_Selected(tvi_Schraubenkopf, null);
+                lab_GewinderichtungHinweis.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lab_GewinderichtungHinweis.Content = "Bitte Gewinderichtung auswählen";
+                lab_GewinderichtungHinweis.Visibility = Visibility.Visible;
             }
             
         }
