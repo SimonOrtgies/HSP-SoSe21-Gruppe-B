@@ -25,7 +25,7 @@
             <TreeViewItem x:Name="tvi_Anzahl" Header="Anzahl" Selected="tvi_Anzahl_Selected"/>
         </TreeView>
 
-        <Grid x:Name="grd_Gewinderichtung" Margin="190,74,102,46" Background="#FF6DA050">
+        <Grid x:Name="grd_Gewinderichtung" Margin="190,74,102,46" Background="#FF6DA050" Visibility="Visible">
             <RadioButton x:Name="rBtn_Rechtsgewinde" Content="Rechtsgewinde" HorizontalAlignment="Left" Margin="33,57,0,0" VerticalAlignment="Top" Checked="rBtn_Rechtsgewinde_Checked" Uid="1"/>
             <RadioButton x:Name="rBtn_Linksgewinde" Content="Linksgewinde" HorizontalAlignment="Left" Margin="225,57,0,0" VerticalAlignment="Top" Checked="rBtn_Linksgewinde_Checked"/>
             <Label x:Name="lab_Gewinderichtung" Content="Gewinderichtung auswählen:" HorizontalAlignment="Left" Margin="25,19,0,0" VerticalAlignment="Top" Width="173"/>
@@ -33,7 +33,7 @@
             <Label x:Name="lab_GewinderichtungHinweis" Content="Label" HorizontalAlignment="Left" Margin="203,297,0,0" VerticalAlignment="Top" Width="195" Visibility="Hidden"/>
         </Grid>
 
-        <Grid x:Name="grd_Schraubenkopf" Margin="190,74,102,46" Background="#FFFC3E3E" Visibility="Visible" >
+        <Grid x:Name="grd_Schraubenkopf" Margin="190,74,102,46" Background="#FFFC3E3E" Visibility="Hidden" >
             <ComboBox x:Name="cBx_Schraubenkopf" HorizontalAlignment="Left" Margin="210,14,0,0" VerticalAlignment="Top" Width="200" Text="Bitte auswählen..">
                 <ComboBoxItem x:Name="cBI_Sechskant" Content="Sechskant" HorizontalAlignment="Left" Width="200" Selected="cBI_Sechskant_Selected"/>
                 <ComboBoxItem x:Name="cBI_Zylinderkopf" Content="Zylinderkopf mit Innensechskant" HorizontalAlignment="Left" Width="200" Selected="cBI_Zylinderkopf_Selected"/>
@@ -42,16 +42,17 @@
             </ComboBox>
             <Label x:Name="label1" Content="Schraubenkopf auswählen" HorizontalAlignment="Left" Margin="43,10,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btn_SchraubenkopfWeiter" Content="Weiter" HorizontalAlignment="Left" Margin="408,300,0,0" VerticalAlignment="Top" Width="75" Click="btn_SchraubenkopfWeiter_Click"/>
-            <Label x:Name="lab_SchraubenkopfHinweis" Content="Label" HorizontalAlignment="Left" Margin="217,297,0,0" VerticalAlignment="Top" Width="191"/>
+            <Label x:Name="lab_SchraubenkopfHinweis" Content="Label" HorizontalAlignment="Left" Margin="217,297,0,0" VerticalAlignment="Top" Width="191" Visibility="Hidden"/>
         </Grid>
 
 
-        <Grid x:Name="grd_Dimensionen" Margin="190,74,102,46" Background="#FF2993EC" Visibility="Visible">
+        <Grid x:Name="grd_Dimensionen" Margin="190,74,102,46" Background="#FF2993EC" Visibility="Hidden">
+
             <Label x:Name="label2" Content="Dimensionen:" HorizontalAlignment="Left" Margin="30,26,0,0" VerticalAlignment="Top"/>
 
             <Label x:Name="label3" Content="Gewindegröße:" HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top"/>
 
-            <TextBox x:Name="txB_Schaftlaenge" HorizontalAlignment="Left" Height="23" Margin="158,173,0,0" TextWrapping="Wrap" Text="Schaftlänge" VerticalAlignment="Top" Width="85" GotFocus="txB_Schaftlaenge_GotFocus" IsReadOnly="False" LostFocus="txB_Schaftlaenge_LostFocus" Visibility="Hidden"/>
+
 
             <Button x:Name="btn_weiterDimensionen" Content="Weiter" Margin="405,300,28,10" Click="btn_weiterDimensionen_Click"/>
 
@@ -78,19 +79,24 @@
                 <ComboBoxItem x:Name="cBI_m36" Content="M36" HorizontalAlignment="Left"  Width="118" Selected="cBI_m36_Selected"/>
                 <ComboBoxItem x:Name="cBI_m42" Content="M42" HorizontalAlignment="Left"  Width="118" Selected="cBI_m42_Selected"/>
             </ComboBox>
+            <Grid x:Name="grd_Schaftlaenge" Margin="0,0,28,120" Height="99" VerticalAlignment="Bottom" Visibility="Hidden" Background="#FF2993EC" HorizontalAlignment="Right" Width="450">
+                <Label x:Name="lab_Schaftlaenge" Content="Schaftlänge bekannt?" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Visibility="Visible" Height="28" RenderTransformOrigin="0.5,0.5"/>
 
-            <Label x:Name="label5" Content="Schaftlänge bekannt?" HorizontalAlignment="Left" Margin="30,132,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="rBtn_SchaftlaengeJa" Content="Ja" HorizontalAlignment="Left" Margin="140,16,0,0" VerticalAlignment="Top" Checked="rBtn_SchaftlaengeJa_Checked" Visibility="Visible" Height="22" RenderTransformOrigin="0.5,0.5"/>
+                <RadioButton x:Name="rBtn_SchaftlaengeNein" Content="Nein" HorizontalAlignment="Left" Margin="280,16,0,0" VerticalAlignment="Top" Checked="rBtn_SchaftlaengeNein_Checked" Visibility="Visible" Height="18" RenderTransformOrigin="0.5,0.5"/>
+                <TextBox x:Name="txB_Schaftlaenge" HorizontalAlignment="Left" Height="23" Margin="140,38,0,0" TextWrapping="Wrap" Text="Schaftlänge" VerticalAlignment="Top" Width="85" GotFocus="txB_Schaftlaenge_GotFocus" IsReadOnly="False" LostFocus="txB_Schaftlaenge_LostFocus" Visibility="Hidden"/>
+                <TextBox x:Name="txB_Klemmlaenge" HorizontalAlignment="Left" Height="23" Margin="280,38,0,0" TextWrapping="Wrap" Text="Klemmlänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Klemmlaenge_GotFocus" LostFocus="txB_Klemmlaenge_LostFocus" Visibility="Hidden"/>
+                <Label x:Name="lab_SchaftlaengeHinweis" Content="SchaftlängeHinweis" HorizontalAlignment="Left" Margin="42,62,0,0" VerticalAlignment="Top" Visibility="Hidden" Height="27" RenderTransformOrigin="0.5,0.5"/>
+            </Grid>
 
-            <RadioButton x:Name="rBtn_SchaftlaengeJa" Content="Ja" HorizontalAlignment="Left" Margin="188,138,0,0" VerticalAlignment="Top" Checked="rBtn_SchaftlaengeJa_Checked"/>
-            <RadioButton x:Name="rBtn_SchaftlaengeNein" Content="Nein" HorizontalAlignment="Left" Margin="284,138,0,0" VerticalAlignment="Top" Checked="rBtn_SchaftlaengeNein_Checked"/>
+            <Label x:Name="lab_Gewindelaenge" Content="Gewindelänge :" HorizontalAlignment="Left" Margin="30,223,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <RadioButton x:Name="rBtn_gesamte_Schaftlaenge" Content="gesamte Schaftlänge" HorizontalAlignment="Left" Margin="310,229,0,0" VerticalAlignment="Top" Checked="rBtn_gesamte_Schaftlaenge_Checked" Visibility="Hidden"/>
+            <RadioButton x:Name="rBtn_benutzerdefiniert" Content="benutzerdefiniert" HorizontalAlignment="Left" Margin="170,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.682,0.933" Checked="rBtn_benutzerdefiniert_Checked" Visibility="Hidden"/>
+            <TextBox x:Name="txB_Gewindelaenge" HorizontalAlignment="Left" Height="23" Margin="170,249,0,0" TextWrapping="Wrap" Text="Gewindelänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Gewindelaenge_GotFocus" LostFocus="txB_Gewindelaenge_LostFocus" Visibility="Hidden"/>
+            <Label x:Name="lab_GewindelaengeHinweis" Content="GewindelängeHinweis" HorizontalAlignment="Left" Margin="72,282,0,0" VerticalAlignment="Top" Visibility ="Hidden"/>
 
-            <TextBox x:Name="txB_Klemmlaenge" HorizontalAlignment="Left" Height="23" Margin="284,173,0,0" TextWrapping="Wrap" Text="Klemmlänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Klemmlaenge_GotFocus" LostFocus="txB_Klemmlaenge_LostFocus" Visibility="Visible"/>
 
-            <Label x:Name="lab_SchaftlaengeHinweis" Content="Label" HorizontalAlignment="Left" Margin="158,196,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-            <Label x:Name="lab_Gewindelaenge" Content="Gewindelänge :" HorizontalAlignment="Left" Margin="52,222,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="rBtn_gesamte_Schaftlaenge" Content="gesamte Schaftlänge" HorizontalAlignment="Left" Margin="320,228,0,0" VerticalAlignment="Top" Checked="rBtn_gesamte_Schaftlaenge_Checked"/>
-            <RadioButton x:Name="rBtn_benutzerdefiniert" Content="benutzerdefiniert" HorizontalAlignment="Left" Margin="188,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.682,0.933" Checked="rBtn_benutzerdefiniert_Checked"/>
-            <TextBox x:Name="txB_Gewindelaenge" HorizontalAlignment="Left" Height="23" Margin="188,257,0,0" TextWrapping="Wrap" Text="Gewindelänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Gewindelaenge_GotFocus" LostFocus="txB_Gewindelaenge_LostFocus"/>
+
         </Grid>
 
         <Grid x:Name="grd_Festigkeitsklasse" Margin="190,74,102,46" Background="#FFC258F3" Visibility="Hidden">
@@ -102,7 +108,7 @@
             <RadioButton x:Name="rBtn_6_8" Content="6.8" HorizontalAlignment="Left" Margin="96,80,0,0" VerticalAlignment="Top" Checked="rBtn_6_8_Checked"/>
             <RadioButton x:Name="rBtn_9_8" Content="9.8" HorizontalAlignment="Left" Margin="239,80,0,0" VerticalAlignment="Top" Checked="rBtn_9_8_Checked"/>
             <Button x:Name="btn_FestigkeitsklasseWeiter" Content="Weiter" HorizontalAlignment="Left" Margin="423,300,0,0" VerticalAlignment="Top" Width="75" Click="btn_FestigkeitsklasseWeiter_Click"/>
-            <Label x:Name="lab_FestigkeitsklasseHinweis" Content="Label" HorizontalAlignment="Left" Margin="232,297,0,0" VerticalAlignment="Top" Width="186"/>
+            <Label x:Name="lab_FestigkeitsklasseHinweis" Content="Label" HorizontalAlignment="Left" Margin="232,297,0,0" VerticalAlignment="Top" Width="186" Visibility="Hidden"/>
         </Grid>
 
 
@@ -115,27 +121,30 @@
         </Grid>
 
 
-        <Grid x:Name="grd_Berechnungen" HorizontalAlignment="Left" Height="330" Margin="20,74,0,0" VerticalAlignment="Top" Width="678" Background="#FFF3CE25" Visibility="Visible">
+        <Grid x:Name="grd_Berechnungen" HorizontalAlignment="Left" Height="330" Margin="20,74,0,0" VerticalAlignment="Top" Width="678" Background="#FFF3CE25" Visibility="Hidden">
             <Label Content="Checkout" HorizontalAlignment="Left" Margin="42,26,0,0" VerticalAlignment="Top" Height="32" Width="110"/>
-            <Label x:Name="lab_Berechnungen_Gewinderichtung" Content="Gewinderichtung" HorizontalAlignment="Left" Margin="219,107,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="txB_BerechungenGewinderichtung" HorizontalAlignment="Left" Height="23" Margin="324,111,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
-            <TextBox x:Name="txB_BerechungenSchraubenkopf" HorizontalAlignment="Left" Height="23" Margin="316,150,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="235" IsReadOnly="True" Background="Transparent"/>
-            <TextBox x:Name="txB_BerechungenGewindegroesse" HorizontalAlignment="Left" Height="23" Margin="316,178,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
-            <TextBox x:Name="txB_BerechungenSchaftlaenge" HorizontalAlignment="Left" Height="23" Margin="316,206,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
-            <TextBox x:Name="txB_BerechungenGewindelaenge" HorizontalAlignment="Left" Height="23" Margin="316,234,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
-            <TextBox x:Name="txB_BerechungenFestigkeitsklasse" HorizontalAlignment="Left" Height="23" Margin="316,262,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
-            <TextBox x:Name="txB_BerechungenAnzahl" HorizontalAlignment="Left" Height="23" Margin="316,290,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
-            <TextBox x:Name="txB_BerechungenVolumen" HorizontalAlignment="Left" Height="23" Margin="91,178,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
-            <TextBox x:Name="txB_BerechungenMasse" HorizontalAlignment="Left" Height="23" Margin="91,229,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
-            <TextBox x:Name="txB_BerechungenPreis" HorizontalAlignment="Left" Height="23" Margin="91,271,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
+            <Label x:Name="lab_Berechnungen_Gewinderichtung" Content="Gewinderichtung" HorizontalAlignment="Left" Margin="300,65,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="txB_BerechungenGewinderichtung" HorizontalAlignment="Left" Height="23" Margin="420,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
+            <TextBox x:Name="txB_BerechungenSchraubenkopf" HorizontalAlignment="Left" Height="23" Margin="420,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="235" IsReadOnly="True" Background="Transparent"/>
+            <TextBox x:Name="txB_BerechungenGewindegroesse" HorizontalAlignment="Left" Height="23" Margin="420,121,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
+            <TextBox x:Name="txB_BerechungenSchaftlaenge" HorizontalAlignment="Left" Height="23" Margin="420,149,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
+            <TextBox x:Name="txB_BerechungenGewindelaenge" HorizontalAlignment="Left" Height="23" Margin="420,177,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
+            <TextBox x:Name="txB_BerechungenFestigkeitsklasse" HorizontalAlignment="Left" Height="23" Margin="420,205,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
+            <TextBox x:Name="txB_BerechungenAnzahl" HorizontalAlignment="Left" Height="23" Margin="420,233,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
+            <TextBox x:Name="txB_BerechungenVolumen" HorizontalAlignment="Left" Height="23" Margin="144,121,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
+            <TextBox x:Name="txB_BerechungenMasse" HorizontalAlignment="Left" Height="23" Margin="144,149,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
+            <TextBox x:Name="txB_BerechungenPreis" HorizontalAlignment="Left" Height="23" Margin="144,177,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
             <Button x:Name="btn_Zurueck" Content="Zurück" HorizontalAlignment="Left" Margin="476,298,0,0" VerticalAlignment="Top" Width="75" Click="btn_Zurueck_Click"/>
             <Button x:Name="btn_AnCatiaUebertragen" Content="An Catia übertragen" HorizontalAlignment="Left" Margin="556,298,0,0" VerticalAlignment="Top" Width="112" ToolTip="CAD Model mit Catia erstellen"/>
-            <Label x:Name="label" Content="Schraubenkopf:" HorizontalAlignment="Left" Margin="219,146,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label6" Content="Gewindegröße" HorizontalAlignment="Left" Margin="219,174,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label7" Content="Schaftlänge" HorizontalAlignment="Left" Margin="229,202,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label8" Content="Gewindelänge" HorizontalAlignment="Left" Margin="221,230,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label9" Content="Festigkeitsklasse" HorizontalAlignment="Left" Margin="209,258,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label10" Content="Anzahl" HorizontalAlignment="Left" Margin="229,286,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label" Content="Schraubenkopf:" HorizontalAlignment="Left" Margin="308,93,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label6" Content="Gewindegröße" HorizontalAlignment="Left" Margin="308,121,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label7" Content="Schaftlänge" HorizontalAlignment="Left" Margin="323,149,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label8" Content="Gewindelänge" HorizontalAlignment="Left" Margin="308,173,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label9" Content="Festigkeitsklasse" HorizontalAlignment="Left" Margin="296,199,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label10" Content="Anzahl" HorizontalAlignment="Left" Margin="347,225,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lab_Berechnungen_Volumen" Content="Volumen:" HorizontalAlignment="Left" Margin="68,117,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lab_Berechnungen_Masse" Content="Masse:" HorizontalAlignment="Left" Margin="81,148,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lab_Berechnungen_Preis" Content="Preis:" HorizontalAlignment="Left" Margin="81,173,0,0" VerticalAlignment="Top"/>
         </Grid>
 
 

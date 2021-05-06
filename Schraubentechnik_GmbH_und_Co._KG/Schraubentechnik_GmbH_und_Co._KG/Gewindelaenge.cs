@@ -37,18 +37,18 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             float max = maxGewindeLaengeRechnung(schaftlaenge);    //Erneute maxGewindelängen festlegen
             if (g < min) //Wenn Gewindelänge zu kurz
             {
-                Console.WriteLine("Zu kurze Gewindelänge für diese Größe, mindestens " + min + " mm nötig");
+                //Console.WriteLine("Zu kurze Gewindelänge für diese Größe, mindestens " + min + " mm nötig");
                 g = -1;     //gewollte Fehlerrückmeldung
 
             }
             else if (g > max)    //Wenn Gewindelänge zu groß
             {
-                Console.WriteLine("Zu lange Gewindelänge für diese Größe, maximal " + max + " mm möglich");
-                g = -1;     //gewollte Fehlerrückmeldung
+                //Console.WriteLine("Zu lange Gewindelänge für diese Größe, maximal " + max + " mm möglich");
+                g = -2;     //gewollte Fehlerrückmeldung
             }
             else
             {
-                Console.WriteLine("Die gewählte Gewindelänge beträgt: " + g + " mm");
+                //Console.WriteLine("Die gewählte Gewindelänge beträgt: " + g + " mm");
             }
             return g;
         }

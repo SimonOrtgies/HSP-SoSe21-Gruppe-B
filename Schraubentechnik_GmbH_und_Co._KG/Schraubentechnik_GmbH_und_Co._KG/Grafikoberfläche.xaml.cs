@@ -22,7 +22,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
     {
         Schraube s;
         Boolean slGuelitg = false; //Kontrollboolean, ob die Schaftlänge gesetzt werden kann
-        Boolean glGueltig = false;
         Boolean FinishGewinderichtung = false;
         Boolean FinishSchraubenkopf = false;
         Boolean FinishGewindegroesse = false;
@@ -91,7 +90,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         }
 
         #endregion
-
 
         #region Schraubenkopf Auswahl
         private void cBI_Sechskant_Selected(object sender, RoutedEventArgs e)
@@ -280,16 +278,18 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         private void GewindegroessenErgaenzung()
         {
+            
+            slGuelitg = true;   //Wird auf true gesetzt, sobald eine Gewindegröße gesetzt wird, verhindert das man eine Schaftlänge4 vor dem Gewinde setzt
+            FinishGewindegroesse = true;
+            grd_Schaftlaenge.Visibility = Visibility.Visible;
             txB_Schaftlaenge.Background = Brushes.White;    //Freigeben der Schaftlängenbox
             txB_Schaftlaenge.IsReadOnly = false;
             txB_Klemmlaenge.Background = Brushes.White; //Freigeben der KLemmlängenbox
             txB_Klemmlaenge.IsReadOnly = false;
-            slGuelitg = true;   //Wird auf true gesetzt, sobald eine Gewindegröße gesetzt wird, verhindert das man eine Schaftlänge4 vor dem Gewinde setzt
-            FinishGewindegroesse = true;
 
             Boolean gueltig = false;
 
-            if(rBtn_SchaftlaengeJa.IsChecked == true)
+            if (rBtn_SchaftlaengeJa.IsChecked == true)
             {
                 Schaftlaenge objSl = new Schaftlaenge(s.metrischeGewindegroesse);
                 try
@@ -311,11 +311,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     lab_SchaftlaengeHinweis.Content = "Bitte eine Zahl eingeben";
                     FinishSchaftlaenge = false;
                 }
-            }else if(rBtn_SchaftlaengeNein.IsChecked == true)   //WEnn eingabe immer noch gültig ist, muss dennoch die Schaftlänge neu aus der KLemmlänge berechnet werden
+            }
+            else if (rBtn_SchaftlaengeNein.IsChecked == true)   //WEnn eingabe immer noch gültig ist, muss dennoch die Schaftlänge neu aus der KLemmlänge berechnet werden
             {
                 txB_Klemmlaenge_LostFocus(txB_Klemmlaenge, null);   //Berechnung durch lostFocus funktion
             }
-                
+
         }
         #endregion
 
@@ -339,13 +340,13 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             txB_Schaftlaenge.Visibility = Visibility.Hidden;
             txB_Klemmlaenge.Visibility = Visibility.Visible;
             lab_SchaftlaengeHinweis.Visibility = Visibility.Hidden;
-           
+
             if (txB_Klemmlaenge.Text != "Klemmlänge")
             {
                 txB_Klemmlaenge.Text = "Klemmlänge";
                 txB_Klemmlaenge.Background = Brushes.White;
             }
-            
+
 
         }
 
@@ -386,6 +387,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                         lab_SchaftlaengeHinweis.Visibility = Visibility.Hidden;
                         s.schaftLaenge.schaftlaenge = sl;   //Setzen der Schaftlänge in der Scharube s
                         FinishSchaftlaenge = true;
+                        lab_Gewindelaenge.Visibility = Visibility.Visible;
+                        rBtn_gesamte_Schaftlaenge.Visibility = Visibility.Visible;
+                        rBtn_benutzerdefiniert.Visibility = Visibility.Visible;                        
                         txB_Gewindelaenge.Background = Brushes.White;    //Freigeben der Schaftlängenbox
                         txB_Gewindelaenge.IsReadOnly = false;
                     }
@@ -408,7 +412,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     FinishSchaftlaenge = false;
                 }
             }
-            
+
 
         }
 
@@ -436,42 +440,45 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             string g = tb.Text;
 
             if (slGuelitg == true)
-            if(slGuelitg == true)
+                if (slGuelitg == true)
 
-            {
-                Schaftlaenge objSl = new Schaftlaenge(s.metrischeGewindegroesse);
-                try     //Erneut try und catch zum fehler abfangen
                 {
-                    float kl = Convert.ToSingle(txB_Klemmlaenge.Text);
-                    objSl.schaftlaenge = Schaftlaenge.berechneSchaftlaenge(s.metrischeGewindegroesse.mutterhoehe, kl);   //Unterprogramm Schaftlänge in Schaftlaenge.cs aufrufen
-                    if (objSl.schaftlaenge == -1)    //WEnn schaftlänge zu groß/klein kommt dieser Fehlercode wieder
+                    Schaftlaenge objSl = new Schaftlaenge(s.metrischeGewindegroesse);
+                    try     //Erneut try und catch zum fehler abfangen
                     {
-                        lab_SchaftlaengeHinweis.Content = "Die Klemmlänge der Schraube muss zwischen " + (objSl.minSchaftlaenge - 1.25 * s.metrischeGewindegroesse.mutterhoehe) + " mm und " + (objSl.maxSchaftlaenge - 1.25 * s.metrischeGewindegroesse.mutterhoehe) + " mm liegen";
+                        float kl = Convert.ToSingle(txB_Klemmlaenge.Text);
+                        objSl.schaftlaenge = Schaftlaenge.berechneSchaftlaenge(s.metrischeGewindegroesse.mutterhoehe, kl);   //Unterprogramm Schaftlänge in Schaftlaenge.cs aufrufen
+                        if (objSl.schaftlaenge == -1)    //WEnn schaftlänge zu groß/klein kommt dieser Fehlercode wieder
+                        {
+                            lab_SchaftlaengeHinweis.Content = "Die Klemmlänge der Schraube muss zwischen " + (objSl.minSchaftlaenge - 1.25 * s.metrischeGewindegroesse.mutterhoehe) + " mm und " + (objSl.maxSchaftlaenge - 1.25 * s.metrischeGewindegroesse.mutterhoehe) + " mm liegen";
+                            lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
+                            txB_Klemmlaenge.Background = Brushes.Red;
+                            txB_Klemmlaenge.Text = "";
+                            FinishSchaftlaenge = false;
+                        }
+                        else
+                        {
+                            lab_SchaftlaengeHinweis.Content = "Die berechnete Schaftlänge beträtgt: " + objSl.schaftlaenge + " mm";
+                            lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
+                            txB_Klemmlaenge.Background = Brushes.Green;
+                            float sl = objSl.schaftlaenge;
+                            s.schaftLaenge = objSl; //Schaftlänge der Schraube zuweisen
+                            FinishSchaftlaenge = true;
+                            lab_Gewindelaenge.Visibility = Visibility.Visible;
+                            rBtn_gesamte_Schaftlaenge.Visibility = Visibility.Visible;
+                            rBtn_benutzerdefiniert.Visibility = Visibility.Visible;                          
+                            txB_Gewindelaenge.Background = Brushes.White;    //Freigeben der Schaftlängenbox
+                            txB_Gewindelaenge.IsReadOnly = false;
+                        }
+                    }
+                    catch (Exception) //Fehler werden abgefangen
+                    {
+                        lab_SchaftlaengeHinweis.Content = "Bitte eine Zahl eingeben";
                         lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
-                        txB_Klemmlaenge.Background = Brushes.Red;
-                        txB_Klemmlaenge.Text = "";
+                        txB_Schaftlaenge.Background = Brushes.Red;
                         FinishSchaftlaenge = false;
                     }
-                    else
-                    {
-                        lab_SchaftlaengeHinweis.Content = "Die berechnete Schaftlänge beträtgt: " + objSl.schaftlaenge + " mm";
-                        lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
-                        txB_Klemmlaenge.Background = Brushes.Green;
-                        float sl = objSl.schaftlaenge;
-                        s.schaftLaenge = objSl; //Schaftlänge der Schraube zuweisen
-                        FinishSchaftlaenge = true;
-                        txB_Gewindelaenge.Background = Brushes.White;    //Freigeben der Schaftlängenbox
-                        txB_Gewindelaenge.IsReadOnly = false;
-                    }
                 }
-                catch (Exception) //Fehler werden abgefangen
-                {
-                    lab_SchaftlaengeHinweis.Content = "Bitte eine Zahl eingeben";
-                    lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
-                    txB_Schaftlaenge.Background = Brushes.Red;
-                    FinishSchaftlaenge = false;
-                }
-            }
 
         }
         #endregion
@@ -479,7 +486,96 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         #region Gewindelaenge
 
         // Baustelle
+        private void rBtn_gesamte_Schaftlaenge_Checked(object sender, RoutedEventArgs e)
+        {
+            lab_GewindelaengeHinweis.Visibility = Visibility.Hidden;
+            txB_Gewindelaenge.Visibility = Visibility.Hidden;
+            txB_Gewindelaenge.Text = "Gewindelänge";
+            txB_Gewindelaenge.Background = Brushes.White;
 
+
+            Gewindelaenge g = new Gewindelaenge(s.schaftLaenge, s.metrischeGewindegroesse);
+            g.gewindeLaenge = Gewindelaenge.maxGewindeLaengeRechnung(s.schaftLaenge.schaftlaenge);
+            s.gewindeLaenge = g;
+            FinishGewindelaenge = true;
+        }
+
+        private void rBtn_benutzerdefiniert_Checked(object sender, RoutedEventArgs e)
+        {
+            txB_Gewindelaenge.Visibility = Visibility.Visible;
+
+        }
+
+
+        private void txB_Gewindelaenge_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txB_Gewindelaenge.Text == "Gewindelänge")
+            {
+                txB_Gewindelaenge.Text = "";
+            }
+            txB_Gewindelaenge.Background = Brushes.White;
+
+            if (s.metrischeGewindegroesse == null)
+            {
+                txB_Gewindelaenge.Background = Brushes.DarkGray;
+                MessageBox.Show("Gewindegröße zuerst wählen!");
+                txB_Gewindelaenge.IsReadOnly = true;
+
+            }
+            else if (s.schaftLaenge == null)  //Wenn noch keine Schaftlänge Festgelegt wurde
+            {
+                txB_Gewindelaenge.Background = Brushes.DarkGray;
+                MessageBox.Show("Schaftlänge zuerst wählen!");
+                txB_Gewindelaenge.IsReadOnly = true;
+
+            }
+        }
+
+        private void txB_Gewindelaenge_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            string g = tb.Text;
+            float test;
+
+
+
+            try     //Erneut try und catch zum fehler abfangen
+            {
+                float gl = Convert.ToSingle(g);
+                Gewindelaenge objGL = new Gewindelaenge(s.schaftLaenge, s.metrischeGewindegroesse);
+                test = Gewindelaenge.berechneGewindeLaenge(s.metrischeGewindegroesse.mutterhoehe, s.schaftLaenge.schaftlaenge, gl);
+                if (test == -1)
+                {
+                    lab_GewindelaengeHinweis.Visibility = Visibility.Visible;
+                    lab_GewindelaengeHinweis.Content = "Gewindelänge muss minimal " + 2*s.metrischeGewindegroesse.mutterhoehe +" mm betragen";
+                    txB_Gewindelaenge.Background = Brushes.Red;
+                    FinishGewindelaenge = false;
+                }
+                else if (test == -2)
+                {
+                    lab_GewindelaengeHinweis.Visibility = Visibility.Visible;
+                    lab_GewindelaengeHinweis.Content = "Gewindelänge darf maximal " + s.schaftLaenge.schaftlaenge + " mm betragen";
+                    txB_Gewindelaenge.Background = Brushes.Red;
+                    FinishGewindelaenge = false;
+                }
+                else
+                {
+                    lab_GewindelaengeHinweis.Visibility = Visibility.Hidden;
+                    objGL.gewindeLaenge = gl;
+                    s.gewindeLaenge = objGL;
+                    txB_Gewindelaenge.Background = Brushes.Green;
+                    FinishGewindelaenge = true;
+                }
+                Console.WriteLine(objGL.gewindeLaenge);
+            }
+            catch (Exception) //Fehler werden abgefangen
+            {
+                lab_GewindelaengeHinweis.Content = "Bitte eine Zahl eingeben";
+                lab_GewindelaengeHinweis.Visibility = Visibility.Visible;
+                txB_Gewindelaenge.Background = Brushes.Red;
+                FinishGewindelaenge = false;
+            }
+        }
 
         #endregion
 
@@ -576,7 +672,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         private void Btn_Fertigstellen_Click(object sender, RoutedEventArgs e)
         {
 
-            FinishGewindelaenge = true; //SPÄTER LÖSCHEN
+            //SPÄTER LÖSCHEN
 
             if (FinishGewinderichtung == false ||
                 FinishSchraubenkopf == false ||
@@ -599,15 +695,15 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
                 txB_BerechungenGewinderichtung.Text = Convert.ToString(s.gewinderichtung);
                 txB_BerechungenSchraubenkopf.Text = s.schraubenkopf;
-                txB_BerechungenGewindegroesse.Text = Convert.ToString(s.metrischeGewindegroesse.bezeichnung);
-                txB_BerechungenSchaftlaenge.Text = Convert.ToString(s.schaftLaenge.schaftlaenge);
-                txB_BerechungenGewindelaenge.Text = Convert.ToString(s.gewindeLaenge.gewindeLaenge);
+                txB_BerechungenGewindegroesse.Text = "M" +Convert.ToString(s.metrischeGewindegroesse.bezeichnung);
+                txB_BerechungenSchaftlaenge.Text = Convert.ToString(s.schaftLaenge.schaftlaenge) + " mm";
+                txB_BerechungenGewindelaenge.Text = Convert.ToString(s.gewindeLaenge.gewindeLaenge) + " mm";
                 txB_BerechungenFestigkeitsklasse.Text = s.festigkeitsklasse;
                 txB_BerechungenAnzahl.Text = Convert.ToString(s.anzahl);
 
-                txB_BerechungenVolumen.Text = Convert.ToString(Math.Round(s.volumen / 1000, 3));
-                txB_BerechungenMasse.Text = Convert.ToString(s.masse);
-                txB_BerechungenPreis.Text = Convert.ToString(s.preis);
+                txB_BerechungenVolumen.Text = Convert.ToString(Math.Round(s.volumen / 1000, 3)) + " cm^3";
+                txB_BerechungenMasse.Text = Convert.ToString(s.masse) + " kg";
+                txB_BerechungenPreis.Text = Convert.ToString(s.preis) + "€";
 
 
                 grd_Berechnungen.Visibility = Visibility.Visible;
@@ -671,85 +767,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         }
         #endregion
 
-        private void rBtn_gesamte_Schaftlaenge_Checked(object sender, RoutedEventArgs e)
-        {
-            if(FinishSchaftlaenge == true)
-            {
-                lab_Gewindelaenge.Visibility = Visibility.Visible;
-                rBtn_benutzerdefiniert.Visibility = Visibility.Visible;
-                rBtn_gesamte_Schaftlaenge.Visibility = Visibility.Visible;
-                txB_Gewindelaenge.Visibility = Visibility.Hidden;
-            }
-            Gewindelaenge g = new Gewindelaenge(s.schaftLaenge, s.metrischeGewindegroesse);
-            g.gewindeLaenge = Gewindelaenge.maxGewindeLaengeRechnung(s.schaftLaenge.schaftlaenge);
-            
-        }
+        
 
-        private void rBtn_benutzerdefiniert_Checked(object sender, RoutedEventArgs e)
-        {
-            txB_Gewindelaenge.Visibility = Visibility.Visible;
-
-        }
-
-        private void txB_Gewindelaenge_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (txB_Gewindelaenge.Text == "Gewindelänge")
-            {
-                txB_Gewindelaenge.Text = "";
-            }
-            txB_Gewindelaenge.Background = Brushes.White;
-
-            if(s.metrischeGewindegroesse ==null)
-            {
-                txB_Gewindelaenge.Background = Brushes.DarkGray;
-                MessageBox.Show("Gewindegröße zuerst wählen!");
-                txB_Gewindelaenge.IsReadOnly = true;
-                glGueltig = false;
-            }
-            else if (s.schaftLaenge == null)  //Wenn noch keine Schaftlänge Festgelegt wurde
-            {
-                txB_Gewindelaenge.Background = Brushes.DarkGray;
-                MessageBox.Show("Schaftlänge zuerst wählen!");
-                txB_Gewindelaenge.IsReadOnly = true;
-                glGueltig = false;
-            }
-        }
-
-        private void txB_Gewindelaenge_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox tb = (TextBox)sender;
-            string g = tb.Text;
-            Boolean test = false;
-
-            float gl = Convert.ToSingle(g);
-
-            s.gewindeLaenge.gewindeLaenge = gl;
-
-            Console.WriteLine(gl);
-
-            if (glGueltig == true)
-            {
-                //Gewindelaenge objGl = new Gewindelaenge(s.schaftLaenge,s.metrischeGewindegroesse);
-                
-                try     //Erneut try und catch zum fehler abfangen
-                {
-                    test = true;
-                    if (test == true)
-                    {
-                        gl = Convert.ToSingle(g);
-                        s.gewindeLaenge.gewindeLaenge = gl;
-                        Console.WriteLine(gl);
-                    }
-                }
-                catch (Exception) //Fehler werden abgefangen
-                {
-                    //lab_SchaftlaengeHinweis.Content = "Bitte eine Zahl eingeben";
-                    //lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
-                    txB_Gewindelaenge.Background = Brushes.Red;
-                    FinishGewindelaenge = false;
-                }
-            }
-        }
 
         private void btn_Zurueck_Click(object sender, RoutedEventArgs e)
         {

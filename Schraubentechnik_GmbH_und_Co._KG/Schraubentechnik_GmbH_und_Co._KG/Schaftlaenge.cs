@@ -10,7 +10,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
     {
         public float schaftlaenge;
         public float minSchaftlaenge;
-        public readonly float maxSchaftlaenge = 100; //Maximale Länge, würde ich einfach vorgeben   //Kann nicht überschrieben werden
+        public readonly float maxSchaftlaenge = 200; //Maximale Länge, würde ich einfach vorgeben   //Kann nicht überschrieben werden
 
         public Schaftlaenge(MetrischeGewindegroesse m)  //Schaftlänge mit der information des gewählten Gewindes wird konstruiert
         {
@@ -45,7 +45,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         {
             float s = mutterhoehe + klemmlaenge + 0.25f * mutterhoehe;    //Berchenung 
             float min = 3 * mutterhoehe;    //Erneute minSchaftlängen berechnung, weil so einfacher
-            float max = 100;    //Erneute maxSchaftlängen festlegen
+            float max = 200;    //Erneute maxSchaftlängen festlegen
             if (s < min) //Wenn schaftlänge zu kurz
             {
                 //Console.WriteLine("Zu kurze Klemmlänge für diese Größe, mindestens " + (min - 1.25 * mutterhoehe) + " mm nötig");
