@@ -29,6 +29,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         Boolean FinishGewindelaenge = false;
         Boolean FinishFestigkeitsklasse = false;
         Boolean FinishAnzahl = false;
+        Boolean hatWertSchaftlaenge = false;   //prüft ob Schaftlänge einen Wert hat, um den WeiterButton für die Dimensionen einzuschalten
+        Boolean hatWertGewindelaenge = false;  //prüft ob Gewindelänge einen Wert hat, um den WeiterButton für die Dimensionen einzuschalten
 
 
         public Grafikoberfläche(Schraube s)
@@ -326,6 +328,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             txB_Schaftlaenge.Visibility = Visibility.Visible;
             txB_Klemmlaenge.Visibility = Visibility.Hidden;
             lab_SchaftlaengeHinweis.Visibility = Visibility.Hidden;
+            hatWertSchaftlaenge = false;
 
             if (txB_Schaftlaenge.Text != "Schaftlänge")     //Wenn zwischen den rBtn gewechselt wird, soll wieder ein leeres fehlt bereitgestellt werden
             {
@@ -340,6 +343,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             txB_Schaftlaenge.Visibility = Visibility.Hidden;
             txB_Klemmlaenge.Visibility = Visibility.Visible;
             lab_SchaftlaengeHinweis.Visibility = Visibility.Hidden;
+            hatWertSchaftlaenge = false;
 
             if (txB_Klemmlaenge.Text != "Klemmlänge")
             {
@@ -387,6 +391,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                         lab_SchaftlaengeHinweis.Visibility = Visibility.Hidden;
                         s.schaftLaenge.schaftlaenge = sl;   //Setzen der Schaftlänge in der Scharube s
                         FinishSchaftlaenge = true;
+                        hatWertSchaftlaenge = true;
                         lab_Gewindelaenge.Visibility = Visibility.Visible;
                         rBtn_gesamte_Schaftlaenge.Visibility = Visibility.Visible;
                         rBtn_benutzerdefiniert.Visibility = Visibility.Visible;                        
@@ -464,6 +469,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                             float sl = objSl.schaftlaenge;
                             s.schaftLaenge = objSl; //Schaftlänge der Schraube zuweisen
                             FinishSchaftlaenge = true;
+                            hatWertSchaftlaenge = true;
                             lab_Gewindelaenge.Visibility = Visibility.Visible;
                             rBtn_gesamte_Schaftlaenge.Visibility = Visibility.Visible;
                             rBtn_benutzerdefiniert.Visibility = Visibility.Visible;                          
@@ -498,11 +504,13 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             g.gewindeLaenge = Gewindelaenge.maxGewindeLaengeRechnung(s.schaftLaenge.schaftlaenge);
             s.gewindeLaenge = g;
             FinishGewindelaenge = true;
+            hatWertGewindelaenge = true;
         }
 
         private void rBtn_benutzerdefiniert_Checked(object sender, RoutedEventArgs e)
         {
             txB_Gewindelaenge.Visibility = Visibility.Visible;
+            hatWertGewindelaenge = false;
 
         }
 
@@ -565,6 +573,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     s.gewindeLaenge = objGL;
                     txB_Gewindelaenge.Background = Brushes.Green;
                     FinishGewindelaenge = true;
+                    hatWertGewindelaenge = true;
                 }
                 Console.WriteLine(objGL.gewindeLaenge);
             }
@@ -759,10 +768,26 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         private void btn_weiterDimensionen_Click(object sender, RoutedEventArgs e)
         {
+            lab_GewindelaengeHinweis.Visibility = Visibility.Hidden;
+            if (hatWertSchaftlaenge ==true && hatWertGewindelaenge == true)
+            {
+                if (s.schaftLaenge.schaftlaenge >= s.gewindeLaenge.gewindeLaenge)
+                {
+                    FinishGewindelaenge = true;
+
+                }
+                else if (s.schaftLaenge.schaftlaenge < s.gewindeLaenge.gewindeLaenge)
+                {
+                    FinishGewindelaenge = false;
+                    lab_GewindelaengeHinweis.Visibility = Visibility.Visible;
+                    lab_GewindelaengeHinweis.Content = "Die Gewindelänge darf maximal " + s.schaftLaenge.schaftlaenge + " mm betragen";
+                }
+            }
             if (FinishGewindegroesse == true && FinishSchaftlaenge == true && FinishGewindelaenge == true)
             {
                 tvi_Festigkeitsklasse_Selected(tvi_Festigkeitsklasse, null);
             }
+
 
         }
         #endregion
