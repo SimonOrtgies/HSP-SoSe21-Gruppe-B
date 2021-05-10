@@ -53,7 +53,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         private void tvi_Dimensionen_Selected(object sender, RoutedEventArgs e)
         {
             HideAllTreviewItem();
-            grd_Dimensionen.Visibility = Visibility.Visible;  //Neuesgrid sichtbar schalten
+            grd_Dimensionen.Visibility = Visibility.Visible;
+            img_Mase.Visibility = Visibility.Visible; //Neuesgrid sichtbar schalten
         }
         private void tvi_Anzahl_Selected(object sender, RoutedEventArgs e)
         {
@@ -99,27 +100,43 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             lab_SchraubenkopfHinweis.Visibility = Visibility.Hidden;
             s.schraubenkopf = "Sechskant";
             FinishSchraubenkopf = true;
+            img_Sechskant.Visibility = Visibility.Visible;
+            img_Linse.Visibility = Visibility.Hidden;
+            img_Senkkopf.Visibility = Visibility.Hidden;
+            img_Zylinder.Visibility = Visibility.Hidden;
         }
 
         private void cBI_Zylinderkopf_Selected(object sender, RoutedEventArgs e)
         {
             lab_SchraubenkopfHinweis.Visibility = Visibility.Hidden;
-            s.schraubenkopf = "Zylinderkopf mit Innensechskant";
+            s.schraubenkopf = "Zylinderkopf mit Schlitz";
             FinishSchraubenkopf = true;
+            img_Sechskant.Visibility = Visibility.Hidden;
+            img_Linse.Visibility = Visibility.Hidden;
+            img_Senkkopf.Visibility = Visibility.Hidden;
+            img_Zylinder.Visibility = Visibility.Visible;
         }
 
         private void cBI_Senkkopf_Selected(object sender, RoutedEventArgs e)
         {
             lab_SchraubenkopfHinweis.Visibility = Visibility.Hidden;
-            s.schraubenkopf = "Senkkopf mit Innensechskant";
+            s.schraubenkopf = "Senkkopf mit Torx";
             FinishSchraubenkopf = true;
+            img_Sechskant.Visibility = Visibility.Hidden;
+            img_Linse.Visibility = Visibility.Hidden;
+            img_Senkkopf.Visibility = Visibility.Visible;
+            img_Zylinder.Visibility = Visibility.Hidden;
         }
 
         private void cBI_Linsenkopf_Selected(object sender, RoutedEventArgs e)
         {
             lab_SchraubenkopfHinweis.Visibility = Visibility.Hidden;
-            s.schraubenkopf = "Linsenkopf mit Schlitz";
+            s.schraubenkopf = "Linsenkopf mit Kreuz-Schlitz";
             FinishSchraubenkopf = true;
+            img_Sechskant.Visibility = Visibility.Hidden;
+            img_Linse.Visibility = Visibility.Visible;
+            img_Senkkopf.Visibility = Visibility.Hidden;
+            img_Zylinder.Visibility = Visibility.Hidden;
         }
         #endregion
 
@@ -756,6 +773,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             {
                 tvi_Dimensionen_Selected(tvi_Dimensionen, null);
                 lab_SchraubenkopfHinweis.Visibility = Visibility.Hidden;
+           
             }
             else
             {
