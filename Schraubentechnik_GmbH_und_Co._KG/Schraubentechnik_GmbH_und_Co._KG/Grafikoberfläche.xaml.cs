@@ -694,6 +694,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     FinishGewindelaenge = false;
                     lab_EingabenUeberpruefen.Content = "Bitte Eingaben Überprüfen";
                     lab_EingabenUeberpruefen.Visibility = Visibility.Visible;
+                    txB_Gewindelaenge.Background = Brushes.Red;
                 }
             }
 
