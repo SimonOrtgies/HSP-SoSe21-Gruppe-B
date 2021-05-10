@@ -97,14 +97,14 @@
 
                 <RadioButton x:Name="rBtn_SchaftlaengeJa" Content="Ja" HorizontalAlignment="Left" Margin="140,16,0,0" VerticalAlignment="Top" Checked="rBtn_SchaftlaengeJa_Checked" Visibility="Visible" Height="22" RenderTransformOrigin="0.5,0.5"/>
                 <RadioButton x:Name="rBtn_SchaftlaengeNein" Content="Nein" HorizontalAlignment="Left" Margin="280,16,0,0" VerticalAlignment="Top" Checked="rBtn_SchaftlaengeNein_Checked" Visibility="Visible" Height="18" RenderTransformOrigin="0.5,0.5"/>
-                <TextBox x:Name="txB_Schaftlaenge" HorizontalAlignment="Left" Height="23" Margin="140,38,0,0" TextWrapping="Wrap" Text="Schaftlänge" VerticalAlignment="Top" Width="85" GotFocus="txB_Schaftlaenge_GotFocus" IsReadOnly="False" LostFocus="txB_Schaftlaenge_LostFocus" Visibility="Hidden"/>
-                <TextBox x:Name="txB_Klemmlaenge" HorizontalAlignment="Left" Height="23" Margin="280,38,0,0" TextWrapping="Wrap" Text="Klemmlänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Klemmlaenge_GotFocus" LostFocus="txB_Klemmlaenge_LostFocus" Visibility="Hidden"/>
+                <TextBox x:Name="txB_Schaftlaenge" HorizontalAlignment="Left" Height="23" Margin="140,38,0,0" TextWrapping="Wrap" Text="Schaftlänge" VerticalAlignment="Top" Width="85" GotFocus="txB_Schaftlaenge_GotFocus" IsReadOnly="False" LostFocus="txB_Schaftlaenge_LostFocus" Visibility="Hidden" ToolTip="Wie lang soll der Schaft der Schraube sein?"/>
+                <TextBox x:Name="txB_Klemmlaenge" HorizontalAlignment="Left" Height="23" Margin="280,38,0,0" TextWrapping="Wrap" Text="Klemmlänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Klemmlaenge_GotFocus" LostFocus="txB_Klemmlaenge_LostFocus" Visibility="Hidden" ToolTip="Wie groß ist die zu klemmende Länge?"/>
                 <Label x:Name="lab_SchaftlaengeHinweis" Content="SchaftlängeHinweis" HorizontalAlignment="Left" Margin="42,62,0,0" VerticalAlignment="Top" Visibility="Hidden" Height="27" RenderTransformOrigin="0.5,0.5"/>
             </Grid>
 
             <Label x:Name="lab_Gewindelaenge" Content="Gewindelänge :" HorizontalAlignment="Left" Margin="30,223,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-            <RadioButton x:Name="rBtn_gesamte_Schaftlaenge" Content="gesamte Schaftlänge" HorizontalAlignment="Left" Margin="310,229,0,0" VerticalAlignment="Top" Checked="rBtn_gesamte_Schaftlaenge_Checked" Visibility="Hidden"/>
-            <RadioButton x:Name="rBtn_benutzerdefiniert" Content="benutzerdefiniert" HorizontalAlignment="Left" Margin="170,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.682,0.933" Checked="rBtn_benutzerdefiniert_Checked" Visibility="Hidden"/>
+            <RadioButton x:Name="rBtn_gesamte_Schaftlaenge" Content="gesamte Schaftlänge" HorizontalAlignment="Left" Margin="310,229,0,0" VerticalAlignment="Top" Checked="rBtn_gesamte_Schaftlaenge_Checked" Visibility="Hidden"   ToolTip="Das Gewinde geht über den gesamten Schaft"/>
+            <RadioButton x:Name="rBtn_benutzerdefiniert" Content="benutzerdefiniert" HorizontalAlignment="Left" Margin="170,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.682,0.933" Checked="rBtn_benutzerdefiniert_Checked" Visibility="Hidden" ToolTip="Bestimmmen Sie selber die Gewindelänge"/>
             <TextBox x:Name="txB_Gewindelaenge" HorizontalAlignment="Left" Height="23" Margin="170,249,0,0" TextWrapping="Wrap" Text="Gewindelänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Gewindelaenge_GotFocus" LostFocus="txB_Gewindelaenge_LostFocus" Visibility="Hidden"/>
             <Label x:Name="lab_GewindelaengeHinweis" Content="GewindelängeHinweis" HorizontalAlignment="Left" Margin="72,282,0,0" VerticalAlignment="Top" Visibility ="Hidden"/>
           
@@ -127,7 +127,7 @@
 
         <Grid x:Name="grd_Anzahl" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Hidden">
             <Label Content="Anzahl:" HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="tBx_Anzahl" HorizontalAlignment="Left" Height="23" Margin="106,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="101" LostFocus="tBx_Anzahl_LostFocus"/>
+            <TextBox x:Name="tBx_Anzahl" HorizontalAlignment="Left" Height="23" Margin="106,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="101" LostFocus="tBx_Anzahl_LostFocus" ToolTip="Wie viele Schrauben werden benötigt?"/>
             <Label x:Name="lab_Anzahl_Warnung" Content="Label" HorizontalAlignment="Left" Margin="106,68,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
             <Button x:Name="Btn_Fertigstellen" Content="Fertigstellen" HorizontalAlignment="Right" Margin="0,290,33,20" Width="75" Click="Btn_Fertigstellen_Click"/>
             <Label x:Name="lab_EingabenUeberpruefen" Content="Label" HorizontalAlignment="Left" Margin="228,294,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
