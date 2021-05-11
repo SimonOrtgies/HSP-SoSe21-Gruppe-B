@@ -54,7 +54,7 @@
         </Grid>
 
 
-        <Grid x:Name="grd_Dimensionen" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Visible">
+        <Grid x:Name="grd_Dimensionen" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Hidden">
             <Image x:Name="img_Mase" HorizontalAlignment="Left" Height="144" VerticalAlignment="Top" Width="315" Source="Linse durchsichtig mit mase.png" Margin="245,0,-52,0" Visibility="Visible" />
             <Label x:Name="label2" Content="Dimensionen:" HorizontalAlignment="Left" Margin="30,26,0,0" VerticalAlignment="Top"/>
 
