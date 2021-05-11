@@ -54,16 +54,15 @@
         </Grid>
 
 
-        <Grid x:Name="grd_Dimensionen" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Hidden"
-              >
-            <Image x:Name="img_Mase" HorizontalAlignment="Left" Height="114" VerticalAlignment="Top" Width="261" Source="Sechs Maße.png" Margin="247,10,0,0" Visibility="Visible"/>
+        <Grid x:Name="grd_Dimensionen" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Visible">
+            <Image x:Name="img_Mase" HorizontalAlignment="Left" Height="144" VerticalAlignment="Top" Width="315" Source="Linse durchsichtig mit mase.png" Margin="245,0,-52,0" Visibility="Visible" />
             <Label x:Name="label2" Content="Dimensionen:" HorizontalAlignment="Left" Margin="30,26,0,0" VerticalAlignment="Top"/>
 
             <Label x:Name="label3" Content="Gewindegröße:" HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top"/>
 
 
 
-            <Button x:Name="btn_weiterDimensionen" Content="Weiter" Margin="400,290,28,10" Click="btn_weiterDimensionen_Click"/>
+            <Button x:Name="btn_weiterDimensionen" Content="Weiter" Margin="400,290,28,20" Click="btn_weiterDimensionen_Click"/>
 
             <ComboBox x:Name="cBx_Gewindegroesse" HorizontalAlignment="Left" Margin="120,76,0,0" VerticalAlignment="Top" Width="120" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="220" Text="Bitte auswählen..." RenderTransformOrigin="-0.208,0.591">
                 <ComboBoxItem x:Name="cBI_m1" Content="M1" HorizontalAlignment="Left"  Width="118" Selected="cBI_m1_Selected"/>
@@ -88,7 +87,7 @@
                 <ComboBoxItem x:Name="cBI_m36" Content="M36" HorizontalAlignment="Left"  Width="118" Selected="cBI_m36_Selected"/>
                 <ComboBoxItem x:Name="cBI_m42" Content="M42" HorizontalAlignment="Left"  Width="118" Selected="cBI_m42_Selected"/>
             </ComboBox>
-            
+
 
 
 
@@ -107,7 +106,7 @@
             <RadioButton x:Name="rBtn_benutzerdefiniert" Content="benutzerdefiniert" HorizontalAlignment="Left" Margin="170,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.682,0.933" Checked="rBtn_benutzerdefiniert_Checked" Visibility="Hidden" ToolTip="Bestimmmen Sie selber die Gewindelänge"/>
             <TextBox x:Name="txB_Gewindelaenge" HorizontalAlignment="Left" Height="23" Margin="170,249,0,0" TextWrapping="Wrap" Text="Gewindelänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Gewindelaenge_GotFocus" LostFocus="txB_Gewindelaenge_LostFocus" Visibility="Hidden"/>
             <Label x:Name="lab_GewindelaengeHinweis" Content="GewindelängeHinweis" HorizontalAlignment="Left" Margin="72,282,0,0" VerticalAlignment="Top" Visibility ="Hidden"/>
-          
+
 
 
         </Grid>

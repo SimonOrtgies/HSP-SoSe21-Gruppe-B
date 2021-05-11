@@ -71,6 +71,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Linse durchsichtig mit mase.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Linse durchsichtig mit mase.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Linse durchsichtig.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

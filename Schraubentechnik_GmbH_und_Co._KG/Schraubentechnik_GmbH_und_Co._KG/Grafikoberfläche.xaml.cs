@@ -44,6 +44,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         {
             HideAllTreviewItem();
             grd_Gewinderichtung.Visibility = Visibility.Visible;
+           
         }
         private void tvi_Schraubenkopf_Selected(object sender, RoutedEventArgs e)
         {
@@ -54,7 +55,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         {
             HideAllTreviewItem();
             grd_Dimensionen.Visibility = Visibility.Visible;
-            img_Mase.Visibility = Visibility.Visible; //Neuesgrid sichtbar schalten
+            img_Mase.Visibility = Visibility.Visible; 
         }
         private void tvi_Anzahl_Selected(object sender, RoutedEventArgs e)
         {
