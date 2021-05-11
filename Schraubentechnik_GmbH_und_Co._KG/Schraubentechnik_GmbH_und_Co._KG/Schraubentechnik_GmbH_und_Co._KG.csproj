@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Schrauben.Profis-2-Kopie.ico</ApplicationIcon>
+    <ApplicationIcon>Logo1.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -83,6 +83,8 @@
     <Content Include="Linse durchsichtig.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Logo.ico" />
+    <Content Include="Logo1.ico" />
     <Content Include="Schrauben.Profis - Kopie.jpg" />
     <Content Include="Schrauben.Profis 2 - Kopie.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
