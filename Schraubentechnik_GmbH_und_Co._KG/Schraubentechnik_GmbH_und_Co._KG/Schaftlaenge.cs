@@ -37,13 +37,14 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         public float MinSchaftlaengeRechnung(float mutterhoehe) //Berechnung der minimalen Schaftlänge
         {
-            float s = 3 * mutterhoehe;  //
+            float s = 3 * mutterhoehe;
             return s;  //Rückgabe der minimalen Länge
         }
 
         public static float berechneSchaftlaenge(float mutterhoehe, float klemmlaenge)  //Unterprogramm um Schaftlänge zu berechnen
         {
             float s = mutterhoehe + klemmlaenge + 0.25f * mutterhoehe;    //Berchenung 
+            
             float min = 3 * mutterhoehe;    //Erneute minSchaftlängen berechnung, weil so einfacher
             float max = 200;    //Erneute maxSchaftlängen festlegen
             if (s < min) //Wenn schaftlänge zu kurz

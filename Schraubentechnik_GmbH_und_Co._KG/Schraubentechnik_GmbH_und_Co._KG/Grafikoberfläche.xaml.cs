@@ -475,7 +475,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                         objSl.schaftlaenge = Schaftlaenge.berechneSchaftlaenge(s.metrischeGewindegroesse.mutterhoehe, kl);   //Unterprogramm Schaftlänge in Schaftlaenge.cs aufrufen
                         if (objSl.schaftlaenge == -1)    //WEnn schaftlänge zu groß/klein kommt dieser Fehlercode wieder
                         {
-                            lab_SchaftlaengeHinweis.Content = "Die Klemmlänge der Schraube muss zwischen " + (objSl.minSchaftlaenge - 1.25 * s.metrischeGewindegroesse.mutterhoehe) + " mm und " + (objSl.maxSchaftlaenge - 1.25 * s.metrischeGewindegroesse.mutterhoehe) + " mm liegen";
+
+                            double minsl = objSl.minSchaftlaenge - 1.25 * s.metrischeGewindegroesse.mutterhoehe;
+                            minsl = Math.Round(objSl.minSchaftlaenge, 2);
+                            double maxsl = (objSl.maxSchaftlaenge - 1.25 * s.metrischeGewindegroesse.mutterhoehe);
+                            maxsl = Math.Round(maxsl, 2);
+                            lab_SchaftlaengeHinweis.Content = "Die Klemmlänge der Schraube muss zwischen " + minsl + " mm und " + maxsl + " mm liegen";
                             lab_SchaftlaengeHinweis.Visibility = Visibility.Visible;
                             txB_Klemmlaenge.Background = Brushes.Red;
                             txB_Klemmlaenge.Text = "";
