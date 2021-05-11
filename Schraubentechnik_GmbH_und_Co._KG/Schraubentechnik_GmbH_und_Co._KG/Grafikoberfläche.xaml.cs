@@ -142,12 +142,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         #endregion
 
         #region Gewindegroessen Auswahl
-        private void txB_Gewindegroesse_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox tb = (TextBox)sender;
-            string g = tb.Text;
-        }
-
 
         private void cBI_m1_Selected(object sender, RoutedEventArgs e)
         {
@@ -380,21 +374,11 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 txB_Schaftlaenge.Text = "";
             }
             txB_Schaftlaenge.Background = Brushes.White;
-
-            if (s.metrischeGewindegroesse == null)  //Wenn noch keine gewindegröße Festgelegt wurde
-            {
-                txB_Schaftlaenge.Background = Brushes.DarkGray;
-                MessageBox.Show("Gewindegöße zuerst wählen!");
-                txB_Schaftlaenge.IsReadOnly = true;
-                slGuelitg = false;
-
-            }
         }
+
         private void txB_Schaftlaenge_LostFocus(object sender, RoutedEventArgs e)
         {
             Boolean gueltig = false;
-
-           
 
             if (slGuelitg == true)
             {
@@ -600,7 +584,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     FinishGewindelaenge = true;
                     hatWertGewindelaenge = true;
                 }
-                Console.WriteLine(objGL.gewindeLaenge);
             }
             catch (Exception) //Fehler werden abgefangen
             {
@@ -715,7 +698,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 else if (s.schaftLaenge.schaftlaenge < s.gewindeLaenge.gewindeLaenge)
                 {
                     FinishGewindelaenge = false;
-                    lab_EingabenUeberpruefen.Content = "Bitte Eingaben Überprüfen";
+                    lab_EingabenUeberpruefen.Content = "Bitte Gewindelänge Überprüfen";
                     lab_EingabenUeberpruefen.Visibility = Visibility.Visible;
                     txB_Gewindelaenge.Background = Brushes.Red;
                 }
@@ -738,7 +721,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 s.volumen = Program.getVolumen(s);
                 s.masse = Program.getMasse(s);
                 s.preis = Program.getPreis(s);
-                Console.WriteLine(s.preis);
 
                 txB_BerechungenGewinderichtung.Text = Convert.ToString(s.gewinderichtung);
                 txB_BerechungenSchraubenkopf.Text = s.schraubenkopf;
@@ -831,12 +813,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         }
         #endregion
 
-        
-
+       
 
         private void btn_Zurueck_Click(object sender, RoutedEventArgs e)
         {
             grd_Berechnungen.Visibility = Visibility.Hidden;
         }
+
     }
 }

@@ -22,8 +22,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             fenster.Content = meineGUI;     //Inhalt des fensters soll durch meineGUI festgelegt werden
             fenster.ShowDialog();       //ShowDialog sorgt dafür dass zuerst das Fenster ausgeführt werden muss
 
-            Console.WriteLine("Press any key...");
-            //Console.ReadKey();
         }
         
         

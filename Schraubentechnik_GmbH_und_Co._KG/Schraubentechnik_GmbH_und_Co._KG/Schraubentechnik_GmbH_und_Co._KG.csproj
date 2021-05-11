@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Schrauben.Profis-2-Kopie.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -84,6 +87,7 @@
     <Content Include="Schrauben.Profis 2 - Kopie.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Schrauben.Profis-2-Kopie.ico" />
     <Content Include="Sechs Durchsichti.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

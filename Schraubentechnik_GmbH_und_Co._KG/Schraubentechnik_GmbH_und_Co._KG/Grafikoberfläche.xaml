@@ -54,8 +54,7 @@
         </Grid>
 
 
-        <Grid x:Name="grd_Dimensionen" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Hidden">
-            <Image x:Name="img_Mase" HorizontalAlignment="Left" Height="144" VerticalAlignment="Top" Width="315" Source="Linse durchsichtig mit mase.png" Margin="245,0,-52,0" Visibility="Visible" />
+        <Grid x:Name="grd_Dimensionen" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Visible">
             <Label x:Name="label2" Content="Dimensionen:" HorizontalAlignment="Left" Margin="30,26,0,0" VerticalAlignment="Top"/>
 
             <Label x:Name="label3" Content="Gewindegröße:" HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top"/>
@@ -106,6 +105,7 @@
             <RadioButton x:Name="rBtn_benutzerdefiniert" Content="benutzerdefiniert" HorizontalAlignment="Left" Margin="170,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.682,0.933" Checked="rBtn_benutzerdefiniert_Checked" Visibility="Hidden" ToolTip="Bestimmmen Sie selber die Gewindelänge"/>
             <TextBox x:Name="txB_Gewindelaenge" HorizontalAlignment="Left" Height="23" Margin="170,249,0,0" TextWrapping="Wrap" Text="Gewindelänge" VerticalAlignment="Top" Width="120" GotFocus="txB_Gewindelaenge_GotFocus" LostFocus="txB_Gewindelaenge_LostFocus" Visibility="Hidden"/>
             <Label x:Name="lab_GewindelaengeHinweis" Content="GewindelängeHinweis" HorizontalAlignment="Left" Margin="72,282,0,0" VerticalAlignment="Top" Visibility ="Hidden"/>
+            <Image x:Name="img_Mase" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="281" Source="Linse durchsichtig mit mase.png" Margin="233,10,-6,0" Visibility="Visible" Stretch="UniformToFill" />
 
 
 
@@ -134,7 +134,7 @@
 
 
         <Grid x:Name="grd_Berechnungen" HorizontalAlignment="Left" Height="330" Margin="20,74,0,0" VerticalAlignment="Top" Width="678" Background="#FFF3CE25" Visibility="Hidden" RenderTransformOrigin="1.08,0.261">
-            <Label Content="Checkout" HorizontalAlignment="Left" Margin="42,26,0,0" VerticalAlignment="Top" Height="32" Width="110"/>
+            <Label Content="Checkout:" HorizontalAlignment="Left" Margin="29,10,0,0" VerticalAlignment="Top" Height="50" Width="130" FontSize="24"/>
             <Label x:Name="lab_Berechnungen_Gewinderichtung" Content="Gewinderichtung" HorizontalAlignment="Left" Margin="300,65,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txB_BerechungenGewinderichtung" HorizontalAlignment="Left" Height="23" Margin="420,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
             <TextBox x:Name="txB_BerechungenSchraubenkopf" HorizontalAlignment="Left" Height="23" Margin="420,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="235" IsReadOnly="True" Background="Transparent"/>
