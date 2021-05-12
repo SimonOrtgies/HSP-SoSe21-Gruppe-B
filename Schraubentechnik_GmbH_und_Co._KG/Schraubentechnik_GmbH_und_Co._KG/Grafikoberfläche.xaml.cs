@@ -39,6 +39,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             InitializeComponent();
         }
 
+
         #region Treeview
         private void tvi_Gewinderichtung_Selected(object sender, RoutedEventArgs e)
         {
@@ -500,7 +501,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         #region Gewindelaenge
 
-        // Baustelle
+        // wenn Schaftlänge gleich Gewindelänge
         private void rBtn_gesamte_Schaftlaenge_Checked(object sender, RoutedEventArgs e)
         {
             lab_GewindelaengeHinweis.Visibility = Visibility.Hidden;
@@ -516,6 +517,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             hatWertGewindelaenge = true;
         }
 
+        // Benutzer kann Gewindelänge eingeben
         private void rBtn_benutzerdefiniert_Checked(object sender, RoutedEventArgs e)
         {
             txB_Gewindelaenge.Visibility = Visibility.Visible;
@@ -703,7 +705,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     txB_Gewindelaenge.Background = Brushes.Red;
                 }
             }
-
+            // Prüft, ob alle Eingaben korekt sind
             if (FinishGewinderichtung == false ||
                 FinishSchraubenkopf == false ||
                 FinishGewindegroesse == false ||
@@ -717,6 +719,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             }
             else
             {
+                // Ausgabefenster anzeigen
                 lab_EingabenUeberpruefen.Visibility = Visibility.Hidden;
                 s.volumen = Program.getVolumen(s);
                 s.masse = Program.getMasse(s);
