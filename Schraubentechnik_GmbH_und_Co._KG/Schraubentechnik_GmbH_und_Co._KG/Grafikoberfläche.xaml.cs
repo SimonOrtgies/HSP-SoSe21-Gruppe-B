@@ -823,5 +823,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             grd_Berechnungen.Visibility = Visibility.Hidden;
         }
 
+        private void btn_AnCatiaUebertragen_Click(object sender, RoutedEventArgs e)
+        {
+            CatiaControl.CatiaStarten(s);
+        }
     }
 }

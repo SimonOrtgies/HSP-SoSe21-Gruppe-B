@@ -131,7 +131,7 @@
         </Grid>
 
 
-        <Grid x:Name="grd_Berechnungen" HorizontalAlignment="Left" Height="330" Margin="20,74,0,0" VerticalAlignment="Top" Width="678" Background="#FFF3CE25" Visibility="Hidden" RenderTransformOrigin="1.08,0.261">
+        <Grid x:Name="grd_Berechnungen" HorizontalAlignment="Left" Height="330" Margin="20,74,0,0" VerticalAlignment="Top" Width="678" Background="#FFF3CE25" Visibility="Visible" RenderTransformOrigin="1.08,0.261">
             <Label Content="Checkout:" HorizontalAlignment="Left" Margin="29,10,0,0" VerticalAlignment="Top" Height="50" Width="130" FontSize="24"/>
             <Label x:Name="lab_Berechnungen_Gewinderichtung" Content="Gewinderichtung" HorizontalAlignment="Left" Margin="300,65,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txB_BerechungenGewinderichtung" HorizontalAlignment="Left" Height="23" Margin="420,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
@@ -145,7 +145,7 @@
             <TextBox x:Name="txB_BerechungenMasse" HorizontalAlignment="Left" Height="23" Margin="144,149,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
             <TextBox x:Name="txB_BerechungenPreis" HorizontalAlignment="Left" Height="23" Margin="144,177,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
             <Button x:Name="btn_Zurueck" Content="Zurück" HorizontalAlignment="Left" Margin="450,290,0,0" VerticalAlignment="Top" Width="75" Click="btn_Zurueck_Click"/>
-            <Button x:Name="btn_AnCatiaUebertragen" Content="An Catia übertragen" HorizontalAlignment="Right" Margin="0,290,33,20" Width="112" ToolTip="CAD Model mit Catia erstellen"/>
+            <Button x:Name="btn_AnCatiaUebertragen" Content="An Catia übertragen" HorizontalAlignment="Right" Margin="0,290,33,20" Width="112" ToolTip="CAD Model mit Catia erstellen" Click="btn_AnCatiaUebertragen_Click"/>
             <Label x:Name="label" Content="Schraubenkopf:" HorizontalAlignment="Left" Margin="308,93,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label6" Content="Gewindegröße" HorizontalAlignment="Left" Margin="308,121,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label7" Content="Schaftlänge" HorizontalAlignment="Left" Margin="323,149,0,0" VerticalAlignment="Top"/>
