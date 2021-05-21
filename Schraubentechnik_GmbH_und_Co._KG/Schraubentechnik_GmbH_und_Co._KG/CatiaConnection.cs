@@ -19,7 +19,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         Pad SchaftPad;
         Chamfer SchaftFase;
-
+        EdgeFillet RadiusKopf;
 
         public bool CATIALaeuft()
         {
@@ -130,7 +130,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         #region Kopf
         public void ErzeugeKopf(MetrischeGewindegroesse m, String sk)
         {
-            sk = "Sechskant"; //Test mit Sechskant 
+            //sk = "Sechskant";                   //Test mit Sechskant 
 
 
             if (sk == "Sechskant")
@@ -223,9 +223,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             // Block(Balken) erzeugen
             ShapeFactory catShapeFactory2 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
 
-            //Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, m.mutterhoehe);
-            Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, -12);                   // Test mit Mutterhoehe 12
-            //catPad1.DirectionOrientation = catInverseOrientation;                 //so müsste das in VB funktionieren, aber wie in C#?    //Nicht NOTWENDIG!!! EInfach -12 anstatt 12
+            Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, -m.mutterhoehe);
+            //Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, -12);                   // Test mit Mutterhoehe 12
 
             // Block umbenennen
             catPad2.set_Name("Kopf");
@@ -275,8 +274,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // Block(Schaft) erzeugen
             ShapeFactory catShapeFactory1 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
-            Pad catPad1 = catShapeFactory1.AddNewPad(hsp_catiaProfil, m.mutterhoehe);
-            //catPad1.DirectionOrientation = catInverseOrientation;              //so müsste das in VB funktionieren, aber wie in C#?
+            Pad catPad1 = catShapeFactory1.AddNewPad(hsp_catiaProfil, -m.mutterhoehe);
+
             // Block umbenennen
             catPad1.set_Name("Kopf");
 
@@ -285,6 +284,20 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
 
 
+            #endregion
+
+            // Erzeugt leider "Exception" bei der Übermittlung an Catia
+            #region Verrundung
+            //hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+
+            //ShapeFactory catshapeFactoryRadius = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
+
+            //Reference reference1 = hsp_catiaPart.Part.CreateReferenceFromBRepName("REdge:(Edge:(Face:(Brp:(Pad.2;2);None:();Cf11:());Face:(Brp:(Pad.2;0:(Brp:(Sketch.1;1)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", RadiusKopf);
+
+            //RadiusKopf = catshapeFactoryRadius.AddNewEdgeFilletWithConstantRadius(reference1, CatFilletEdgePropagation.catTangencyFilletEdgePropagation, 1);
+
+            //RadiusKopf.set_Name("Radius");
+            //hsp_catiaPart.Part.Update();
             #endregion
         }
 
@@ -330,7 +343,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         #endregion
 
 
-        public void ErzeugeFase()           // Fase am Ende des Schraubenschaftes, funktioniert noch nicht
+        public void ErzeugeFase()           // Fase am Ende des Schraubenschaftes
         {
             hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
 
