@@ -53,7 +53,7 @@ HybridBody catHybridBody1;
             catch (Exception)
             {
                 MessageBox.Show("Kein geometrisches Set gefunden! " + Environment.NewLine +
-                    "Ein PART manuell erzeugen und ein darauf achten, dass 'Geometisches Set' aktiviert ist.",
+                    "Ein PART manuell erzeugen und darauf achten, dass 'Geometisches Set' aktiviert ist.",
                     "Fehler", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -110,7 +110,7 @@ HybridBody catHybridBody1;
             // Hauptkoerper in Bearbeitung definieren
             hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
 
-            // Block(Balken) erzeugen
+            // Block(Schaft) erzeugen
             ShapeFactory catShapeFactory1 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
             Pad catPad1 = catShapeFactory1.AddNewPad(hsp_catiaProfil, l);
 
@@ -125,14 +125,22 @@ HybridBody catHybridBody1;
         #region Kopf
         public void ErzeugeKopf(MetrischeGewindegroesse m, String sk)
         {
-            sk = "Sechskant";
 
-            if(sk == "Sechskant")
+            if (sk == "Sechskant")
             {
                 Sechskant(m);
-            }else if (sk == "Zylinderkopf mit Schlitz")
+            }
+            else if (sk == "Zylinderkopf mit Schlitz")
             {
-                Zylinderkopf();
+                Zylinderkopf(m);
+            }
+            else if (sk == "Senkkopf mit Torx") 
+            {
+                Senkkopf(m);
+            }
+            else if (sk == "Linsenkopf mit Kreuz-Schlitz")
+            {
+                Linsenkopf(m);
             }
 
         }
@@ -148,10 +156,12 @@ HybridBody catHybridBody1;
 
             // Achsensystem in Skizze erstellen 
             ErzeugeAchsensystem();
-            hsp_catiaProfil.set_Name("Schraubenkopf");
+            hsp_catiaProfil.set_Name("Sechskanntkopf");
+            // Skizzierer verlassen
+            hsp_catiaProfil.CloseEdition();
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
-            #endregion
+            
 
             Factory2D catFactory2D1 = hsp_catiaProfil.OpenEdition();
 
@@ -194,12 +204,12 @@ HybridBody catHybridBody1;
             catLine2D6.StartPoint = catPoint2D6;
             catLine2D6.EndPoint = catPoint2D1;
 
-            // Skizzierer verlassen
-            hsp_catiaProfil.CloseEdition();
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
 
+            #endregion
 
+            #region Pad
             // Hauptkoerper in Bearbeitung definieren
             hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
 
@@ -207,28 +217,118 @@ HybridBody catHybridBody1;
             ShapeFactory catShapeFactory2 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
             Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, m.mutterhoehe);
             //Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, 12);                    Test mit Mutterhoehe 12
-
+            //catPad1.DirectionOrientation = catInverseOrientation;                 //so müsste das in VB funktionieren, aber wie in C#?
             // Block umbenennen
             catPad2.set_Name("Kopf");
 
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
+            #endregion
+        }
+
+
+        public void Zylinderkopf(MetrischeGewindegroesse m)
+        {
+            #region SKizze bauen
+            // neue Skizze im ausgewaehlten geometrischen Set anlegen
+            Sketches catSketches1 = catHybridBody1.HybridSketches;
+            OriginElements catOriginElements = hsp_catiaPart.Part.OriginElements;
+            Reference catReference1 = (Reference)catOriginElements.PlaneYZ;
+            hsp_catiaProfil = catSketches1.Add(catReference1);
+
+            // Achsensystem in Skizze erstellen 
+            ErzeugeAchsensystem();
+            hsp_catiaProfil.set_Name("Zylinderkopf");
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            
+
+            Factory2D catFactory2D1 = hsp_catiaProfil.OpenEdition();
+
+            // erst die Punkte
+            Point2D catPoint2D1 = catFactory2D1.CreatePoint(0, 0);
+
+            // dann den Kreis
+            Circle2D catCircle2D_1 = catFactory2D1.CreateCircle(0, 0, m.kopfdurchmesser/2, 0, 0);
+            catCircle2D_1.CenterPoint = catPoint2D1;
+
+            // Skizzierer verlassen
+            hsp_catiaProfil.CloseEdition();
+
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+
+            #endregion
+
+            #region Pad
+            // Hauptkoerper in Bearbeitung definieren
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+
+            // Block(Schaft) erzeugen
+            ShapeFactory catShapeFactory1 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
+            Pad catPad1 = catShapeFactory1.AddNewPad(hsp_catiaProfil, m.mutterhoehe);
+            //catPad1.DirectionOrientation = catInverseOrientation;              //so müsste das in VB funktionieren, aber wie in C#?
+            // Block umbenennen
+            catPad1.set_Name("Kopf");
+
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+
+
+
+            #endregion
+        }
+
+        public void Linsenkopf(MetrischeGewindegroesse m)
+        {
+            #region SKizze bauen
+            // neue Skizze im ausgewaehlten geometrischen Set anlegen
+            Sketches catSketches1 = catHybridBody1.HybridSketches;
+            OriginElements catOriginElements = hsp_catiaPart.Part.OriginElements;
+            Reference catReference1 = (Reference)catOriginElements.PlaneYZ;
+            hsp_catiaProfil = catSketches1.Add(catReference1);
+
+            // Achsensystem in Skizze erstellen 
+            ErzeugeAchsensystem();
+            hsp_catiaProfil.set_Name("Linsenkopf");
+            // Skizzierer verlassen
+            hsp_catiaProfil.CloseEdition();
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            #endregion
+
+        }
+
+        public void Senkkopf(MetrischeGewindegroesse m)
+        {
+            #region SKizze bauen
+            // neue Skizze im ausgewaehlten geometrischen Set anlegen
+            Sketches catSketches1 = catHybridBody1.HybridSketches;
+            OriginElements catOriginElements = hsp_catiaPart.Part.OriginElements;
+            Reference catReference1 = (Reference)catOriginElements.PlaneYZ;
+            hsp_catiaProfil = catSketches1.Add(catReference1);
+
+            // Achsensystem in Skizze erstellen 
+            ErzeugeAchsensystem();
+            hsp_catiaProfil.set_Name("Senkkopf");
+            // Skizzierer verlassen
+            hsp_catiaProfil.CloseEdition();
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            #endregion
+
         }
         #endregion
 
-        public void Zylinderkopf()
-        {
-        
-        }
 
-        public void ErzeugeFase()
+        public void ErzeugeFase()           // Fase am Ende des Schraubenschaftes, funktioniert noch nicht
         {
             ShapeFactory catshapeFactoryFase = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
             // var reference1 = (Reference)hsp_catiaPart.Part.CreateReferenceFromBRepName("REdge:(Edge:(Face:(Brp:(Pad.1;0:(Brp:(Sketch.1;1)));None:();Cf11:());Face:(Brp:(Pad.1;2);None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)");
             var reference1 = (Reference)hsp_catiaPart.Part.CreateReferenceFromName("");
 
             Chamfer catChamfer1 = catshapeFactoryFase.AddNewChamfer(reference1, CatChamferPropagation.catTangencyChamfer, CatChamferMode.catLengthAngleChamfer, CatChamferOrientation.catNoReverseChamfer, 1, 45);
-
+           
            // Set reference1 = part1.CreateReferenceFromName("");
 
 

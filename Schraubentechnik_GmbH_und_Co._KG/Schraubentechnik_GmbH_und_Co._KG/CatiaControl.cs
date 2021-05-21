@@ -34,7 +34,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     //cc.ErzeugeProfil(10);                     Test für M20
                     Console.WriteLine("3");
 
-                    // Extrudiere Balken
+                    // Extrudiere Schaft
                     cc.ErzeugeSchaft(s.schaftLaenge.schaftlaenge);
                     //cc.ErzeugeSchaft(100);                    Test mit Schaftlänge 100
                     Console.WriteLine("4");
