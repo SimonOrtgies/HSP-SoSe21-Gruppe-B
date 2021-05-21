@@ -88,7 +88,6 @@ HybridBody catHybridBody1;
             // Skizze oeffnen
             Factory2D catFactory2D1 = hsp_catiaProfil.OpenEdition();
 
-            // Rechteck erzeugen
 
             // erst die Punkte
             Point2D catPoint2D1 = catFactory2D1.CreatePoint(0, 0);
@@ -133,7 +132,7 @@ HybridBody catHybridBody1;
                 Sechskant(m);
             }else if (sk == "Zylinderkopf mit Schlitz")
             {
-
+                Zylinderkopf();
             }
 
         }
@@ -159,8 +158,8 @@ HybridBody catHybridBody1;
             // Sechskant erzeugen
             double tan30 = Math.Sqrt(3)/3;
             double cos30 = Math.Sqrt(3)/2;
-            //double mSW = m.schluesselweite / 2;
-            double mSW = 16;
+            double mSW = m.schluesselweite /2;
+            //double mSW = 16;                              Test mit Schlüsselweite 16
 
             // erst die Punkte
             Point2D catPoint2D1 = catFactory2D1.CreatePoint(mSW, tan30*mSW);
@@ -206,8 +205,8 @@ HybridBody catHybridBody1;
 
             // Block(Balken) erzeugen
             ShapeFactory catShapeFactory2 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
-            //Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, m.mutterhoehe);
-            Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, 12);
+            Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, m.mutterhoehe);
+            //Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, 12);                    Test mit Mutterhoehe 12
 
             // Block umbenennen
             catPad2.set_Name("Kopf");
@@ -216,6 +215,11 @@ HybridBody catHybridBody1;
             hsp_catiaPart.Part.Update();
         }
         #endregion
+
+        public void Zylinderkopf()
+        {
+        
+        }
 
         public void ErzeugeFase()
         {

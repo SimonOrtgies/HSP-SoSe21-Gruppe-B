@@ -8,14 +8,17 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 {
     public class MetrischeGewindegroesse   //Objekt/Klasse metrischeGewindegröße
     {
-        public float bezeichnung;   //Variablen/Infomrationen die die Klasse enthält
+        public float bezeichnung;       //Variablen/Infomrationen die die Klasse enthält
         public float steigung;
-        public float flanken;       //Für Volumenberechnung nötig
+        public float flanken;           //Für Volumenberechnung nötig
         public float aussengewinde;
-        public float mutterhoehe;   //Für mindest Schaftlänge und Längenrechner notwendig
-        public float schluesselweite; //Für Catia Sechskant
+        public float mutterhoehe;       //Für mindest Schaftlänge und Längenrechner notwendig
+        public float schluesselweite;   //Für Catia Sechskant
+        public float kopfdurchmesser;   //Für Catia Zylinderkopf
+        public float schlitztiefe;      //Für Catia Zylinderkopf
+        public float schlitzbreite;     //Für Catia Zylinderkopf
 
-        public MetrischeGewindegroesse(float b, float st, float f, float au, float mu, float sw)    //Aufbau der KLasse
+        public MetrischeGewindegroesse(float b, float st, float f, float au, float mu, float sw, float kd, float ts, float bs)    //Aufbau der KLasse
         {
             bezeichnung = b;
             steigung = st;
@@ -23,6 +26,10 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             aussengewinde = au;
             mutterhoehe = mu;
             schluesselweite = sw;
+            kopfdurchmesser = kd;
+            schlitztiefe = ts;
+            schlitzbreite = bs;
+
         }
 
         public String printGewinde()    //Unterprogramm zur Ausgabe der Daten als Übersicht
