@@ -15,7 +15,11 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         INFITF.Application hsp_catiaApp;
         MECMOD.PartDocument hsp_catiaPart;
         MECMOD.Sketch hsp_catiaProfil;
-HybridBody catHybridBody1;
+        HybridBody catHybridBody1;
+
+        Pad SchaftPad;
+        Chamfer SchaftFase;
+
 
         public bool CATIALaeuft()
         {
@@ -112,10 +116,11 @@ HybridBody catHybridBody1;
 
             // Block(Schaft) erzeugen
             ShapeFactory catShapeFactory1 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
-            Pad catPad1 = catShapeFactory1.AddNewPad(hsp_catiaProfil, l);
+            SchaftPad = catShapeFactory1.AddNewPad(hsp_catiaProfil, l);
+             
 
             // Block umbenennen
-            catPad1.set_Name("Schaft");
+            SchaftPad.set_Name("Schaft");
 
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
@@ -125,6 +130,8 @@ HybridBody catHybridBody1;
         #region Kopf
         public void ErzeugeKopf(MetrischeGewindegroesse m, String sk)
         {
+            sk = "Sechskant"; //Test mit Sechskant 
+
 
             if (sk == "Sechskant")
             {
@@ -168,8 +175,8 @@ HybridBody catHybridBody1;
             // Sechskant erzeugen
             double tan30 = Math.Sqrt(3)/3;
             double cos30 = Math.Sqrt(3)/2;
-            double mSW = m.schluesselweite /2;
-            //double mSW = 16;                              Test mit Schlüsselweite 16
+            //double mSW = m.schluesselweite /2;
+            double mSW = 16;                              //Test mit Schlüsselweite 16
 
             // erst die Punkte
             Point2D catPoint2D1 = catFactory2D1.CreatePoint(mSW, tan30*mSW);
@@ -215,9 +222,11 @@ HybridBody catHybridBody1;
 
             // Block(Balken) erzeugen
             ShapeFactory catShapeFactory2 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
-            Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, m.mutterhoehe);
-            //Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, 12);                    Test mit Mutterhoehe 12
-            //catPad1.DirectionOrientation = catInverseOrientation;                 //so müsste das in VB funktionieren, aber wie in C#?
+
+            //Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, m.mutterhoehe);
+            Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, -12);                   // Test mit Mutterhoehe 12
+            //catPad1.DirectionOrientation = catInverseOrientation;                 //so müsste das in VB funktionieren, aber wie in C#?    //Nicht NOTWENDIG!!! EInfach -12 anstatt 12
+
             // Block umbenennen
             catPad2.set_Name("Kopf");
 
@@ -323,19 +332,49 @@ HybridBody catHybridBody1;
 
         public void ErzeugeFase()           // Fase am Ende des Schraubenschaftes, funktioniert noch nicht
         {
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+
             ShapeFactory catshapeFactoryFase = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
-            // var reference1 = (Reference)hsp_catiaPart.Part.CreateReferenceFromBRepName("REdge:(Edge:(Face:(Brp:(Pad.1;0:(Brp:(Sketch.1;1)));None:();Cf11:());Face:(Brp:(Pad.1;2);None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)");
-            var reference1 = (Reference)hsp_catiaPart.Part.CreateReferenceFromName("");
 
-            Chamfer catChamfer1 = catshapeFactoryFase.AddNewChamfer(reference1, CatChamferPropagation.catTangencyChamfer, CatChamferMode.catLengthAngleChamfer, CatChamferOrientation.catNoReverseChamfer, 1, 45);
-           
-           // Set reference1 = part1.CreateReferenceFromName("");
+            Reference reference1 = hsp_catiaPart.Part.CreateReferenceFromBRepName(
+                "REdge:(Edge:(Face:(Brp:(Pad.1;0:(Brp:(Sketch.1;1)));None:();Cf11:());Face:(Brp:(Pad.1;2);None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", SchaftPad);
 
+            SchaftFase = catshapeFactoryFase.AddNewChamfer(reference1, CatChamferPropagation.catTangencyChamfer, CatChamferMode.catLengthAngleChamfer, CatChamferOrientation.catNoReverseChamfer, 1, 45);
 
-
-          // Set chamfer1 = shapeFactory1.AddNewChamfer(reference1, catTangencyChamfer, catLengthAngleChamfer, catNoReverseChamfer, 1.000000, 45.000000);
+            SchaftFase.set_Name("Fase");
+            hsp_catiaPart.Part.Update();
         }
 
+
+        // Erzeugt ein Gewindefeature auf dem vorher erzeugten Schaft.
+        internal void ErzeugeGewindeFeature(Double bezeichnung, double gewindelaenge)
+        {
+            // Gewinde...
+            // ... Referenzen lateral und limit erzeugen
+            Reference RefMantelflaeche = hsp_catiaPart.Part.CreateReferenceFromBRepName(
+                "RSur:(Face:(Brp:(Pad.1;0:(Brp:(Sketch.1;1)));None:();Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", SchaftFase);
+            Reference RefFrontflaeche = hsp_catiaPart.Part.CreateReferenceFromBRepName(
+                "RSur:(Face:(Brp:(Pad.1;2);None:();Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", SchaftFase);
+
+            ShapeFactory catshapeFactoryThread = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
+
+            // ... Gewinde erzeugen, Parameter setzen
+            PARTITF.Thread thread1 = catshapeFactoryThread.AddNewThreadWithOutRef();
+            thread1.Side = CatThreadSide.catRightSide;
+            thread1.Diameter = bezeichnung;
+            thread1.Depth = gewindelaenge;
+
+            thread1.LateralFaceElement = RefMantelflaeche; // Referenz lateral
+            thread1.LimitFaceElement = RefFrontflaeche; // Referenz limit
+
+            // ... Standardgewinde gesteuert über eine Konstruktionstabelle
+            thread1.CreateUserStandardDesignTable("Metric_Thick_Pitch", @"C:\Program Files\Dassault Systemes\B28\win_b64\resources\standard\thread\Metric_Thick_Pitch.xml");
+
+            thread1.set_Name("Gewinde");
+
+            // Part update und fertig
+            hsp_catiaPart.Part.Update();
+        }
 
     }
 }
