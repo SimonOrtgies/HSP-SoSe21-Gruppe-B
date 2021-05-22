@@ -19,6 +19,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         Pad SchaftPad;
         Chamfer SchaftFase;
+
+        Pad KopfPad;
         EdgeFillet RadiusKopf;
 
         public bool CATIALaeuft()
@@ -274,10 +276,10 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // Block(Schaft) erzeugen
             ShapeFactory catShapeFactory1 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
-            Pad catPad1 = catShapeFactory1.AddNewPad(hsp_catiaProfil, -m.mutterhoehe);
+            KopfPad = catShapeFactory1.AddNewPad(hsp_catiaProfil, -m.mutterhoehe);
 
             // Block umbenennen
-            catPad1.set_Name("Kopf");
+            KopfPad.set_Name("Kopf");
 
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
@@ -288,16 +290,18 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // Erzeugt leider "Exception" bei der Übermittlung an Catia
             #region Verrundung
-            //hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
 
-            //ShapeFactory catshapeFactoryRadius = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
+            ShapeFactory catshapeFactoryRadius = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
 
-            //Reference reference1 = hsp_catiaPart.Part.CreateReferenceFromBRepName("REdge:(Edge:(Face:(Brp:(Pad.2;2);None:();Cf11:());Face:(Brp:(Pad.2;0:(Brp:(Sketch.1;1)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", RadiusKopf);
+            Reference reference1 = hsp_catiaPart.Part.CreateReferenceFromBRepName(  //Hier scheint der Fehler drin zu stecken, er erkennt nicht die richtige kante
+                "REdge:(Edge:(Face:(Brp:(Pad.2;2);None:();Cf11:());Face:(Brp:(Pad.2;0:(Brp:(Sketch.1;1)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", SchaftPad); 
 
-            //RadiusKopf = catshapeFactoryRadius.AddNewEdgeFilletWithConstantRadius(reference1, CatFilletEdgePropagation.catTangencyFilletEdgePropagation, 1);
+            RadiusKopf = catshapeFactoryRadius.AddNewEdgeFilletWithConstantRadius(reference1, CatFilletEdgePropagation.catTangencyFilletEdgePropagation, 1);
+ 
 
-            //RadiusKopf.set_Name("Radius");
-            //hsp_catiaPart.Part.Update();
+            RadiusKopf.set_Name("Radius");
+            hsp_catiaPart.Part.Update();
             #endregion
         }
 
