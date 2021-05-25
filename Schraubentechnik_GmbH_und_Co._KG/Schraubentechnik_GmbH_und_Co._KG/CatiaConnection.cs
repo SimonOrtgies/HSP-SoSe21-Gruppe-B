@@ -62,7 +62,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             catch (Exception)
             {
                 MessageBox.Show("Kein geometrisches Set gefunden! " + Environment.NewLine +
-                    "Ein PART manuell erzeugen und darauf achten, dass 'Geometisches Set' aktiviert ist.",
+                    "Ein PART manuell erzeugen und darauf achten, dass 'Geometrisches Set' aktiviert ist.",
                     "Fehler", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -168,7 +168,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // Achsensystem in Skizze erstellen 
             ErzeugeAchsensystem();
-            hsp_catiaProfil.set_Name("Sechskanntkopf");
+            hsp_catiaProfil.set_Name("Sechskantkopf");
             // Skizzierer verlassen
             hsp_catiaProfil.CloseEdition();
             // Part aktualisieren
@@ -228,11 +228,11 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             // Block(Balken) erzeugen
             ShapeFactory catShapeFactory2 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
 
-            Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, -m.mutterhoehe);
+            KopfPad = catShapeFactory2.AddNewPad(hsp_catiaProfil, -m.mutterhoehe);
             //Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, -12);                   // Test mit Mutterhoehe 12
 
             // Block umbenennen
-            catPad2.set_Name("Kopf");
+            KopfPad.set_Name("Kopf");
 
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
@@ -331,19 +331,19 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // Erzeugt leider "Exception" bei der Übermittlung an Catia
             #region Verrundung
-            /*hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
 
               ShapeFactory catshapeFactoryRadius = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
-
-              Reference reference1 = hsp_catiaPart.Part.CreateReferenceFromBRepName(  //Hier scheint der Fehler drin zu stecken, er erkennt nicht die richtige kante
-                  "REdge:(Edge:(Face:(Brp:(Pad.2;2);None:();Cf11:());Face:(Brp:(Pad.2;0:(Brp:(Sketch.1;1)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", KopfPad);
-
-              RadiusKopf = catshapeFactoryRadius.AddNewEdgeFilletWithConstantRadius(reference1, CatFilletEdgePropagation.catTangencyFilletEdgePropagation, 1);
+        
+              Reference reference1 = hsp_catiaPart.Part.CreateReferenceFromBRepName(  //Hier scheint der Fehler drin zu stecken, er erkennt nicht die richtige kante--wenn nicht die Kante, sondern die Fläche ausgewählt wird, scheint der Fehler behpoben zu sein
+                  "RSur:(Face:(Brp:(Pad.2;2);None:();Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", KopfPad);
+               // "REdge:(Edge:(Face:(Brp:(Pad.1;0:(Brp:(Sketch.1;1)));None:();Cf11:());Face:(Brp:(Pad.1;2);None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", SchaftPad);
+            RadiusKopf = catshapeFactoryRadius.AddNewEdgeFilletWithConstantRadius(reference1, CatFilletEdgePropagation.catTangencyFilletEdgePropagation, 2);
 
 
               RadiusKopf.set_Name("Radius");
               hsp_catiaPart.Part.Update();
-            */
+          
             #endregion
 
 
