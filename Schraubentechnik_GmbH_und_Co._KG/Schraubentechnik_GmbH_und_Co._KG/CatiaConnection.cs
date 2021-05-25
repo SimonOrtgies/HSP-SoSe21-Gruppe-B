@@ -7,6 +7,7 @@ using MECMOD;
 using INFITF;
 using PARTITF;
 using System.Windows;
+using HybridShapeTypeLib;
 
 namespace Schraubentechnik_GmbH_und_Co._KG
 {
@@ -134,7 +135,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         #region Kopf
         public void ErzeugeKopf(MetrischeGewindegroesse m, String sk)
         {
-            //sk = "Sechskant";                   //Test mit Sechskant 
+            sk = "Zylinderkopf mit Schlitz";                   //Test mit Sechskant 
 
 
             if (sk == "Sechskant")
@@ -291,27 +292,39 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             #endregion
 
             #region Schlitz
-            
-            /*hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
-            Sketches catSketches2 = catHybridBody1.HybridSketches;
-  
-            Reference catReference2 = hsp_catiaPart.Part.CreateReferenceFromBRepName("Selection_RSur:(Face:(Brp:(Pad.2;2);None:();Cf11:());Pad.2_ResultOUT;Z0;G8241)", ZKopf);
-            hsp_catiaProfil = catSketches2.Add(catReference2);
+            /*
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+            AxisSystems Achsen = (AxisSystems)hsp_catiaPart.Part.AxisSystems;
+            AxisSystem Achse = Achsen.Item("Absolutes Achsensystem");
+            Reference RefmyAchse = hsp_catiaPart.Part.CreateReferenceFromBRepName("RSur:(Face:(Brp:(AxisSystem.1;2);None:();Cf11:());WithPermanentBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", Achse);
+   
+            HybridShapeFactory hybridShapeFactory1 = (HybridShapeFactory)hsp_catiaPart.Part.HybridShapeFactory;
+           
+            Plane PlaneOffset = hybridShapeFactory1.AddNewPlaneOffset(RefmyAchse, 20, false);
+            Reference RefmyPlaneOffset = hsp_catiaPart.Part.CreateReferenceFromObject(PlaneOffset);
+            //Reference RefmyPlaneOffset = hsp_catiaPart.Part.CreateReferenceFromBRepName("RSur:(Face:(Brp:(AxisSystem.1;2);None:();Cf11:());WithPermanentBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", Achse);
+            hsp_catiaPart.Part.Update();
 
-            hsp_catiaProfil.set_Name("Schlitz");
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+            Sketches catSketches2 = catHybridBody1.HybridSketches;
+ 
+
+            Sketch hsp_catiaProfil2 = catSketches2.Add(RefmyPlaneOffset);
+
+            hsp_catiaProfil2.set_Name("Schlitz");
 
             hsp_catiaPart.Part.Update();
 
-            hsp_catiaProfil.set_Name("Grundfläche Schaft");
 
  
             // Skizze oeffnen
-            Factory2D catFactory2D2 = hsp_catiaProfil.OpenEdition();
+            Factory2D catFactory2D2 = hsp_catiaProfil2.OpenEdition();
 
 
             // erst die Punkte
             Point2D catPoint2D2 = catFactory2D2.CreatePoint(0, 0);
 
+            hsp_catiaPart.Part.Update();
             */
             #endregion
 
@@ -323,7 +336,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
               ShapeFactory catshapeFactoryRadius = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
 
               Reference reference1 = hsp_catiaPart.Part.CreateReferenceFromBRepName(  //Hier scheint der Fehler drin zu stecken, er erkennt nicht die richtige kante
-                  "REdge:(Edge:(Face:(Brp:(Pad.2;2);None:();Cf11:());Face:(Brp:(Pad.2;0:(Brp:(Sketch.1;1)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", SchaftPad);
+                  "REdge:(Edge:(Face:(Brp:(Pad.2;2);None:();Cf11:());Face:(Brp:(Pad.2;0:(Brp:(Sketch.1;1)));None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", KopfPad);
 
               RadiusKopf = catshapeFactoryRadius.AddNewEdgeFilletWithConstantRadius(reference1, CatFilletEdgePropagation.catTangencyFilletEdgePropagation, 1);
 
