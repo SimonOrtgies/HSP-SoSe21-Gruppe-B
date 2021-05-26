@@ -135,7 +135,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         #region Kopf
         public void ErzeugeKopf(MetrischeGewindegroesse m, String sk)
         {
-            //sk = "Zylinderkopf mit Schlitz";                   //Test mit Sechskant 
+            sk = "Zylinderkopf mit Schlitz";                   //Test mit Sechskant 
 
 
             if (sk == "Sechskant")
@@ -180,8 +180,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             // Sechskant erzeugen
             double tan30 = Math.Sqrt(3)/3;
             double cos30 = Math.Sqrt(3)/2;
-            double mSW = m.schluesselweite /2;
-            //double mSW = 16;                              //Test mit Schlüsselweite 16
+            //double mSW = m.schluesselweite /2;
+            double mSW = 16;                              //Test mit Schlüsselweite 16
 
             // erst die Punkte
             Point2D catPoint2D1 = catFactory2D1.CreatePoint(mSW, tan30*mSW);
@@ -297,7 +297,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Reference RefmyPlaneYZ = (Reference)catOriginElements.PlaneYZ;
             hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part;
             HybridShapeFactory hybridShapeFactory1 = (HybridShapeFactory)hsp_catiaPart.Part.HybridShapeFactory;
-            HybridShapePlaneOffset OffsetEbene = hybridShapeFactory1.AddNewPlaneOffset(RefmyPlaneYZ, m.mutterhoehe, true);
+            HybridShapePlaneOffset OffsetEbene = hybridShapeFactory1.AddNewPlaneOffset(RefmyPlaneYZ, 20, true);
             OffsetEbene.set_Name("OffsetEbene");
             Reference RefOffsetEbene = hsp_catiaPart.Part.CreateReferenceFromObject(OffsetEbene);
             HybridBodies hybridBodies1 = hsp_catiaPart.Part.HybridBodies;
@@ -311,7 +311,13 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             hsp_catiaPart.Part.InWorkObject = SkizzeaufOffset;
             SkizzeaufOffset.set_Name("OffsetSkizze");
 
+            // Achsensystem in Skizze erstellen 
+            ErzeugeAchsensystem();
+            // Skizzierer verlassen
+            hsp_catiaProfil.CloseEdition();
+            // Part aktualisieren
             hsp_catiaPart.Part.Update();
+
             #endregion
 
 
@@ -320,35 +326,21 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
 
             // erst die Punkte
-            Point2D catPoint2D2 = catFactory2D2.CreatePoint(m.kopfdurchmesser/2, m.schlitzbreite/2);
-            Point2D catPoint2D3 = catFactory2D2.CreatePoint(-m.kopfdurchmesser/2, m.schlitzbreite/2);
-            Point2D catPoint2D4 = catFactory2D2.CreatePoint(-m.kopfdurchmesser/2, -m.schlitzbreite/2);
-            Point2D catPoint2D5 = catFactory2D2.CreatePoint(m.kopfdurchmesser/2, -m.schlitzbreite/2);
+            Point2D catPoint2D2 = catFactory2D2.CreatePoint(10, 0);
+            Point2D catPoint2D3 = catFactory2D2.CreatePoint(10, 10);
+            Point2D catPoint2D4 = catFactory2D2.CreatePoint(0, 10);
+            Point2D catPoint2D5 = catFactory2D2.CreatePoint(10, 15);
+            Point2D catPoint2D6 = catFactory2D2.CreatePoint(15, 0);
 
-            Line2D catLine2D1 = catFactory2D1.CreateLine(m.kopfdurchmesser / 2, m.schlitzbreite / 2, -m.kopfdurchmesser / 2, m.schlitzbreite / 2);
-            catLine2D1.StartPoint = catPoint2D2;
-            catLine2D1.EndPoint = catPoint2D3;
-
-            Line2D catLine2D2 = catFactory2D1.CreateLine(-m.kopfdurchmesser / 2, m.schlitzbreite / 2, -m.kopfdurchmesser / 2, -m.schlitzbreite / 2);
-            catLine2D2.StartPoint = catPoint2D3;
-            catLine2D2.EndPoint = catPoint2D4;
-
-            Line2D catLine2D3 = catFactory2D1.CreateLine(-m.kopfdurchmesser / 2, -m.schlitzbreite / 2, m.kopfdurchmesser / 2, - m.schlitzbreite / 2);
-            catLine2D3.StartPoint = catPoint2D4;
-            catLine2D3.EndPoint = catPoint2D5;
-
-            Line2D catLine2D4 = catFactory2D1.CreateLine(m.kopfdurchmesser / 2, -m.schlitzbreite / 2, m.kopfdurchmesser / 2, m.schlitzbreite / 2);
-            catLine2D4.StartPoint = catPoint2D5;
-            catLine2D4.EndPoint = catPoint2D2;
 
             hsp_catiaPart.Part.Update();
 
+            
             #endregion
 
-        
 
             #region Verrundung
-            /*hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
 
               ShapeFactory catshapeFactoryRadius = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
         
@@ -360,7 +352,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
               RadiusKopf.set_Name("Radius");
               hsp_catiaPart.Part.Update();
-          */
+          
             #endregion
 
 
@@ -425,7 +417,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
 
         // Erzeugt ein Gewindefeature auf dem vorher erzeugten Schaft.
-        internal void ErzeugeGewindeFeature(Gewinderichtung gr, Double bezeichnung, double gewindelaenge)
+        internal void ErzeugeGewindeFeature(Double bezeichnung, double gewindelaenge, Gewinderichtung gr)
         {
             // Gewinde...
             // ... Referenzen lateral und limit erzeugen
@@ -438,15 +430,15 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // ... Gewinde erzeugen, Parameter setzen
             PARTITF.Thread thread1 = catshapeFactoryThread.AddNewThreadWithOutRef();
-            if (gr == Gewinderichtung.Rechtsgewinde)
+            if(gr == Gewinderichtung.Rechtsgewinde)     //Gewinderichtung festlegen
             {
                 thread1.Side = CatThreadSide.catRightSide;
             }
-            else if (gr == Gewinderichtung.Linksgewinde)
+            else
             {
                 thread1.Side = CatThreadSide.catLeftSide;
             }
-            thread1.Diameter = bezeichnung;
+            thread1.Diameter = bezeichnung; //Gewindegröße
             thread1.Depth = gewindelaenge;
 
             thread1.LateralFaceElement = RefMantelflaeche; // Referenz lateral

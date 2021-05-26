@@ -49,7 +49,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
                     //ErzeugeGewindeFeature
 
-                    cc.ErzeugeGewindeFeature(s.gewinderichtung,s.metrischeGewindegroesse.bezeichnung, s.gewindeLaenge.gewindeLaenge);
+                   // cc.ErzeugeGewindeFeature(s.gewinderichtung,s.metrischeGewindegroesse.bezeichnung, s.gewindeLaenge.gewindeLaenge); //WAS IST HIER PASSIERT??
 
                     //cc.ErzeugeGewindeFeature(20, 75);         //Test mit d=20, gewindelänge=75
                     Console.WriteLine("6");
