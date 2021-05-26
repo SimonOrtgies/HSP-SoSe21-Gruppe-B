@@ -417,7 +417,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
 
         // Erzeugt ein Gewindefeature auf dem vorher erzeugten Schaft.
-        internal void ErzeugeGewindeFeature(Double bezeichnung, double gewindelaenge, Gewinderichtung gr)
+        internal void ErzeugeGewindeFeature(Gewinderichtung gr, Double bezeichnung, double gewindelaenge)
         {
             // Gewinde...
             // ... Referenzen lateral und limit erzeugen
