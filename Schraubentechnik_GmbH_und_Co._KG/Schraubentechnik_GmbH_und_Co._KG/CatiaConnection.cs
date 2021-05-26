@@ -136,7 +136,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public void ErzeugeKopf(MetrischeGewindegroesse m, String sk)
         {
             //sk = "Zylinderkopf mit Schlitz";                   //Test mit Sechskant 
-            sk = "Senkkopf mit Torx";                          //Test mit Senkkopf
+   
+
 
             if (sk == "Sechskant")
             {
@@ -144,7 +145,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             }
             else if (sk == "Zylinderkopf mit Schlitz")
             {
-                Zylinderkopf(m);
+                ZylinderkopfSchlitz(m);
             }
             else if (sk == "Senkkopf mit Torx") 
             {
@@ -152,7 +153,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             }
             else if (sk == "Linsenkopf mit Kreuz-Schlitz")
             {
-                Linsenkopf(m);
+                ZylinderkopfInnensechskannt(m);
             }
 
         }
@@ -240,7 +241,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         }
 
 
-        public void Zylinderkopf(MetrischeGewindegroesse m)
+        public void ZylinderkopfSchlitz(MetrischeGewindegroesse m)
         {
             #region SKizze bauen
             // neue Skizze im ausgewaehlten geometrischen Set anlegen
@@ -251,7 +252,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // Achsensystem in Skizze erstellen 
             ErzeugeAchsensystem();
-            hsp_catiaProfil.set_Name("Zylinderkopf");
+            hsp_catiaProfil.set_Name("Zylinderkopf mit Schlitz");
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
             
@@ -286,9 +287,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
-
-
-
             #endregion
 
             #region Schlitz
@@ -364,7 +362,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             RadiusKopf.set_Name("Radius");
             hsp_catiaPart.Part.Update();
-
             #endregion
 
             #region Tasche Schlitz
@@ -382,13 +379,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
             #endregion
-
-          
-
-
         }
 
-        public void Linsenkopf(MetrischeGewindegroesse m)
+        public void ZylinderkopfInnensechskannt(MetrischeGewindegroesse m)
         {
             #region SKizze bauen
             // neue Skizze im ausgewaehlten geometrischen Set anlegen
@@ -399,13 +392,57 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // Achsensystem in Skizze erstellen 
             ErzeugeAchsensystem();
-            hsp_catiaProfil.set_Name("Linsenkopf");
+            hsp_catiaProfil.set_Name("Zylinderkopf mit Innensechskannt");
             // Skizzierer verlassen
             hsp_catiaProfil.CloseEdition();
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
+
+            Factory2D catFactory2D1 = hsp_catiaProfil.OpenEdition();
+
+            // erst die Punkte
+            Point2D catPoint2D1 = catFactory2D1.CreatePoint(0, 0);
+
+            // dann den Kreis
+            Circle2D catCircle2D_1 = catFactory2D1.CreateCircle(0, 0, m.kopfdurchmesser / 2, 0, 0);
+            catCircle2D_1.CenterPoint = catPoint2D1;
+
+            // Skizzierer verlassen
+            hsp_catiaProfil.CloseEdition();
+
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
             #endregion
 
+            #region Pad
+            // Hauptkoerper in Bearbeitung definieren
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+
+            // Block(Schaft) erzeugen
+            ShapeFactory catShapeFactory1 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
+            KopfPad = catShapeFactory1.AddNewPad(hsp_catiaProfil, -m.mutterhoehe);
+
+            // Block umbenennen
+            KopfPad.set_Name("Kopf");
+
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            #endregion
+
+            #region Verrundung
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+
+            ShapeFactory catshapeFactoryRadius = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
+
+            Reference reference1 = hsp_catiaPart.Part.CreateReferenceFromBRepName(  //Hier scheint der Fehler drin zu stecken, er erkennt nicht die richtige kante--wenn nicht die Kante, sondern die Fläche ausgewählt wird, scheint der Fehler behpoben zu sein
+                "RSur:(Face:(Brp:(Pad.2;2);None:();Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", KopfPad);
+            // "REdge:(Edge:(Face:(Brp:(Pad.1;0:(Brp:(Sketch.1;1)));None:();Cf11:());Face:(Brp:(Pad.1;2);None:();Cf11:());None:(Limits1:();Limits2:());Cf11:());WithTemporaryBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", SchaftPad);
+            RadiusKopf = catshapeFactoryRadius.AddNewEdgeFilletWithConstantRadius(reference1, CatFilletEdgePropagation.catTangencyFilletEdgePropagation, 2);
+
+
+            RadiusKopf.set_Name("Radius");
+            hsp_catiaPart.Part.Update();
+            #endregion
         }
 
         public void Senkkopf(MetrischeGewindegroesse m)
