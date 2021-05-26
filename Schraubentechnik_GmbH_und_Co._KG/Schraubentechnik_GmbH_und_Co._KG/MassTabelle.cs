@@ -11,7 +11,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         static MetrischeGewindegroesse[] tabelle =  //Tabelle mit den Informationen die ein Gewinde enthält (Reihenfolge in MetrischeGewindegroesse.cs festgelegt)
 
-            //                             b      st      f       au      mu      sw      kd       ts          bs        ins    iskt    iskh   // Bezeichnungen der Abkürzungen siehe MetrischeGewindegroesse.cs
+            //                             b      st      f       au      mu      sw      kd       ts          bs        ins    iskt    iskh    iskd// Bezeichnungen der Abkürzungen siehe MetrischeGewindegroesse.cs
            { new MetrischeGewindegroesse(1,     0.25f,  0.84f,  0.69f,  0.8f,   2,      2,      0.25f,      0.25f   ,   0.6f,   0.4f,   0.7f,   2),
              new MetrischeGewindegroesse(1.2f,  0.25f,  1.04f,  0.89f,  1,      2.4f,   2.3f,   0.3f,       0.3f    ,   0.8f,   0.5f,   0.8f,   2.4f),
              new MetrischeGewindegroesse(1.6f,  0.35f,  1.38f,  1.17f,  1.2f,   3.2f,   3,      0.45f,      0.4f    ,   1,      0.6f,   1,      3.2f),
