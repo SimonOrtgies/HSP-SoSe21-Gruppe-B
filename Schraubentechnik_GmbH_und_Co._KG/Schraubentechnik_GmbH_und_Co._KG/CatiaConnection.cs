@@ -314,7 +314,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             // Achsensystem in Skizze erstellen 
             ErzeugeAchsensystem();
             // Skizzierer verlassen
-            hsp_catiaProfil.CloseEdition();
+            SkizzeaufOffset.CloseEdition();
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
 
@@ -331,19 +331,19 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             Point2D catPoint2D4 = catFactory2D2.CreatePoint(-m.kopfdurchmesser / 2, -m.schlitzbreite / 2);
             Point2D catPoint2D5 = catFactory2D2.CreatePoint(m.kopfdurchmesser / 2, -m.schlitzbreite / 2);
 
-            Line2D catLine2D1 = catFactory2D1.CreateLine(m.kopfdurchmesser / 2, m.schlitzbreite / 2, -m.kopfdurchmesser / 2, m.schlitzbreite / 2);
+            Line2D catLine2D1 = catFactory2D2.CreateLine(m.kopfdurchmesser / 2, m.schlitzbreite / 2, -m.kopfdurchmesser / 2, m.schlitzbreite / 2);
             catLine2D1.StartPoint = catPoint2D2;
             catLine2D1.EndPoint = catPoint2D3;
 
-            Line2D catLine2D2 = catFactory2D1.CreateLine(-m.kopfdurchmesser / 2, m.schlitzbreite / 2, -m.kopfdurchmesser / 2, -m.schlitzbreite / 2);
+            Line2D catLine2D2 = catFactory2D2.CreateLine(-m.kopfdurchmesser / 2, m.schlitzbreite / 2, -m.kopfdurchmesser / 2, -m.schlitzbreite / 2);
             catLine2D2.StartPoint = catPoint2D3;
             catLine2D2.EndPoint = catPoint2D4;
 
-            Line2D catLine2D3 = catFactory2D1.CreateLine(-m.kopfdurchmesser / 2, -m.schlitzbreite / 2, m.kopfdurchmesser / 2, -m.schlitzbreite / 2);
+            Line2D catLine2D3 = catFactory2D2.CreateLine(-m.kopfdurchmesser / 2, -m.schlitzbreite / 2, m.kopfdurchmesser / 2, -m.schlitzbreite / 2);
             catLine2D3.StartPoint = catPoint2D4;
             catLine2D3.EndPoint = catPoint2D5;
 
-            Line2D catLine2D4 = catFactory2D1.CreateLine(m.kopfdurchmesser / 2, -m.schlitzbreite / 2, m.kopfdurchmesser / 2, m.schlitzbreite / 2);
+            Line2D catLine2D4 = catFactory2D2.CreateLine(m.kopfdurchmesser / 2, -m.schlitzbreite / 2, m.kopfdurchmesser / 2, m.schlitzbreite / 2);
             catLine2D4.StartPoint = catPoint2D5;
             catLine2D4.EndPoint = catPoint2D2;
 
