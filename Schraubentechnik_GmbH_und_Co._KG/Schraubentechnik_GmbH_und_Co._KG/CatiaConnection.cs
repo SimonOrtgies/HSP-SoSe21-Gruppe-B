@@ -181,8 +181,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             // Sechskant erzeugen
             double tan30 = Math.Sqrt(3)/3;
             double cos30 = Math.Sqrt(3)/2;
-            //double mSW = m.schluesselweite /2;
-            double mSW = 16;                              //Test mit Schlüsselweite 16
+            double mSW = m.schluesselweite /2;
+            //double mSW = 16;                              //Test mit Schlüsselweite 16
 
             // erst die Punkte
             Point2D catPoint2D1 = catFactory2D1.CreatePoint(mSW, tan30*mSW);
@@ -429,6 +429,77 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             hsp_catiaPart.Part.Update();
             #endregion
 
+            #region Offsetebene
+            Reference RefmyPlaneYZ = (Reference)catOriginElements.PlaneYZ;
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part;
+            HybridShapeFactory hybridShapeFactory1 = (HybridShapeFactory)hsp_catiaPart.Part.HybridShapeFactory;
+            HybridShapePlaneOffset OffsetEbene = hybridShapeFactory1.AddNewPlaneOffset(RefmyPlaneYZ, m.mutterhoehe, true);
+            OffsetEbene.set_Name("OffsetEbene");
+            Reference RefOffsetEbene = hsp_catiaPart.Part.CreateReferenceFromObject(OffsetEbene);
+            HybridBodies hybridBodies1 = hsp_catiaPart.Part.HybridBodies;
+            HybridBody hybridBody1 = hybridBodies1.Item("Profile");
+            hybridBody1.AppendHybridShape(OffsetEbene);
+
+
+            hsp_catiaPart.Part.Update();
+            Sketches catSketches2 = catHybridBody1.HybridSketches;
+            Sketch SkizzeaufOffset = catSketches2.Add(RefOffsetEbene);
+            hsp_catiaPart.Part.InWorkObject = SkizzeaufOffset;
+            SkizzeaufOffset.set_Name("OffsetSkizze");
+
+            // Achsensystem in Skizze erstellen 
+            ErzeugeAchsensystem();
+            // Skizzierer verlassen
+            SkizzeaufOffset.CloseEdition();
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            #endregion
+
+            #region Innensechskannt
+            Factory2D catFactory2D2 = SkizzeaufOffset.OpenEdition();
+            
+            // Sechskant erzeugen
+            double tan30 = Math.Sqrt(3) / 3;
+            double cos30 = Math.Sqrt(3) / 2;
+            double mSW = m.innensechskant /2;
+            
+            // erst die Punkte
+            Point2D catPoint2D2 = catFactory2D2.CreatePoint(mSW, tan30 * mSW);
+            Point2D catPoint2D3 = catFactory2D2.CreatePoint(mSW, -(tan30 * mSW));
+            Point2D catPoint2D4 = catFactory2D2.CreatePoint(0, -(mSW / cos30));
+            Point2D catPoint2D5 = catFactory2D2.CreatePoint(-mSW, -(tan30 * mSW));
+            Point2D catPoint2D6 = catFactory2D2.CreatePoint(-mSW, tan30 * mSW);
+            Point2D catPoint2D7 = catFactory2D2.CreatePoint(0, mSW / cos30);
+
+            // dann die Linien
+            Line2D catLine2D1 = catFactory2D2.CreateLine(mSW, tan30 * mSW, mSW, -(tan30 * mSW));
+            catLine2D1.StartPoint = catPoint2D2;
+            catLine2D1.EndPoint = catPoint2D3;
+
+            Line2D catLine2D2 = catFactory2D2.CreateLine(mSW, -(tan30 * mSW), 0, -(mSW / cos30));
+            catLine2D2.StartPoint = catPoint2D3;
+            catLine2D2.EndPoint = catPoint2D4;
+
+            Line2D catLine2D3 = catFactory2D2.CreateLine(0, -(mSW / cos30), -mSW, -(tan30 * mSW));
+            catLine2D3.StartPoint = catPoint2D4;
+            catLine2D3.EndPoint = catPoint2D5;
+
+            Line2D catLine2D4 = catFactory2D2.CreateLine(-mSW, -(tan30 * mSW), -mSW, (tan30 * mSW));
+            catLine2D4.StartPoint = catPoint2D5;
+            catLine2D4.EndPoint = catPoint2D6;
+
+            Line2D catLine2D5 = catFactory2D2.CreateLine(-mSW, (tan30 * mSW), 0, mSW / cos30);
+            catLine2D5.StartPoint = catPoint2D6;
+            catLine2D5.EndPoint = catPoint2D7;
+
+            Line2D catLine2D6 = catFactory2D2.CreateLine(0, mSW / cos30, mSW, tan30 * mSW);
+            catLine2D6.StartPoint = catPoint2D7;
+            catLine2D6.EndPoint = catPoint2D2;
+
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            #endregion
+            
             #region Verrundung
             hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
 
@@ -441,6 +512,22 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
 
             RadiusKopf.set_Name("Radius");
+            hsp_catiaPart.Part.Update();
+            #endregion
+
+            #region Tasche Innensechskannt
+            // Hauptkoerper in Bearbeitung definieren
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+
+            // Tasche erzeugen erzeugen
+            ShapeFactory catShapeFactory2 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
+
+            SchlitzPocket = catShapeFactory2.AddNewPocket(SkizzeaufOffset, -m.schlitztiefe);
+
+            // Block umbenennen
+            SchlitzPocket.set_Name("Innensechskannt");
+
+            // Part aktualisieren
             hsp_catiaPart.Part.Update();
             #endregion
         }
