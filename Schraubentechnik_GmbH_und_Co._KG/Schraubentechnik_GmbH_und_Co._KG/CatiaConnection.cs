@@ -407,7 +407,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
 
         // Erzeugt ein Gewindefeature auf dem vorher erzeugten Schaft.
-        internal void ErzeugeGewindeFeature(Schraube s, Double bezeichnung, double gewindelaenge)
+        internal void ErzeugeGewindeFeature(Gewinderichtung gr, Double bezeichnung, double gewindelaenge)
         {
             // Gewinde...
             // ... Referenzen lateral und limit erzeugen
@@ -420,11 +420,11 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // ... Gewinde erzeugen, Parameter setzen
             PARTITF.Thread thread1 = catshapeFactoryThread.AddNewThreadWithOutRef();
-            if (s.gewinderichtung == Gewinderichtung.Rechtsgewinde)
+            if (gr == Gewinderichtung.Rechtsgewinde)
             {
                 thread1.Side = CatThreadSide.catRightSide;
             }
-            else if (s.gewinderichtung == Gewinderichtung.Linksgewinde)
+            else if (gr == Gewinderichtung.Linksgewinde)
             {
                 thread1.Side = CatThreadSide.catLeftSide;
             }
