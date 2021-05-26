@@ -17,9 +17,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public float kopfdurchmesser;   //Für Catia Zylinderkopf
         public float schlitztiefe;      //Für Catia Zylinderkopf
         public float schlitzbreite;     //Für Catia Zylinderkopf
-        public float innensechskant;    //Für Catia Senkkopf
+        public float innensechskant;    //Für Catia Senkkopf die schlüsselweite
+        public float innensktiefe;      //Für Catia Senkkopf
+        public float innenskkopfhöhe;   //Für Catia Senkkopf
+        public float innenskkopfdurchmesser; //Für Catia Senkkopf
 
-        public MetrischeGewindegroesse(float b, float st, float f, float au, float mu, float sw, float kd, float ts, float bs, float ins)    //Aufbau der KLasse
+        public MetrischeGewindegroesse(float b, float st, float f, float au, float mu, float sw, float kd, float ts, float bs, float ins, float iskt, float iskh, float iskd)    //Aufbau der KLasse
         {
             bezeichnung = b;
             steigung = st;
@@ -31,6 +34,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             schlitztiefe = ts;
             schlitzbreite = bs;
             innensechskant = ins;
+            innensktiefe = iskt;
+            innenskkopfhöhe = iskh;
+            innenskkopfdurchmesser = iskd;
 
         }
 
