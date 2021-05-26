@@ -48,8 +48,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     Console.WriteLine("6");
 
                     //ErzeugeGewindeFeature
-                    //cc.ErzeugeGewindeFeature(s.metrischeGewindegroesse.bezeichnung, s.gewindeLaenge.gewindeLaenge);
-                    cc.ErzeugeGewindeFeature(20, 75);         //Test mit d=20, gewindelänge=75
+                    cc.ErzeugeGewindeFeature(s.metrischeGewindegroesse.bezeichnung, s.gewindeLaenge.gewindeLaenge, s.gewinderichtung);
+                   // cc.ErzeugeGewindeFeature(20, 75, Gewinderichtung.Rechtsgewinde);         //Test mit d=20, gewindelänge=75, Rechtsgewinde
                     Console.WriteLine("6");
 
                 }
