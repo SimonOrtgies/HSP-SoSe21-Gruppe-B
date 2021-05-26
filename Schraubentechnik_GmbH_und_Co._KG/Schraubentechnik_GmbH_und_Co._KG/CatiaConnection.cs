@@ -153,7 +153,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             }
             else if (sk == "Linsenkopf mit Kreuz-Schlitz")
             {
-                ZylinderkopfInnensechskannt(m);
+                ZylinderkopfInensechskannt(m);
             }
 
         }
@@ -381,7 +381,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             #endregion
         }
 
-        public void ZylinderkopfInnensechskannt(MetrischeGewindegroesse m)
+        public void ZylinderkopfInnensechskant(MetrischeGewindegroesse m)
         {
             #region SKizze bauen
             // neue Skizze im ausgewaehlten geometrischen Set anlegen
@@ -522,10 +522,10 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             // Tasche erzeugen erzeugen
             ShapeFactory catShapeFactory2 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
 
-            SchlitzPocket = catShapeFactory2.AddNewPocket(SkizzeaufOffset, -m.schlitztiefe);
+            SchlitzPocket = catShapeFactory2.AddNewPocket(SkizzeaufOffset, -m.innensktiefe);
 
             // Block umbenennen
-            SchlitzPocket.set_Name("Innensechskannt");
+            SchlitzPocket.set_Name("Innensechskant");
 
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
