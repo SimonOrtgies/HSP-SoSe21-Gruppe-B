@@ -292,40 +292,39 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             #endregion
 
             #region Schlitz
-            /*
-            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
-            AxisSystems Achsen = (AxisSystems)hsp_catiaPart.Part.AxisSystems;
-            AxisSystem Achse = Achsen.Item("Absolutes Achsensystem");
-            Reference RefmyAchse = hsp_catiaPart.Part.CreateReferenceFromBRepName("RSur:(Face:(Brp:(AxisSystem.1;2);None:();Cf11:());WithPermanentBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", Achse);
-   
+
+            #region Offsetebene
+            Reference RefmyPlaneYZ = (Reference)catOriginElements.PlaneYZ;
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part;
             HybridShapeFactory hybridShapeFactory1 = (HybridShapeFactory)hsp_catiaPart.Part.HybridShapeFactory;
-           
-            Plane PlaneOffset = hybridShapeFactory1.AddNewPlaneOffset(RefmyAchse, 20, false);
-            Reference RefmyPlaneOffset = hsp_catiaPart.Part.CreateReferenceFromObject(PlaneOffset);
-            //Reference RefmyPlaneOffset = hsp_catiaPart.Part.CreateReferenceFromBRepName("RSur:(Face:(Brp:(AxisSystem.1;2);None:();Cf11:());WithPermanentBody;WithoutBuildError;WithSelectingFeatureSupport;MFBRepVersion_CXR15)", Achse);
-            hsp_catiaPart.Part.Update();
+            HybridShapePlaneOffset OffsetEbene = hybridShapeFactory1.AddNewPlaneOffset(RefmyPlaneYZ, 20, true);
+            OffsetEbene.set_Name("OffsetEbene");
+            Reference RefOffsetEbene = hsp_catiaPart.Part.CreateReferenceFromObject(OffsetEbene);
+            HybridBodies hybridBodies1 = hsp_catiaPart.Part.HybridBodies;
+            HybridBody hybridBody1 = hybridBodies1.Item("Profile");
+            hybridBody1.AppendHybridShape(OffsetEbene);
 
-            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+
+            hsp_catiaPart.Part.Update();
             Sketches catSketches2 = catHybridBody1.HybridSketches;
- 
-
-            Sketch hsp_catiaProfil2 = catSketches2.Add(RefmyPlaneOffset);
-
-            hsp_catiaProfil2.set_Name("Schlitz");
+            Sketch SkizzeaufOffset = catSketches2.Add(RefOffsetEbene);
+            hsp_catiaPart.Part.InWorkObject = SkizzeaufOffset;
+            SkizzeaufOffset.set_Name("OffsetSkizze");
 
             hsp_catiaPart.Part.Update();
+            #endregion
 
 
- 
             // Skizze oeffnen
-            Factory2D catFactory2D2 = hsp_catiaProfil2.OpenEdition();
+            Factory2D catFactory2D2 = SkizzeaufOffset.OpenEdition();
 
 
             // erst die Punkte
-            Point2D catPoint2D2 = catFactory2D2.CreatePoint(0, 0);
+            Point2D catPoint2D2 = catFactory2D2.CreatePoint(10, 0);
 
             hsp_catiaPart.Part.Update();
-            */
+
+            
             #endregion
 
 
