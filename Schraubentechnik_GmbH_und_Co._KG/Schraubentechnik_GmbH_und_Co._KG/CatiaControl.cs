@@ -30,13 +30,13 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     Console.WriteLine("2");
 
                     // Generiere ein Profil
-                    //cc.ErzeugeProfil(s.metrischeGewindegroesse.bezeichnung/2);
-                    cc.ErzeugeProfil(10);                     //Test für M20
+                    cc.ErzeugeProfil(s.metrischeGewindegroesse.bezeichnung/2);
+                    //cc.ErzeugeProfil(10);                     //Test für M20
                     Console.WriteLine("3");
 
                     // Extrudiere Schaft
-                    //cc.ErzeugeSchaft(s.schaftLaenge.schaftlaenge);
-                    cc.ErzeugeSchaft(100);                   // Test mit Schaftlänge 100
+                    cc.ErzeugeSchaft(s.schaftLaenge.schaftlaenge);
+                    //cc.ErzeugeSchaft(100);                   // Test mit Schaftlänge 100
                     Console.WriteLine("4");
 
                     //Erzeuge Scharubenkopf
@@ -48,8 +48,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     Console.WriteLine("6");
 
                     //ErzeugeGewindeFeature
-                    //cc.ErzeugeGewindeFeature(s.metrischeGewindegroesse.bezeichnung, s.gewindeLaenge.gewindeLaenge);
-                    cc.ErzeugeGewindeFeature(20, 75);         //Test mit d=20, gewindelänge=75
+                    cc.ErzeugeGewindeFeature(s.metrischeGewindegroesse.bezeichnung, s.gewindeLaenge.gewindeLaenge);
+                    //cc.ErzeugeGewindeFeature(20, 75);         //Test mit d=20, gewindelänge=75
                     Console.WriteLine("6");
 
                 }
