@@ -135,8 +135,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         #region Kopf
         public void ErzeugeKopf(MetrischeGewindegroesse m, String sk)
         {
-            sk = "Zylinderkopf mit Schlitz";                   //Test mit Sechskant 
-
+            //sk = "Zylinderkopf mit Schlitz";                   //Test mit Sechskant 
+            sk = "Senkkopf mit Torx";                          //Test mit Senkkopf
 
             if (sk == "Sechskant")
             {
@@ -397,8 +397,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             // neue Skizze im ausgewaehlten geometrischen Set anlegen
             Sketches catSketches1 = catHybridBody1.HybridSketches;
             OriginElements catOriginElements = hsp_catiaPart.Part.OriginElements;
-            Reference catReference1 = (Reference)catOriginElements.PlaneYZ;
+            Reference catReference1 = (Reference)catOriginElements.PlaneZX;
             hsp_catiaProfil = catSketches1.Add(catReference1);
+
 
             // Achsensystem in Skizze erstellen 
             ErzeugeAchsensystem();
@@ -408,6 +409,36 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
             #endregion
+            Factory2D catFactory2D1 = hsp_catiaProfil.OpenEdition();
+
+            // erst die Punkte
+            Point2D catPoint2D1 = catFactory2D1.CreatePoint(0, 0);
+            Point2D catPoint2D2 = catFactory2D1.CreatePoint(m.mutterhoehe, 0);
+            Point2D catPoint2D3 = catFactory2D1.CreatePoint(m.mutterhoehe, m.bezeichnung);
+            Point2D catPoint2D4 = catFactory2D1.CreatePoint(0, m.bezeichnung/2);
+
+            // dann das Profil
+            Line2D catLine2D1 = catFactory2D1.CreateLine(0,0,m.mutterhoehe,0);
+            catLine2D1.StartPoint = catPoint2D1;
+            catLine2D1.EndPoint = catPoint2D2;
+
+            Line2D catLine2D2 = catFactory2D1.CreateLine(m.mutterhoehe, 0, m.mutterhoehe, m.bezeichnung);
+            catLine2D2.StartPoint = catPoint2D2;
+            catLine2D2.EndPoint = catPoint2D3;
+
+            Line2D catLine2D3 = catFactory2D1.CreateLine(m.mutterhoehe, m.bezeichnung, 0, m.bezeichnung/2);
+            catLine2D3.StartPoint = catPoint2D3;
+            catLine2D3.EndPoint = catPoint2D4;
+
+            Line2D catLine2D4 = catFactory2D1.CreateLine(0, m.bezeichnung/2,0,0);
+            catLine2D4.StartPoint = catPoint2D4;
+            catLine2D4.EndPoint = catPoint2D1;
+
+            // Skizzierer verlassen
+            hsp_catiaProfil.CloseEdition();
+
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
 
         }
         #endregion
