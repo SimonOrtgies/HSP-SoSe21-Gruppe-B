@@ -49,8 +49,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
                     //ErzeugeGewindeFeature
 
-                    cc.ErzeugeGewindeFeature(s.metrischeGewindegroesse.bezeichnung, s.gewindeLaenge.gewindeLaenge);
-
                     cc.ErzeugeGewindeFeature(s,s.metrischeGewindegroesse.bezeichnung, s.gewindeLaenge.gewindeLaenge);
 
                     //cc.ErzeugeGewindeFeature(20, 75);         //Test mit d=20, gewindelänge=75
