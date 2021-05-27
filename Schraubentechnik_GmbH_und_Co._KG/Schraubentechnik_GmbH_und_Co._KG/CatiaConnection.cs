@@ -739,41 +739,41 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         public void ErzeugeExportDatei()
         {
-            string Dokumentname = "SchraubenDokument";
-            hsp_catiaPart.Activate();
-            hsp_catiaPart.ExportData("C:\\Windows\\Temp\\", ".stp");
+            //string Dokumentname = "SchraubenDokument";
+            //hsp_catiaPart.Activate();
+            //hsp_catiaPart.ExportData("C:\\Windows\\Temp\\", ".stp");
                                                                       
-            //C:\Windows\Temp
+            
         }
 
         public void ErzeugeScreenshot(MetrischeGewindegroesse m, string sk)
-        {
+        {   
+            // Dateiname festlegen
             string bildname = sk + " M" + m.bezeichnung;
+            
+            //Standarthintergrung speichern
             object[] arr1 = new object[3];
             hsp_catiaApp.ActiveWindow.ActiveViewer.GetBackgroundColor(arr1);
-            //Console.WriteLine("Col: " + arr1[0] + " " + arr1[1] + " " + arr1[2]);
-
+            
+            // Hintergrung auf weiß setzen
             object[] arr2 = new object[] { 1, 1, 1 };
             hsp_catiaApp.ActiveWindow.ActiveViewer.PutBackgroundColor(arr2);
-
+             
+            // 3D Kompass ausblenden
             hsp_catiaApp.StartCommand("CompassDisplayOff");
             hsp_catiaApp.ActiveWindow.ActiveViewer.Reframe();
 
-            // hsp_catiaApp.ActiveWindow.ActiveViewer.Viewpoint3D = INFITF.Viewpoint3D;
-            //int[] color = new int[3]; // Hintergundfarbe in Weiß setzen
-            //color[0] = 1;
-            //color[1] = 1;
-            //color[2] = 1;
-            // CATSafeArray color[] = new CATSafeArrayVariant[3];
-
             INFITF.SettingControllers settingControllers1 = hsp_catiaApp.SettingControllers;
-            //INFITF.VisualizationSettingAtt visualizationSettingAtt1 = settingControllers1.Item("CATVizVisualizationSettingCtrl");
-
-            // hsp_catiaApp.ActiveWindow.ActiveViewer.PutBackgroundColor(color);
-
+            
+            // Screenshot wird erstellt und gespeichert
             hsp_catiaApp.ActiveWindow.ActiveViewer.CaptureToFile(CatCaptureFormat.catCaptureFormatBMP, "C:\\Windows\\Temp\\" + bildname + ".bmp");
             
+            // 3D Kompass eingeblendet
+            hsp_catiaApp.StartCommand("CompassDisplayOn");
+
+            // Setzt die Hintergrundfarbe auf Standart zurück
+            hsp_catiaApp.ActiveWindow.ActiveViewer.PutBackgroundColor(arr1);
         }
-        //C:\Windows\Temp
+      
     }
 }
