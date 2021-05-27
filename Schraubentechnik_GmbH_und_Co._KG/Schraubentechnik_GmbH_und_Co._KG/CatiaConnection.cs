@@ -26,6 +26,8 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         Pocket SchlitzPocket;
 
+        Shaft SenkkopfShaft;
+
         public bool CATIALaeuft()
         {
             try
@@ -149,11 +151,11 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             }
             else if (sk == "Senkkopf mit Torx") 
             {
-                Senkkopf(m);
+                SenkkopfInnensechskant(m);
             }
             else if (sk == "Linsenkopf mit Kreuz-Schlitz")
             {
-                ZylinderkopfInnensechskannt(m);
+                ZylinderkopfInnensechskant(m);
             }
 
         }
@@ -381,7 +383,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             #endregion
         }
 
-        public void ZylinderkopfInnensechskannt(MetrischeGewindegroesse m)
+        public void ZylinderkopfInnensechskant(MetrischeGewindegroesse m)
         {
             #region SKizze bauen
             // neue Skizze im ausgewaehlten geometrischen Set anlegen
@@ -532,7 +534,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             #endregion
         }
 
-        public void Senkkopf(MetrischeGewindegroesse m)
+        public void SenkkopfInnensechskant(MetrischeGewindegroesse m)
         {
             #region SKizze bauen
             // neue Skizze im ausgewaehlten geometrischen Set anlegen
@@ -552,35 +554,183 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             #endregion
             Factory2D catFactory2D1 = hsp_catiaProfil.OpenEdition();
 
+            #region Profil zeichnen
+            double tan45 = 1;
+            double tan30 = Math.Sqrt(3) / 3;
+            double winkel;
+            if(m.bezeichnung <= 20)
+            {
+                winkel = tan45;
+            }
+            else
+            {
+                winkel = tan30;
+            }
+            
+            double HoeheP4 = ((m.innenskkopfdurchmesser / 2)-(m.bezeichnung/2))/winkel;
+
             // erst die Punkte
             Point2D catPoint2D1 = catFactory2D1.CreatePoint(0, 0);
-            Point2D catPoint2D2 = catFactory2D1.CreatePoint(m.mutterhoehe, 0);
-            Point2D catPoint2D3 = catFactory2D1.CreatePoint(m.mutterhoehe, m.bezeichnung);
-            Point2D catPoint2D4 = catFactory2D1.CreatePoint(0, m.bezeichnung/2);
+            Point2D catPoint2D2 = catFactory2D1.CreatePoint(m.innenskkopfhöhe, 0);
+            Point2D catPoint2D3 = catFactory2D1.CreatePoint(m.innenskkopfhöhe, m.innenskkopfdurchmesser/2);
+            Point2D catPoint2D4 = catFactory2D1.CreatePoint(HoeheP4, m.innenskkopfdurchmesser/2);
+            Point2D catPoint2D5 = catFactory2D1.CreatePoint(0, m.bezeichnung/2);
 
             // dann das Profil
-            Line2D catLine2D1 = catFactory2D1.CreateLine(0,0,m.mutterhoehe,0);
+            Line2D catLine2D1 = catFactory2D1.CreateLine(0,0, m.innenskkopfhöhe, 0);
             catLine2D1.StartPoint = catPoint2D1;
             catLine2D1.EndPoint = catPoint2D2;
 
-            Line2D catLine2D2 = catFactory2D1.CreateLine(m.mutterhoehe, 0, m.mutterhoehe, m.bezeichnung);
+            Line2D catLine2D2 = catFactory2D1.CreateLine(m.innenskkopfhöhe, 0, m.innenskkopfhöhe, m.innenskkopfdurchmesser/2);
             catLine2D2.StartPoint = catPoint2D2;
             catLine2D2.EndPoint = catPoint2D3;
 
-            Line2D catLine2D3 = catFactory2D1.CreateLine(m.mutterhoehe, m.bezeichnung, 0, m.bezeichnung/2);
+            Line2D catLine2D3 = catFactory2D1.CreateLine(m.innenskkopfhöhe, m.innenskkopfdurchmesser/2, HoeheP4, m.innenskkopfdurchmesser / 2);
             catLine2D3.StartPoint = catPoint2D3;
             catLine2D3.EndPoint = catPoint2D4;
 
-            Line2D catLine2D4 = catFactory2D1.CreateLine(0, m.bezeichnung/2,0,0);
+            Line2D catLine2D4 = catFactory2D1.CreateLine(HoeheP4, m.innenskkopfdurchmesser / 2, 0, m.bezeichnung / 2);
             catLine2D4.StartPoint = catPoint2D4;
-            catLine2D4.EndPoint = catPoint2D1;
+            catLine2D4.EndPoint = catPoint2D5;
+
+            Line2D catLine2D5 = catFactory2D1.CreateLine(0, m.bezeichnung / 2, 0, 0);
+            catLine2D5.StartPoint = catPoint2D5;
+            catLine2D5.EndPoint = catPoint2D1;
+
+            Point2D AxisPoint1 = catFactory2D1.CreatePoint(0, 0);
+            Point2D AxisPoint2 = catFactory2D1.CreatePoint(m.innenskkopfhöhe, 0);
+
+            Line2D AxisLine1 = catFactory2D1.CreateLine(0, 0, m.innenskkopfhöhe, 0);
+            AxisLine1.StartPoint = AxisPoint1;
+            AxisLine1.EndPoint = AxisPoint2;
+
+            Reference Axisreference1 = hsp_catiaPart.Part.CreateReferenceFromObject(AxisPoint1);
+            GeometricElements geometricElements1 = hsp_catiaProfil.GeometricElements;
+            Axis2D catAxis2D1 = (Axis2D)geometricElements1.Item("Absolute Achse");
+            Line2D AxisLine2 = (Line2D)catAxis2D1.GetItem("H-Richtung");
+
+            Reference Axisreference2 = hsp_catiaPart.Part.CreateReferenceFromObject(AxisLine2);
+            Constraints constraints1 = hsp_catiaProfil.Constraints;
+            Constraint constraint1 = constraints1.AddBiEltCst(CatConstraintType.catCstTypeOn,Axisreference1 ,Axisreference2);
+            constraint1.Mode = CatConstraintMode.catCstModeDrivingDimension;
+
+            Reference Axisreference3 = hsp_catiaPart.Part.CreateReferenceFromObject(AxisLine1);
+            Reference Axisreference4 = hsp_catiaPart.Part.CreateReferenceFromObject(AxisLine2);
+            Constraint constraint2 = constraints1.AddBiEltCst(CatConstraintType.catCstTypeVerticality, Axisreference3, Axisreference4);
+            constraint2.Mode = CatConstraintMode.catCstModeDrivingDimension;
+
+            hsp_catiaProfil.CenterLine = AxisLine1;
 
             // Skizzierer verlassen
             hsp_catiaProfil.CloseEdition();
 
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
+            #endregion
 
+            #region Shaft
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+
+            
+            ShapeFactory catShapeFactory1 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
+            Reference reference1 = hsp_catiaPart.Part.CreateReferenceFromObject(hsp_catiaProfil);
+            SenkkopfShaft = catShapeFactory1.AddNewShaftFromRef(reference1);
+            SenkkopfShaft.SetProfileElement (reference1);
+            
+            SenkkopfShaft.set_Name("Kopf");
+
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            #endregion
+
+            
+            #region Offsetebene
+            Reference RefmyPlaneYZ = (Reference)catOriginElements.PlaneYZ;
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part;
+            HybridShapeFactory hybridShapeFactory1 = (HybridShapeFactory)hsp_catiaPart.Part.HybridShapeFactory;
+            HybridShapePlaneOffset OffsetEbene = hybridShapeFactory1.AddNewPlaneOffset(RefmyPlaneYZ, m.innenskkopfhöhe, true);
+            OffsetEbene.set_Name("OffsetEbene");
+            Reference RefOffsetEbene = hsp_catiaPart.Part.CreateReferenceFromObject(OffsetEbene);
+            HybridBodies hybridBodies1 = hsp_catiaPart.Part.HybridBodies;
+            HybridBody hybridBody1 = hybridBodies1.Item("Profile");
+            hybridBody1.AppendHybridShape(OffsetEbene);
+
+
+            hsp_catiaPart.Part.Update();
+            Sketches catSketches2 = catHybridBody1.HybridSketches;
+            Sketch SkizzeaufOffset = catSketches2.Add(RefOffsetEbene);
+            hsp_catiaPart.Part.InWorkObject = SkizzeaufOffset;
+            SkizzeaufOffset.set_Name("OffsetSkizze");
+
+            // Achsensystem in Skizze erstellen 
+            ErzeugeAchsensystem();
+            // Skizzierer verlassen
+            SkizzeaufOffset.CloseEdition();
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            #endregion
+
+            #region Innensechskant
+            Factory2D catFactory2D2 = SkizzeaufOffset.OpenEdition();
+
+            // Sechskant erzeugen
+            
+            double cos30 = Math.Sqrt(3) / 2;
+            double mSW = m.innensechskant / 2;
+
+            // erst die Punkte
+            Point2D catPoint2D6 = catFactory2D2.CreatePoint(mSW, tan30 * mSW);
+            Point2D catPoint2D7 = catFactory2D2.CreatePoint(mSW, -(tan30 * mSW));
+            Point2D catPoint2D8 = catFactory2D2.CreatePoint(0, -(mSW / cos30));
+            Point2D catPoint2D9 = catFactory2D2.CreatePoint(-mSW, -(tan30 * mSW));
+            Point2D catPoint2D10 = catFactory2D2.CreatePoint(-mSW, tan30 * mSW);
+            Point2D catPoint2D11 = catFactory2D2.CreatePoint(0, mSW / cos30);
+
+            // dann die Linien
+            Line2D catLine2D6 = catFactory2D2.CreateLine(mSW, tan30 * mSW, mSW, -(tan30 * mSW));
+            catLine2D6.StartPoint = catPoint2D6;
+            catLine2D6.EndPoint = catPoint2D7;
+
+            Line2D catLine2D7 = catFactory2D2.CreateLine(mSW, -(tan30 * mSW), 0, -(mSW / cos30));
+            catLine2D7.StartPoint = catPoint2D7;
+            catLine2D7.EndPoint = catPoint2D8;
+
+            Line2D catLine2D8 = catFactory2D2.CreateLine(0, -(mSW / cos30), -mSW, -(tan30 * mSW));
+            catLine2D8.StartPoint = catPoint2D8;
+            catLine2D8.EndPoint = catPoint2D9;
+
+            Line2D catLine2D9 = catFactory2D2.CreateLine(-mSW, -(tan30 * mSW), -mSW, (tan30 * mSW));
+            catLine2D9.StartPoint = catPoint2D9;
+            catLine2D9.EndPoint = catPoint2D10;
+
+            Line2D catLine2D10 = catFactory2D2.CreateLine(-mSW, (tan30 * mSW), 0, mSW / cos30);
+            catLine2D10.StartPoint = catPoint2D10;
+            catLine2D10.EndPoint = catPoint2D11;
+
+            Line2D catLine2D11 = catFactory2D2.CreateLine(0, mSW / cos30, mSW, tan30 * mSW);
+            catLine2D11.StartPoint = catPoint2D11;
+            catLine2D11.EndPoint = catPoint2D6;
+
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            #endregion
+
+            #region Tasche Innensechskant
+            // Hauptkoerper in Bearbeitung definieren
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+
+            // Tasche erzeugen erzeugen
+            ShapeFactory catShapeFactory2 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
+
+            SchlitzPocket = catShapeFactory2.AddNewPocket(SkizzeaufOffset, -m.schlitztiefe);
+
+            // Block umbenennen
+            SchlitzPocket.set_Name("Innensechskannt");
+
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            #endregion
+            
         }
         #endregion
 
