@@ -137,8 +137,10 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         #region Kopf
         public void ErzeugeKopf(MetrischeGewindegroesse m, String sk)
         {
-            //sk = "Zylinderkopf mit Schlitz";                   //Test mit Sechskant 
-   
+			//sk = "Sechskant";							//Test mit Sechskant
+            //sk = "Zylinderkopf mit Schlitz";        	//Test mit ZylinderkopfSchlitz       
+			//sk = "Senkkopf mit Torx";					//Test mit Senkkopf
+			//sk = "Linsenkopf mit Kreuz-Schlitz";		//Test mit Linsenkopf bzw. ZylinderkopfInnensechskant
 
 
             if (sk == "Sechskant")
@@ -524,10 +526,10 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             // Tasche erzeugen erzeugen
             ShapeFactory catShapeFactory2 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
 
-            SchlitzPocket = catShapeFactory2.AddNewPocket(SkizzeaufOffset, -m.schlitztiefe);
+            SchlitzPocket = catShapeFactory2.AddNewPocket(SkizzeaufOffset, -m.innensktiefe);
 
             // Block umbenennen
-            SchlitzPocket.set_Name("Innensechskannt");
+            SchlitzPocket.set_Name("Innensechskant");
 
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
