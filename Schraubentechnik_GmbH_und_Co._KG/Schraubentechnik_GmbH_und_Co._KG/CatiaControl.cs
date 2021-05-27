@@ -44,7 +44,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     Console.WriteLine("5");
 
                     //Erzeugt eine Fase am ende des Schafts
-                    cc.ErzeugeFase();
+                    cc.ErzeugeFase(s.metrischeGewindegroesse);
                     Console.WriteLine("6");
 
                     //ErzeugeGewindeFeature

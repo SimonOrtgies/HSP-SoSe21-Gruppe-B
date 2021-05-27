@@ -21,8 +21,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public float innensktiefe;      //Für Catia Senkkopf
         public float innenskkopfhöhe;   //Für Catia Senkkopf
         public float innenskkopfdurchmesser; //Für Catia Senkkopf
+        public float fase;              //Für Catia Schaftfase und Zylinderkopfradius
 
-        public MetrischeGewindegroesse(float b, float st, float f, float au, float mu, float sw, float kd, float ts, float bs, float ins, float iskt, float iskh, float iskd)    //Aufbau der KLasse
+        public MetrischeGewindegroesse(float b, float st, float f, float au, float mu, float sw, float kd, float ts, float bs, float ins, float iskt, float iskh, float iskd, float fa)    //Aufbau der KLasse
         {
             bezeichnung = b;
             steigung = st;
@@ -37,6 +38,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             innensktiefe = iskt;
             innenskkopfhöhe = iskh;
             innenskkopfdurchmesser = iskd;
+            fase = fa;
 
         }
 
