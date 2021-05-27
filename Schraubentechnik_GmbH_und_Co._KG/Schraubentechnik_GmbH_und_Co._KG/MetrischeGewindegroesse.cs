@@ -13,6 +13,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public float flanken;           //Für Volumenberechnung nötig
         public float aussengewinde;
         public float mutterhoehe;       //Für mindest Schaftlänge und Längenrechner notwendig
+        public float kopfhoehesechs;    //Für Catia Sechskant
         public float schluesselweite;   //Für Catia Sechskant
         public float kopfdurchmesser;   //Für Catia Zylinderkopf
         public float schlitztiefe;      //Für Catia Zylinderkopf
@@ -23,13 +24,14 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         public float innenskkopfdurchmesser; //Für Catia Senkkopf
         public float fase;              //Für Catia Schaftfase und Zylinderkopfradius
 
-        public MetrischeGewindegroesse(float b, float st, float f, float au, float mu, float sw, float kd, float ts, float bs, float ins, float iskt, float iskh, float iskd, float fa)    //Aufbau der KLasse
+        public MetrischeGewindegroesse(float b, float st, float f, float au, float mu, float kh, float sw, float kd, float ts, float bs, float ins, float iskt, float iskh, float iskd, float fa)    //Aufbau der KLasse
         {
             bezeichnung = b;
             steigung = st;
             flanken = f;
             aussengewinde = au;
             mutterhoehe = mu;
+            kopfhoehesechs = kh;
             schluesselweite = sw;
             kopfdurchmesser = kd;
             schlitztiefe = ts;
@@ -39,6 +41,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             innenskkopfhöhe = iskh;
             innenskkopfdurchmesser = iskd;
             fase = fa;
+            
 
         }
 

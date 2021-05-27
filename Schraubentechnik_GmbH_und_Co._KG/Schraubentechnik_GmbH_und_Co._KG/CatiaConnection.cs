@@ -229,7 +229,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             // Block(Balken) erzeugen
             ShapeFactory catShapeFactory2 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
 
-            KopfPad = catShapeFactory2.AddNewPad(hsp_catiaProfil, -m.mutterhoehe);
+            KopfPad = catShapeFactory2.AddNewPad(hsp_catiaProfil, -m.kopfhoehesechs);
             //Pad catPad2 = catShapeFactory2.AddNewPad(hsp_catiaProfil, -12);                   // Test mit Mutterhoehe 12
 
             // Block umbenennen
