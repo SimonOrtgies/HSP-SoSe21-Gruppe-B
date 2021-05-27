@@ -27,6 +27,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         Pocket SchlitzPocket;
 
         Shaft SenkkopfShaft;
+        Groove SechskantGroove;
 
         public bool CATIALaeuft()
         {
@@ -238,6 +239,99 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // Block umbenennen
             KopfPad.set_Name("Kopf");
+
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            #endregion
+
+            Sechskantverrundung(m);
+        }
+
+        public void Sechskantverrundung(MetrischeGewindegroesse m)
+        {
+            #region SKizze bauen
+            // neue Skizze im ausgewaehlten geometrischen Set anlegen
+            Sketches catSketches1 = catHybridBody1.HybridSketches;
+            OriginElements catOriginElements = hsp_catiaPart.Part.OriginElements;
+            Reference catReference1 = (Reference)catOriginElements.PlaneZX;
+            hsp_catiaProfil = catSketches1.Add(catReference1);
+
+
+            // Achsensystem in Skizze erstellen 
+            ErzeugeAchsensystem();
+            hsp_catiaProfil.set_Name("Kopffase");
+            // Skizzierer verlassen
+            hsp_catiaProfil.CloseEdition();
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            
+            Factory2D catFactory2D1 = hsp_catiaProfil.OpenEdition();
+            #endregion
+
+            #region Profil zeichnen
+
+            double tan30 = Math.Sqrt(3) / 3;
+            double cos30 = Math.Sqrt(3) / 2;
+            double mSW = (m.schluesselweite / 2);
+            double Breite = (mSW / cos30);
+
+            Point2D catPoint2D1 = catFactory2D1.CreatePoint(m.kopfhoehesechs, mSW*0.95);
+            Point2D catPoint2D2 = catFactory2D1.CreatePoint(m.kopfhoehesechs, Breite);
+            Point2D catPoint2D3 = catFactory2D1.CreatePoint(m.kopfhoehesechs-(tan30*(Breite-mSW)),Breite);
+
+            Line2D catLine2D1 = catFactory2D1.CreateLine(m.kopfhoehesechs, mSW * 0.95, m.kopfhoehesechs, Breite);
+            catLine2D1.StartPoint = catPoint2D1;
+            catLine2D1.EndPoint = catPoint2D2;
+
+            Line2D catLine2D2 = catFactory2D1.CreateLine(m.kopfhoehesechs, Breite, m.kopfhoehesechs - (tan30 * (Breite - mSW)), Breite);
+            catLine2D2.StartPoint = catPoint2D2;
+            catLine2D2.EndPoint = catPoint2D3;
+
+            Line2D catLine2D3 = catFactory2D1.CreateLine(m.kopfhoehesechs - (tan30 * (Breite - mSW)), Breite, m.kopfhoehesechs, mSW * 0.95);
+            catLine2D3.StartPoint = catPoint2D3;
+            catLine2D3.EndPoint = catPoint2D1;
+
+            Point2D AxisPoint1 = catFactory2D1.CreatePoint(0, 0);
+            Point2D AxisPoint2 = catFactory2D1.CreatePoint(m.kopfhoehesechs, 0);
+
+            Line2D AxisLine1 = catFactory2D1.CreateLine(0, 0, m.kopfhoehesechs, 0);
+            AxisLine1.StartPoint = AxisPoint1;
+            AxisLine1.EndPoint = AxisPoint2;
+
+            Reference Axisreference1 = hsp_catiaPart.Part.CreateReferenceFromObject(AxisPoint1);
+            GeometricElements geometricElements1 = hsp_catiaProfil.GeometricElements;
+            Axis2D catAxis2D1 = (Axis2D)geometricElements1.Item("Absolute Achse");
+            Line2D AxisLine2 = (Line2D)catAxis2D1.GetItem("H-Richtung");
+
+            Reference Axisreference2 = hsp_catiaPart.Part.CreateReferenceFromObject(AxisLine2);
+            Constraints constraints1 = hsp_catiaProfil.Constraints;
+            Constraint constraint1 = constraints1.AddBiEltCst(CatConstraintType.catCstTypeOn, Axisreference1, Axisreference2);
+            constraint1.Mode = CatConstraintMode.catCstModeDrivingDimension;
+
+            Reference Axisreference3 = hsp_catiaPart.Part.CreateReferenceFromObject(AxisLine1);
+            Reference Axisreference4 = hsp_catiaPart.Part.CreateReferenceFromObject(AxisLine2);
+            Constraint constraint2 = constraints1.AddBiEltCst(CatConstraintType.catCstTypeVerticality, Axisreference3, Axisreference4);
+            constraint2.Mode = CatConstraintMode.catCstModeDrivingDimension;
+
+            hsp_catiaProfil.CenterLine = AxisLine1;
+
+            // Skizzierer verlassen
+            hsp_catiaProfil.CloseEdition();
+
+            // Part aktualisieren
+            hsp_catiaPart.Part.Update();
+            #endregion
+
+            #region Nut
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+
+
+            ShapeFactory catShapeFactory1 = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
+            Reference reference1 = hsp_catiaPart.Part.CreateReferenceFromObject(hsp_catiaProfil);
+            SechskantGroove = catShapeFactory1.AddNewGrooveFromRef(reference1);
+            SechskantGroove.SetProfileElement(reference1);
+
+            SechskantGroove.set_Name("Kopfnut");
 
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
@@ -553,8 +647,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             hsp_catiaProfil.CloseEdition();
             // Part aktualisieren
             hsp_catiaPart.Part.Update();
-            #endregion
+            
             Factory2D catFactory2D1 = hsp_catiaProfil.OpenEdition();
+            #endregion
 
             #region Profil zeichnen
             double tan45 = 1;
