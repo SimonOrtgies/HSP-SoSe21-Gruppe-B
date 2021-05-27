@@ -55,7 +55,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     cc.ErzeugeExportDatei();
                     Console.WriteLine("7");
 
-                    cc.ErzeugeScreenshot();
+                    cc.ErzeugeScreenshot(s.metrischeGewindegroesse, s.schraubenkopf);
                     Console.WriteLine("8");
                 }
                 else
