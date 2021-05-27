@@ -30,9 +30,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
              new MetrischeGewindegroesse(16,    2f,     14.7f,  13.55f, 13,     24,     24,     4.2f,       4       ,   10,     5.3f,   7.5f,   30,     2    ),
              new MetrischeGewindegroesse(20,    2.5f,   18.38f, 16.93f, 16,     30,     30,     5.2f,       5       ,   12,     5.9f,   8.5f,   36,     2    ),
              new MetrischeGewindegroesse(24,    3f,     22.05f, 20.32f, 19,     36,     36,     6.3f,       6       ,   14,     10.3f,  14,     39,     2    ),
-             new MetrischeGewindegroesse(30,    3.5f,   27.73f, 25.71f, 24,     46,     45,     8,          8       ,   17,     12,     17,     42,     2    ),
-             new MetrischeGewindegroesse(36,    4f,     33.4f,  31.09f, 29,     55,     54,     9.5f,       9       ,   19,     15,     19,     40,     2    ),
-             new MetrischeGewindegroesse(42,    4.5f,  39.08f,  36.48f, 34,     62,     63,     11.2f,      10      ,   22,     18,     22,     60,     2    ),
+             new MetrischeGewindegroesse(30,    3.5f,   27.73f, 25.71f, 24,     46,     45,     8,          8       ,   17,     12,     17,     48,     2    ),
+             new MetrischeGewindegroesse(36,    4f,     33.4f,  31.09f, 29,     55,     54,     9.5f,       9       ,   19,     15,     19,     57,     2    ),
+             new MetrischeGewindegroesse(42,    4.5f,  39.08f,  36.48f, 34,     62,     63,     11.2f,      10      ,   22,     18,     22,     66,     2    ),
 
         };
 
