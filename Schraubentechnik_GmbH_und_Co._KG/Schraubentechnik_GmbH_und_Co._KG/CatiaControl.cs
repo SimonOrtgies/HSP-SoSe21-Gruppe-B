@@ -9,7 +9,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 {
     class CatiaControl
     {
-        CatiaControl(Schraube s)
+        CatiaControl(Schraube s, String Gewindedarstellung)
         {
             try
             {
@@ -42,21 +42,28 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     //Erzeuge Scharubenkopf
                     cc.ErzeugeKopf(s.metrischeGewindegroesse, s.schraubenkopf);
                     Console.WriteLine("5");
-
-                    //Erzeugt eine Fase am ende des Schafts
-                    cc.ErzeugeFase(s.metrischeGewindegroesse);
-                    Console.WriteLine("6");
-
+                 
                     //ErzeugeGewindeFeature
-                    cc.ErzeugeGewindeFeature(s.gewinderichtung,s.metrischeGewindegroesse.bezeichnung, s.gewindeLaenge.gewindeLaenge);
-                    //cc.ErzeugeGewindeFeature(20, 75);         //Test mit d=20, gewindelänge=75
-                    Console.WriteLine("6");
+                    if(Gewindedarstellung == "technisch")
+                    {
+                        //Erzeugt eine Fase am ende des Schafts
+                        cc.ErzeugeFase(s.metrischeGewindegroesse);
+                        Console.WriteLine("6");
+                        cc.ErzeugeGewindeFeature(s.gewinderichtung,s.metrischeGewindegroesse.bezeichnung, s.gewindeLaenge.gewindeLaenge);
+                        //cc.ErzeugeGewindeFeature(20, 75);         //Test mit d=20, gewindelänge=75
+                         Console.WriteLine("7");
+                    }else if(Gewindedarstellung == "optisch")
+                    {
+                        cc.ErzeugeGewindeHelix(s);
+                        Console.WriteLine("7");
+                    }
+                    
 
                     cc.ErzeugeExportDatei();
-                    Console.WriteLine("7");
+                    Console.WriteLine("8");
 
                     cc.ErzeugeScreenshot(s.metrischeGewindegroesse, s.schraubenkopf);
-                    Console.WriteLine("8");
+                    Console.WriteLine("9");
                 }
                 else
                 {               
@@ -71,10 +78,12 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         }
 
-        public static void CatiaStarten(Schraube s)
+        public static void CatiaStarten(Schraube s, String Gd)
         {
             Schraube schr = s;
-            new CatiaControl(schr);
+            String Gewindedarstellung = Gd;
+
+            new CatiaControl(schr, Gewindedarstellung);
         }
     }
 }

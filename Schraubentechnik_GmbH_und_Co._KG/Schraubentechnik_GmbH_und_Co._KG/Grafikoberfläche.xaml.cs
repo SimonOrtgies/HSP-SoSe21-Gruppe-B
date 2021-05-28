@@ -31,6 +31,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         Boolean FinishAnzahl = false;
         Boolean hatWertSchaftlaenge = false;   //prüft ob Schaftlänge einen Wert hat, um den WeiterButton für die Dimensionen einzuschalten
         Boolean hatWertGewindelaenge = false;  //prüft ob Gewindelänge einen Wert hat, um den WeiterButton für die Dimensionen einzuschalten
+        String Gewindedarstellung = "";     //Gewindedarstellung für Catia festlegen
 
 
         public Grafikoberfläche(Schraube s)
@@ -825,7 +826,36 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         private void btn_AnCatiaUebertragen_Click(object sender, RoutedEventArgs e)
         {
-            CatiaControl.CatiaStarten(s);
+            if(Gewindedarstellung == "technisch")
+            {
+                CatiaControl.CatiaStarten(s, Gewindedarstellung);
+                
+            }
+            else if(Gewindedarstellung == "optisch")
+            {
+                CatiaControl.CatiaStarten(s, Gewindedarstellung);
+            }
+            else if(Gewindedarstellung == "")
+            {
+                lab_GewindedarstellungsHinweis.Content = "Bitte zuerst Gewindedarstellung auswählen!";
+                lab_GewindedarstellungsHinweis.Visibility = Visibility.Visible;
+            }
+            
         }
+
+        #region Gewindedarstellung
+        private void rBtn_TechnischesGewinde_Checked(object sender, RoutedEventArgs e)
+        {
+            lab_GewindedarstellungsHinweis.Visibility = Visibility.Hidden;
+            Gewindedarstellung = "technisch";
+        }
+        private void rBtn_OptischesGewinde_Checked(object sender, RoutedEventArgs e)
+        {
+            lab_GewindedarstellungsHinweis.Visibility = Visibility.Hidden;
+            Gewindedarstellung = "optisch";
+        }
+        #endregion
+
+
     }
 }

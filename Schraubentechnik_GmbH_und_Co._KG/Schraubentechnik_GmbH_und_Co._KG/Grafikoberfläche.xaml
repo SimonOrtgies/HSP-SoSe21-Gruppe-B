@@ -135,7 +135,7 @@
             <Label Content="Checkout:" HorizontalAlignment="Left" Margin="29,10,0,0" VerticalAlignment="Top" Height="50" Width="130" FontSize="24"/>
             <Label x:Name="lab_Berechnungen_Gewinderichtung" Content="Gewinderichtung" HorizontalAlignment="Left" Margin="300,65,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txB_BerechungenGewinderichtung" HorizontalAlignment="Left" Height="23" Margin="420,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
-            <TextBox x:Name="txB_BerechungenSchraubenkopf" HorizontalAlignment="Left" Height="23" Margin="420,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="235" IsReadOnly="True" Background="Transparent"/>
+            <TextBox x:Name="txB_BerechungenSchraubenkopf" HorizontalAlignment="Left" Height="23" Margin="420,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"  IsReadOnly="True" Background="Transparent"/>
             <TextBox x:Name="txB_BerechungenGewindegroesse" HorizontalAlignment="Left" Height="23" Margin="420,121,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
             <TextBox x:Name="txB_BerechungenSchaftlaenge" HorizontalAlignment="Left" Height="23" Margin="420,149,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
             <TextBox x:Name="txB_BerechungenGewindelaenge" HorizontalAlignment="Left" Height="23" Margin="420,177,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
@@ -146,7 +146,7 @@
             <TextBox x:Name="txB_BerechungenPreis" HorizontalAlignment="Left" Height="23" Margin="144,177,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
             <Button x:Name="btn_Zurueck" Content="Zurück" HorizontalAlignment="Left" Margin="450,290,0,0" VerticalAlignment="Top" Width="75" Click="btn_Zurueck_Click"/>
             <Button x:Name="btn_AnCatiaUebertragen" Content="An Catia übertragen" HorizontalAlignment="Right" Margin="0,290,33,20" Width="112" ToolTip="CAD Model mit Catia erstellen" Click="btn_AnCatiaUebertragen_Click"/>
-            <Label x:Name="label" Content="Schraubenkopf:" HorizontalAlignment="Left" Margin="308,93,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label" Content="Schraubenkopf" HorizontalAlignment="Left" Margin="308,93,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label6" Content="Gewindegröße" HorizontalAlignment="Left" Margin="308,121,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label7" Content="Schaftlänge" HorizontalAlignment="Left" Margin="323,149,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label8" Content="Gewindelänge" HorizontalAlignment="Left" Margin="308,173,0,0" VerticalAlignment="Top"/>
@@ -155,6 +155,9 @@
             <Label x:Name="lab_Berechnungen_Volumen" Content="Volumen:" HorizontalAlignment="Left" Margin="68,117,0,0" VerticalAlignment="Top"/>
             <Label x:Name="lab_Berechnungen_Masse" Content="Masse:" HorizontalAlignment="Left" Margin="81,148,0,0" VerticalAlignment="Top"/>
             <Label x:Name="lab_Berechnungen_Preis" Content="Preis:" HorizontalAlignment="Left" Margin="81,173,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="rBtn_TechnischesGewinde" Content="Technisches Gewinde" HorizontalAlignment="Left" Margin="533,255,0,0" VerticalAlignment="Top" Checked="rBtn_TechnischesGewinde_Checked"/>
+            <RadioButton x:Name="rBtn_OptischesGewinde" Content="Optisches Gewinde" HorizontalAlignment="Left" Margin="533,270,0,0" VerticalAlignment="Top" Checked="rBtn_OptischesGewinde_Checked"/>
+            <Label x:Name="lab_GewindedarstellungsHinweis" Content="Label" HorizontalAlignment="Left" Margin="199,287,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         </Grid>
 
 

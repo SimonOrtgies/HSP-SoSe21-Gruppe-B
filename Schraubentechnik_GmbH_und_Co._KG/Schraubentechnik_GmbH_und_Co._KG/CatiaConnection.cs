@@ -400,7 +400,6 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             HybridBody hybridBody1 = hybridBodies1.Item("Profile");
             hybridBody1.AppendHybridShape(OffsetEbene);
 
-
             hsp_catiaPart.Part.Update();
             Sketches catSketches2 = catHybridBody1.HybridSketches;
             Sketch SkizzeaufOffset = catSketches2.Add(RefOffsetEbene);
@@ -717,6 +716,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             hsp_catiaProfil.CenterLine = AxisLine1;
 
+
             // Skizzierer verlassen
             hsp_catiaProfil.CloseEdition();
 
@@ -882,43 +882,188 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             hsp_catiaPart.Part.Update();
         }
 
+        #region Gewinde Optisch
+        internal void ErzeugeGewindeHelix(Schraube  s)
+        {
+            Double P = s.metrischeGewindegroesse.steigung;
+            Double Ri = s.metrischeGewindegroesse.bezeichnung/2;
+            HybridShapeFactory HSF = (HybridShapeFactory)hsp_catiaPart.Part.HybridShapeFactory;
+
+            Sketch myGewinde = makeGewindeSkizze(s);
+
+            HybridShapeDirection HelixDir = HSF.AddNewDirectionByCoord(1, 0, 0);
+            Reference RefHelixDir = hsp_catiaPart.Part.CreateReferenceFromObject(HelixDir);
+
+            HybridShapePointCoord HelixStartpunkt = HSF.AddNewPointCoord(s.schaftLaenge.schaftlaenge, 0, Ri);
+            Reference RefHelixStartpunkt = hsp_catiaPart.Part.CreateReferenceFromObject(HelixStartpunkt);
+
+            HybridShapeHelix Helix = HSF.AddNewHelix(RefHelixDir, true, RefHelixStartpunkt, P, s.gewindeLaenge.gewindeLaenge, false, 0, 0, false);
+
+
+            Reference RefHelix = hsp_catiaPart.Part.CreateReferenceFromObject(Helix);
+            Reference RefmyGewinde = hsp_catiaPart.Part.CreateReferenceFromObject(myGewinde);
+
+            hsp_catiaPart.Part.Update();
+
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+
+            OriginElements catOriginElements = this.hsp_catiaPart.Part.OriginElements;
+            Reference RefmyPlaneZX = (Reference)catOriginElements.PlaneZX;
+            
+            Sketches catSketchesChamferHelix = catHybridBody1.HybridSketches;
+            Sketch ChamferSkizze = catSketchesChamferHelix.Add(RefmyPlaneZX);
+            hsp_catiaPart.Part.InWorkObject = ChamferSkizze;
+            ChamferSkizze.set_Name("Fase");
+
+            double H_links = Ri;
+            double V_links = s.schaftLaenge.schaftlaenge-0.65 * P;
+
+            double H_rechts = Ri;
+            double V_rechts = s.schaftLaenge.schaftlaenge;
+
+            double H_unten = Ri - 0.65 * P;
+            double V_unten = s.schaftLaenge.schaftlaenge;
+
+            Factory2D catFactory2D3 = ChamferSkizze.OpenEdition();
+
+            Point2D links = catFactory2D3.CreatePoint(H_links, V_links);
+            Point2D rechts = catFactory2D3.CreatePoint(H_rechts, V_rechts);
+            Point2D unten = catFactory2D3.CreatePoint(H_unten, V_unten);
+
+            Line2D Oben = catFactory2D3.CreateLine(H_links, V_links, H_rechts, V_rechts);
+            Oben.StartPoint = links;
+            Oben.EndPoint = rechts;
+
+            Line2D hypo = catFactory2D3.CreateLine(H_links, V_links, H_unten, V_unten);
+            hypo.StartPoint = links;
+            hypo.EndPoint = unten;
+
+            Line2D seite = catFactory2D3.CreateLine(H_unten, V_unten, H_rechts, V_rechts);
+            seite.StartPoint = unten;
+            seite.EndPoint = rechts;
+
+            ChamferSkizze.CloseEdition();
+            
+            hsp_catiaPart.Part.InWorkObject = hsp_catiaPart.Part.MainBody;
+            hsp_catiaPart.Part.Update();
+
+            ShapeFactory catshapeFactoryHelix = (ShapeFactory)hsp_catiaPart.Part.ShapeFactory;
+            Groove myChamfer = catshapeFactoryHelix.AddNewGroove(ChamferSkizze);
+            myChamfer.RevoluteAxis = RefHelixDir;
+            
+            hsp_catiaPart.Part.Update();
+
+            Slot GewindeRille = catshapeFactoryHelix.AddNewSlotFromRef(RefmyGewinde, RefHelix);
+
+            Reference RefmyPad = hsp_catiaPart.Part.CreateReferenceFromObject(SchaftPad);
+            HybridShapeSurfaceExplicit GewindestangenSurface = HSF.AddNewSurfaceDatum(RefmyPad);
+            Reference RefGewindestangenSurface = hsp_catiaPart.Part.CreateReferenceFromObject(GewindestangenSurface);
+
+            GewindeRille.ReferenceSurfaceElement = RefGewindestangenSurface;
+
+            Reference RefGewindeRille = hsp_catiaPart.Part.CreateReferenceFromObject(GewindeRille);
+
+            hsp_catiaPart.Part.Update();
+        }
+
+        
+      
+        private Sketch makeGewindeSkizze(Schraube s)
+        {
+            Double P = s.metrischeGewindegroesse.steigung;
+            Double Ri = s.metrischeGewindegroesse.bezeichnung/2;
+
+            OriginElements catOriginElements = hsp_catiaPart.Part.OriginElements;
+            Reference RefmyPlaneZX = (Reference)catOriginElements.PlaneZX;
+
+            Sketches catSketchesGewinde = catHybridBody1.HybridSketches;
+            Sketch myGewinde = catSketchesGewinde.Add(RefmyPlaneZX);
+            hsp_catiaPart.Part.InWorkObject = myGewinde;
+            myGewinde.set_Name("Gewinde");
+
+            double V_oben_links = -(((((Math.Sqrt(3) / 2) * P) / 6) + 0.6134 * P) * Math.Tan((30 * Math.PI) / 180)-s.schaftLaenge.schaftlaenge);
+            double H_oben_links = Ri;
+
+            double V_oben_rechts = (((((Math.Sqrt(3) / 2) * P) / 6) + 0.6134 * P) * Math.Tan((30 * Math.PI) / 180)+s.schaftLaenge.schaftlaenge);
+            double H_oben_rechts = Ri;
+
+            double V_unten_links = -((0.1443 * P) * Math.Sin((60 * Math.PI) / 180)-s.schaftLaenge.schaftlaenge);
+            double H_unten_links = Ri - (0.6134 * P - 0.1443 * P) - Math.Sqrt(Math.Pow((0.1443 * P), 2) - Math.Pow((0.1443 * P) * Math.Sin((60 * Math.PI) / 180), 2));
+
+            double V_unten_rechts = (0.1443 * P) * Math.Sin((60 * Math.PI) / 180)+s.schaftLaenge.schaftlaenge;
+            double H_unten_rechts = Ri - (0.6134 * P - 0.1443 * P) - Math.Sqrt(Math.Pow((0.1443 * P), 2) - Math.Pow((0.1443 * P) * Math.Sin((60 * Math.PI) / 180), 2));
+
+            double V_Mittelpunkt = s.schaftLaenge.schaftlaenge;
+            double H_Mittelpunkt = Ri - ((0.6134 * P) - 0.1443 * P);
+
+            Factory2D catFactory2D2 = myGewinde.OpenEdition();
+
+            Point2D Oben_links = catFactory2D2.CreatePoint(H_oben_links, V_oben_links);
+            Point2D Oben_rechts = catFactory2D2.CreatePoint(H_oben_rechts, V_oben_rechts);
+            Point2D Unten_links = catFactory2D2.CreatePoint(H_unten_links, V_unten_links);
+            Point2D Unten_rechts = catFactory2D2.CreatePoint(H_unten_rechts, V_unten_rechts);
+            Point2D Mittelpunkt = catFactory2D2.CreatePoint(H_Mittelpunkt, V_Mittelpunkt);
+
+            Line2D Oben = catFactory2D2.CreateLine(H_oben_links, V_oben_links, H_oben_rechts, V_oben_rechts);
+            Oben.StartPoint = Oben_links;
+            Oben.EndPoint = Oben_rechts;
+
+            Line2D Rechts = catFactory2D2.CreateLine(H_oben_rechts, V_oben_rechts, H_unten_rechts, V_unten_rechts);
+            Rechts.StartPoint = Oben_rechts;
+            Rechts.EndPoint = Unten_rechts;
+
+            Circle2D Verrundung = catFactory2D2.CreateCircle(H_Mittelpunkt, V_Mittelpunkt, 0.1443 * P, 0, 0);
+            Verrundung.CenterPoint = Mittelpunkt;
+            Verrundung.StartPoint = Unten_rechts;
+            Verrundung.EndPoint = Unten_links;
+
+            Line2D Links = catFactory2D2.CreateLine(H_oben_links, V_oben_links, H_unten_links, V_unten_links);
+            Links.StartPoint = Unten_links;
+            Links.EndPoint = Oben_links;
+
+            myGewinde.CloseEdition();
+            hsp_catiaPart.Part.Update();
+
+            return myGewinde;
+        }
+        #endregion
+
         public void ErzeugeExportDatei()
         {
             //string Dokumentname = "SchraubenDokument";
             //hsp_catiaPart.Activate();
             //hsp_catiaPart.ExportData("C:\\Windows\\Temp\\", ".stp");
-                                                                      
-            
+
+
         }
 
         public void ErzeugeScreenshot(MetrischeGewindegroesse m, string sk)
-        {   
+        {
             // Dateiname festlegen
             string bildname = sk + " M" + m.bezeichnung;
-            
+
             //Standarthintergrung speichern
             object[] arr1 = new object[3];
             hsp_catiaApp.ActiveWindow.ActiveViewer.GetBackgroundColor(arr1);
-            
+
             // Hintergrung auf weiß setzen
             object[] arr2 = new object[] { 1, 1, 1 };
             hsp_catiaApp.ActiveWindow.ActiveViewer.PutBackgroundColor(arr2);
-             
+
             // 3D Kompass ausblenden
             hsp_catiaApp.StartCommand("CompassDisplayOff");
             hsp_catiaApp.ActiveWindow.ActiveViewer.Reframe();
 
             INFITF.SettingControllers settingControllers1 = hsp_catiaApp.SettingControllers;
-            
+
             // Screenshot wird erstellt und gespeichert
             hsp_catiaApp.ActiveWindow.ActiveViewer.CaptureToFile(CatCaptureFormat.catCaptureFormatBMP, "C:\\Windows\\Temp\\" + bildname + ".bmp");
-            
+
             // 3D Kompass eingeblendet
             hsp_catiaApp.StartCommand("CompassDisplayOn");
 
             // Setzt die Hintergrundfarbe auf Standart zurück
             hsp_catiaApp.ActiveWindow.ActiveViewer.PutBackgroundColor(arr1);
         }
-      
     }
 }
