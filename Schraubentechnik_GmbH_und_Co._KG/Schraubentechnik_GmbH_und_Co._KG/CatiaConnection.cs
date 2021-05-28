@@ -897,7 +897,18 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             HybridShapePointCoord HelixStartpunkt = HSF.AddNewPointCoord(s.schaftLaenge.schaftlaenge, 0, Ri);
             Reference RefHelixStartpunkt = hsp_catiaPart.Part.CreateReferenceFromObject(HelixStartpunkt);
 
-            HybridShapeHelix Helix = HSF.AddNewHelix(RefHelixDir, true, RefHelixStartpunkt, P, s.gewindeLaenge.gewindeLaenge, false, 0, 0, false);
+            Boolean DrehrichtungLinks;
+
+            if (s.gewinderichtung == Gewinderichtung.Rechtsgewinde)
+            {
+                DrehrichtungLinks = false;
+            }
+            else
+            {
+                DrehrichtungLinks = true;
+            }
+
+            HybridShapeHelix Helix = HSF.AddNewHelix(RefHelixDir, true, RefHelixStartpunkt, P, s.gewindeLaenge.gewindeLaenge, DrehrichtungLinks, 0, 0, false);
 
 
             Reference RefHelix = hsp_catiaPart.Part.CreateReferenceFromObject(Helix);
@@ -972,6 +983,16 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         {
             Double P = s.metrischeGewindegroesse.steigung;
             Double Ri = s.metrischeGewindegroesse.bezeichnung/2;
+            Boolean DrehrichtungRechts;
+
+            if(s.gewinderichtung == Gewinderichtung.Rechtsgewinde)
+            {
+                DrehrichtungRechts = true;
+            }
+            else
+            {
+                DrehrichtungRechts = false;
+            }
 
             OriginElements catOriginElements = hsp_catiaPart.Part.OriginElements;
             Reference RefmyPlaneZX = (Reference)catOriginElements.PlaneZX;
