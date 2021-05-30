@@ -104,7 +104,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             s.schraubenkopf = "Sechskant";
             FinishSchraubenkopf = true;
             img_Sechskant.Visibility = Visibility.Visible;
-            img_Linse.Visibility = Visibility.Hidden;
+            img_Zylinder_Innen.Visibility = Visibility.Hidden;
             img_Senkkopf.Visibility = Visibility.Hidden;
             img_Zylinder.Visibility = Visibility.Hidden;
         }
@@ -115,7 +115,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             s.schraubenkopf = "Zylinderkopf mit Schlitz";
             FinishSchraubenkopf = true;
             img_Sechskant.Visibility = Visibility.Hidden;
-            img_Linse.Visibility = Visibility.Hidden;
+            img_Zylinder_Innen.Visibility = Visibility.Hidden;
             img_Senkkopf.Visibility = Visibility.Hidden;
             img_Zylinder.Visibility = Visibility.Visible;
         }
@@ -126,7 +126,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             s.schraubenkopf = "Senkkopf mit Torx";
             FinishSchraubenkopf = true;
             img_Sechskant.Visibility = Visibility.Hidden;
-            img_Linse.Visibility = Visibility.Hidden;
+            img_Zylinder_Innen.Visibility = Visibility.Hidden;
             img_Senkkopf.Visibility = Visibility.Visible;
             img_Zylinder.Visibility = Visibility.Hidden;
         }
@@ -137,7 +137,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             s.schraubenkopf = "Linsenkopf mit Kreuz-Schlitz";
             FinishSchraubenkopf = true;
             img_Sechskant.Visibility = Visibility.Hidden;
-            img_Linse.Visibility = Visibility.Visible;
+            img_Zylinder_Innen.Visibility = Visibility.Visible;
             img_Senkkopf.Visibility = Visibility.Hidden;
             img_Zylinder.Visibility = Visibility.Hidden;
         }

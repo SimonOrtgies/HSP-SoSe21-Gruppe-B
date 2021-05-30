@@ -128,6 +128,10 @@
     <Content Include="Zylinder Durchsichtig.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Zylinder Innen.jpg" />
+    <Content Include="Zylinder Innen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="INFITF">

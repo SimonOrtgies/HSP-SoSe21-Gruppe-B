@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Schraubentechnik_GmbH_und_Co._KG"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    
+
+
     <Grid x:Name="grd_Main" Background="#FFE6EAEE">
         <Grid.RowDefinitions>
             <RowDefinition Height="421*"/>
@@ -41,16 +41,17 @@
             <ComboBox x:Name="cBx_Schraubenkopf" HorizontalAlignment="Left" Margin="210,14,0,0" VerticalAlignment="Top" Width="200" Text="Bitte auswählen..">
                 <ComboBoxItem x:Name="cBI_Sechskant" Content="Sechskant" HorizontalAlignment="Left" Width="200" Selected="cBI_Sechskant_Selected"/>
                 <ComboBoxItem x:Name="cBI_Zylinderkopf" Content="Zylinderkopf mit Schlitz" HorizontalAlignment="Left" Width="200" Selected="cBI_Zylinderkopf_Selected"/>
-                <ComboBoxItem x:Name="cBI_Senkkopf" Content="Senkkopf mit Torx" HorizontalAlignment="Left" Width="200" Selected="cBI_Senkkopf_Selected"/>
-                <ComboBoxItem x:Name="cBI_Linsenkopf" Content="Linsenkopf mit Kreuz-Schlitz" HorizontalAlignment="Left" Width="200" Selected="cBI_Linsenkopf_Selected"/>
+                <ComboBoxItem x:Name="cBI_Senkkopf" Content="Senkkopf mit Innensechskant" HorizontalAlignment="Left" Width="200" Selected="cBI_Senkkopf_Selected"/>
+                <ComboBoxItem x:Name="cBI_Linsenkopf" Content="Zylinderkopf mit Innensechskant" HorizontalAlignment="Left" Width="200" Selected="cBI_Linsenkopf_Selected"/>
             </ComboBox>
             <Label x:Name="label1" Content="Schraubenkopf auswählen" HorizontalAlignment="Left" Margin="43,10,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btn_SchraubenkopfWeiter" Content="Weiter" HorizontalAlignment="Left" Margin="400,290,0,0" VerticalAlignment="Top" Width="75" Click="btn_SchraubenkopfWeiter_Click"/>
             <Label x:Name="lab_SchraubenkopfHinweis" Content="Label" HorizontalAlignment="Left" Margin="192,287,0,0" VerticalAlignment="Top" Width="191" Visibility="Hidden"/>
-            <Image x:Name="img_Linse" Source="Linse durchsichtig.png" Margin="43,53,45,60" Visibility="Hidden" Width="420" Height="217"/>
+            
             <Image x:Name="img_Sechskant" Source="Sechs Durchsichti.png" Margin="64,76,57,90" Visibility="Hidden" Width="387" Height="164"/>
             <Image x:Name="img_Senkkopf" Source="Senk durchsichtig.png" Margin="43,68,45,83" Visibility="Hidden" Width="420" Height="179"/>
             <Image x:Name="img_Zylinder" Source="Zylinder Durchsichtig.png" Margin="10,76,31,83" Visibility="Hidden" Width="467" Height="171"/>
+            <Image x:Name="img_Zylinder_Innen" Source="Zylinder Innen.png" RenderTransformOrigin="0.754,0.791" Margin="-1,100,33,30" Height="200" Width="476" Visibility="Hidden"/>
         </Grid>
 
 
@@ -108,7 +109,7 @@
             <Image x:Name="img_Mase" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="281" Source="Linse durchsichtig mit mase.png" Margin="233,10,-6,0" Visibility="Visible" Stretch="UniformToFill" />
         </Grid>
 
-        
+
         <Grid x:Name="grd_Festigkeitsklasse" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Hidden">
             <Label x:Name="label4" Content="Festigkeitsklasse" HorizontalAlignment="Left" Margin="33,27,0,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="rBtn_8_8" Content="8.8" HorizontalAlignment="Left" Margin="174,80,0,0" VerticalAlignment="Top" Checked="rBtn_8_8_Checked"/>
@@ -131,7 +132,7 @@
         </Grid>
 
 
-        <Grid x:Name="grd_Berechnungen" HorizontalAlignment="Left" Height="330" Margin="20,74,0,0" VerticalAlignment="Top" Width="678" Background="#FFF3CE25" Visibility="Visible" RenderTransformOrigin="1.08,0.261">
+        <Grid x:Name="grd_Berechnungen" HorizontalAlignment="Left" Height="330" Margin="20,74,0,0" VerticalAlignment="Top" Width="678" Background="#FFF3CE25" Visibility="Hidden" RenderTransformOrigin="1.08,0.261">
             <Label Content="Checkout:" HorizontalAlignment="Left" Margin="29,10,0,0" VerticalAlignment="Top" Height="50" Width="130" FontSize="24"/>
             <Label x:Name="lab_Berechnungen_Gewinderichtung" Content="Gewinderichtung" HorizontalAlignment="Left" Margin="300,65,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txB_BerechungenGewinderichtung" HorizontalAlignment="Left" Height="23" Margin="420,65,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="Transparent"/>
