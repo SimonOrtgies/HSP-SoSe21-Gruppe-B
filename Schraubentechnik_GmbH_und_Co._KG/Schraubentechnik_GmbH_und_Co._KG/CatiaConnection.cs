@@ -1049,19 +1049,18 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         }
         #endregion
 
-        public void ErzeugeExportDatei()
+        public void ErzeugeExportDatei(Schraube s)
         {
-            //string Dokumentname = "SchraubenDokument";
-            //hsp_catiaPart.Activate();
-            //hsp_catiaPart.ExportData("C:\\Windows\\Temp\\", ".stp");
-
-
+            string Dokumentname = s.schraubenkopf +" M" + s.metrischeGewindegroesse.bezeichnung + "x" + s.schaftLaenge.schaftlaenge;
+            hsp_catiaPart.Activate();
+            hsp_catiaPart.ExportData("C:\\Windows\\Temp\\" + Dokumentname, "stp");
+            //partDocument1.SaveAs "D:\Users\Simon Ortgies\Google Drive\Me2 Conaxkupplung\Part7.CATPart"
         }
 
-        public void ErzeugeScreenshot(MetrischeGewindegroesse m, string sk)
+        public void ErzeugeScreenshot(Schraube s)
         {
             // Dateiname festlegen
-            string bildname = sk + " M" + m.bezeichnung;
+            string bildname = s.schraubenkopf + " M" + s.metrischeGewindegroesse.bezeichnung + "x" + s.schaftLaenge.schaftlaenge;
 
             //Standarthintergrung speichern
             object[] arr1 = new object[3];
@@ -1085,6 +1084,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
             // Setzt die Hintergrundfarbe auf Standart zurück
             hsp_catiaApp.ActiveWindow.ActiveViewer.PutBackgroundColor(arr1);
+            
         }
     }
 }

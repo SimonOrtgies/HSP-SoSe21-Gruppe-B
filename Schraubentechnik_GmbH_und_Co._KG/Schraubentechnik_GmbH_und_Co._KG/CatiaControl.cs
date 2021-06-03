@@ -59,11 +59,14 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                     }
                     
 
-                    cc.ErzeugeExportDatei();
+                    cc.ErzeugeExportDatei(s);
                     Console.WriteLine("8");
 
-                    cc.ErzeugeScreenshot(s.metrischeGewindegroesse, s.schraubenkopf);
+                    cc.ErzeugeScreenshot(s);
                     Console.WriteLine("9");
+
+                    MessageBox.Show("Modell erfolgreich erstellt!" + "\n" + "Screenshot und STP unter C:\\Windows\\Temp\\" + s.schraubenkopf + " M" + s.metrischeGewindegroesse.bezeichnung + "x" + s.schaftLaenge.schaftlaenge +" gespeichert",
+                    "Erfolgreiche Erstellung", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {               
