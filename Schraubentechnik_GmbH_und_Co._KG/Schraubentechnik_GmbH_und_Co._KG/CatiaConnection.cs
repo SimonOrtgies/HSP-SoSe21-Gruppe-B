@@ -983,16 +983,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         {
             Double P = s.metrischeGewindegroesse.steigung;
             Double Ri = s.metrischeGewindegroesse.bezeichnung/2;
-            Boolean DrehrichtungRechts;
-
-            if(s.gewinderichtung == Gewinderichtung.Rechtsgewinde)
-            {
-                DrehrichtungRechts = true;
-            }
-            else
-            {
-                DrehrichtungRechts = false;
-            }
+           
 
             OriginElements catOriginElements = hsp_catiaPart.Part.OriginElements;
             Reference RefmyPlaneZX = (Reference)catOriginElements.PlaneZX;
