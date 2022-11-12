@@ -103,7 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CatiaConnection.cs" />
+    <Compile Include="CatiaConnestionM.cs" />
     <Compile Include="CatiaControl.cs" />
+    <Compile Include="CatiaControlM.cs" />
     <Compile Include="Mutter.cs" />
     <Compile Include="Gewindelaenge.cs" />
     <Compile Include="Gewinderichtung.cs" />

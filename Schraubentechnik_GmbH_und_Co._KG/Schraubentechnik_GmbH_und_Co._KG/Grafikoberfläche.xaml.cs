@@ -834,6 +834,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             {
                 lab_AuswahlHinweis.Visibility = Visibility.Visible;
                 tv_Gliederung_Auswahl.Visibility = Visibility.Hidden;
+                tv_Gliederung_Copy.Visibility = Visibility.Hidden;
                 if (Auswahl_Schraube == true)
                 {
                     tv_Gliederung_Copy.Visibility = Visibility.Visible;
@@ -841,12 +842,13 @@ namespace Schraubentechnik_GmbH_und_Co._KG
                 }
                 if(Auswahl_Mutter == true)
                 {
+                    tv_Gliederung_Copy.Visibility = Visibility.Hidden;
                     tv_Gliederung_Mutter.Visibility = Visibility.Visible;
                     grd_Mutter.Visibility = Visibility.Visible;
                 }
                 if(Auswahl_Kugellager == true)
                 {
-
+                    lab_KugellagerHinweis.Visibility = Visibility.Visible;
                 }
             }else
             {
@@ -1083,7 +1085,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             {
                 if (MGewindedarstellung == "technisch")
                 {
-                    CatiaControlM.CatiaStartenM(m, MGewindedarstellung);
+                    //CatiaControlM.CatiaStartenM(m, MGewindedarstellung);
+                    lab_Mutter_EingabenUeberpruefen.Content = "Noch nicht verfügbar!";
+                    lab_Mutter_EingabenUeberpruefen.Visibility = Visibility.Visible;
 
                 }
                 else if (MGewindedarstellung == "optisch")
@@ -1114,6 +1118,23 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         private void tvi_Mutter_Selected(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Btn_Mutter_Zurück_Click(object sender, RoutedEventArgs e)
+        {
+            grd_Auswahl.Visibility = Visibility.Visible;
+            grd_Mutter.Visibility = Visibility.Hidden;
+            grd_Gewinderichtung.Visibility = Visibility.Hidden;
+            tv_Gliederung_Auswahl.Visibility = Visibility.Visible;
+            tv_Gliederung_Mutter.Visibility = Visibility.Hidden;
+        }
+
+        private void btn_GewinderichtungZurück_Click(object sender, RoutedEventArgs e)
+        {
+            grd_Auswahl.Visibility = Visibility.Visible;
+            grd_Gewinderichtung.Visibility = Visibility.Hidden;
+            tv_Gliederung_Auswahl.Visibility = Visibility.Visible;
+            tv_Gliederung_Copy.Visibility = Visibility.Hidden;
         }
     }
 
