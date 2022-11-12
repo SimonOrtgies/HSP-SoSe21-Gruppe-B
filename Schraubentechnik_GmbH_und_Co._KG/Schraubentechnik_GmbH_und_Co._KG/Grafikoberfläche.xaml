@@ -16,8 +16,16 @@
 
         <Image x:Name="img_Logo" Margin="0,0,511,347" Source="Schrauben.Profis 2 - Kopie.png" Visibility="Visible" Cursor="Cross" Width="226" Height="74"/>
 
+        <TreeView x:Name="tv_Gliederung_Auswahl" Margin="20,74,648,17">
+            <TreeViewItem x:Name="tvi_AuswahlAnfang" Header="Bauteil Auswahl" Selected="tvi_Auswahl_Selected"/>
+        </TreeView>
 
-        <TreeView x:Name="tv_Gliederung_Copy" Margin="20,74,648,17">
+        <TreeView x:Name="tv_Gliederung_Mutter" Margin="20,74,648,17" Visibility="Hidden">
+            <TreeViewItem x:Name="tvi_Mutter_Gewindegroesse" Header="Gewindegröße" Selected="tvi_Mutter_Selected"/>
+        </TreeView>
+
+        <TreeView x:Name="tv_Gliederung_Copy" Margin="20,74,648,17" Visibility="Hidden">
+            <TreeViewItem x:Name="tvi_Auswahl" Header="Bauteil Auswahl" Selected="tvi_Auswahl_Selected"/>
             <TreeViewItem x:Name="tvi_Gewinderichtung" Header="Gewinderichtung" Selected="tvi_Gewinderichtung_Selected"/>
             <TreeViewItem x:Name="tvi_Schraubenkopf" Header="Schraubenkopf" IsExpanded="True" Selected="tvi_Schraubenkopf_Selected"/>
             <TreeViewItem x:Name="tvi_Dimensionen" Header="Dimensionen" IsExpanded="True" Selected="tvi_Dimensionen_Selected">
@@ -29,12 +37,23 @@
             <TreeViewItem x:Name="tvi_Anzahl" Header="Anzahl" Selected="tvi_Anzahl_Selected"/>
         </TreeView>
 
-        <Grid x:Name="grd_Gewinderichtung" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Visible">
+        <Grid x:Name="grd_Auswahl" Margin="190,74,102,17" Background="#FF0022F9" Visibility="Visible">
+            <RadioButton x:Name="rBtn_Schraube" Content="Schraube" HorizontalAlignment="Left" Margin="33,57,0,0" VerticalAlignment="Top" Checked="rBtn_Schraube_Checked" Uid="1"/>
+            <RadioButton x:Name="rBtn_Mutter" Content="Mutter" HorizontalAlignment="Left" Margin="225,57,0,0" VerticalAlignment="Top" Checked="rBtn_Mutter_Checked"/>
+            <RadioButton x:Name="rBtn_Kugellager" Content="Kugellager" HorizontalAlignment="Left" Margin="399,57,0,0" VerticalAlignment="Top" Checked="rBtn_Kugellager_Checked"/>
+            <Label x:Name="lab_Auswahl" Content="Bauteil auswählen:" HorizontalAlignment="Left" Margin="25,19,0,0" VerticalAlignment="Top" Width="173"/>
+            <Button x:Name="btn_AuswahlWeiter" Content="Weiter" HorizontalAlignment="Left" Margin="400,290,0,0" VerticalAlignment="Top" Width="75" Click="btn_AuswahlWeiter_Click"/>
+            <Label x:Name="lab_AuswahlHinweis" Content="Label" HorizontalAlignment="Left" Margin="203,297,0,0" VerticalAlignment="Top" Width="195" Visibility="Hidden"/>
+            <Label x:Name="lab_Auswahl_Copy" Content="Bauteil auswählen:" HorizontalAlignment="Left" Margin="25,127,0,0" VerticalAlignment="Top" Width="173" Visibility="Hidden"/>
+        </Grid>
+
+        <Grid x:Name="grd_Gewinderichtung" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Hidden">
             <RadioButton x:Name="rBtn_Rechtsgewinde" Content="Rechtsgewinde" HorizontalAlignment="Left" Margin="33,57,0,0" VerticalAlignment="Top" Checked="rBtn_Rechtsgewinde_Checked" Uid="1"/>
             <RadioButton x:Name="rBtn_Linksgewinde" Content="Linksgewinde" HorizontalAlignment="Left" Margin="225,57,0,0" VerticalAlignment="Top" Checked="rBtn_Linksgewinde_Checked"/>
             <Label x:Name="lab_Gewinderichtung" Content="Gewinderichtung auswählen:" HorizontalAlignment="Left" Margin="25,19,0,0" VerticalAlignment="Top" Width="173"/>
             <Button x:Name="btn_GewinderichtungWeiter" Content="Weiter" HorizontalAlignment="Left" Margin="400,290,0,0" VerticalAlignment="Top" Width="75" Click="btn_GewinderichtungWeiter_Click"/>
             <Label x:Name="lab_GewinderichtungHinweis" Content="Label" HorizontalAlignment="Left" Margin="203,297,0,0" VerticalAlignment="Top" Width="195" Visibility="Hidden"/>
+            <Label x:Name="lab_Gewinderichtung_Copy" Content="Gewinderichtung auswählen:" HorizontalAlignment="Left" Margin="25,127,0,0" VerticalAlignment="Top" Width="173"/>
         </Grid>
 
         <Grid x:Name="grd_Schraubenkopf" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Hidden" >
@@ -161,7 +180,38 @@
             <Label x:Name="lab_GewindedarstellungsHinweis" Content="Label" HorizontalAlignment="Left" Margin="199,287,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         </Grid>
 
+        <Grid x:Name="grd_Mutter" Margin="190,74,102,17" Background="#FF008C3A" Visibility="Visible">
+            <Label Content="Gedindegröße:" HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="cBx_MutterGewindegroesse" HorizontalAlignment="Left" Margin="146,40,0,0" VerticalAlignment="Top" Width="120" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxDropDownHeight="220" Text="Bitte auswählen..." RenderTransformOrigin="-0.208,0.591">
+                <ComboBoxItem x:Name="cBI_Mm1" Content="M1" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm1_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm1_2" Content="M1,2" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm1_2_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm1_6" Content="M1,6" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm1_6_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm2" Content="M2" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm2_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm2_5" Content="M2,5" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm2_5_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm3" Content="M3" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm3_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm3_5" Content="M3,5" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm3_5_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm4" Content="M4" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm4_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm5" Content="M5" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm5_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm6" Content="M6" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm6_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm7" Content="M7" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm7_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm8" Content="M8" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm8_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm10" Content="M10" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm10_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm12" Content="M12" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm12_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm14" Content="M14" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm14_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm16" Content="M16" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm16_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm20" Content="M20" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm20_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm24" Content="M24" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm24_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm30" Content="M30" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm30_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm36" Content="M36" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm36_Selected"/>
+                <ComboBoxItem x:Name="cBI_Mm42" Content="M42" HorizontalAlignment="Left"  Width="118" Selected="cBI_Mm42_Selected"/>
+            </ComboBox>
+            <Label x:Name="lab_Mutter_Warnung" Content="Label" HorizontalAlignment="Left" Margin="106,68,0,0" VerticalAlignment="Top" Visibility="Visible"/>
+            <Button x:Name="Btn_FertigstellenMutter" Content="Fertigstellen und an Catia übertragen" HorizontalAlignment="Right" Margin="0,290,10,20" Width="209" Click="Btn_Mutter_Fertigstellen_Click"/>
+            <Label x:Name="lab_Mutter_EingabenUeberpruefen" Content="Label" HorizontalAlignment="Left" Margin="289,217,0,0" VerticalAlignment="Top" Visibility="Visible"/>
+            <RadioButton x:Name="rBtn_MOptischesGewinde1" Content="Optisches Gewinde" HorizontalAlignment="Left" Margin="368,250,0,0" VerticalAlignment="Top" Checked="rBtn_MOptischesGewinde_Checked"/>
+            <RadioButton x:Name="rBtn_MTechnischesGewinde" Content="Technisches Gewinde" HorizontalAlignment="Left" Margin="368,270,0,0" VerticalAlignment="Top" Checked="rBtn_MTechnischesGewinde_Checked" Visibility="Visible"/>
 
+        </Grid>
 
     </Grid>
 </UserControl>

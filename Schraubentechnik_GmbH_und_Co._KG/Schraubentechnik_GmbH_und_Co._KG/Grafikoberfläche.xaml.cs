@@ -33,12 +33,24 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         Boolean hatWertGewindelaenge = false;  //prüft ob Gewindelänge einen Wert hat, um den WeiterButton für die Dimensionen einzuschalten
         String Gewindedarstellung = "";     //Gewindedarstellung für Catia festlegen
 
+        Boolean Auswahl_Schraube = false;
+        Boolean Auswahl_Mutter = false;
+        Boolean Auswahl_Kugellager = false;
+        Boolean FinishAuswahl = false;
+        String MGewindedarstellung = "";
+        Boolean FinishMGewindegroesse = false;
+        Boolean FinishMGewindedarstellung = false;
 
-        public Grafikoberfläche(Schraube s)
+        Mutter m;
+
+
+        public Grafikoberfläche(Schraube s, Mutter m)
         {
             this.s = s; //Zuweisung der übergebenen Variable auf die memberVariable schrauben
+            this.m = m;
             InitializeComponent();
         }
+
 
 
         #region Treeview
@@ -647,7 +659,7 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         private void tBx_Anzahl_LostFocus(object sender, RoutedEventArgs e)
         {
             int max = 1000000;
-            int min = 25;
+            int min = 1;
             try
             {
                 int a = Convert.ToInt32(tBx_Anzahl.Text);
@@ -815,9 +827,36 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
 
         }
+
+        private void btn_AuswahlWeiter_Click(object sender, RoutedEventArgs e)
+        {
+            if(FinishAuswahl == true)
+            {
+                lab_AuswahlHinweis.Visibility = Visibility.Visible;
+                tv_Gliederung_Auswahl.Visibility = Visibility.Hidden;
+                if (Auswahl_Schraube == true)
+                {
+                    tv_Gliederung_Copy.Visibility = Visibility.Visible;
+                    grd_Gewinderichtung.Visibility = Visibility.Visible;
+                }
+                if(Auswahl_Mutter == true)
+                {
+                    tv_Gliederung_Mutter.Visibility = Visibility.Visible;
+                    grd_Mutter.Visibility = Visibility.Visible;
+                }
+                if(Auswahl_Kugellager == true)
+                {
+
+                }
+            }else
+            {
+                lab_AuswahlHinweis.Visibility = Visibility.Visible;
+                lab_AuswahlHinweis.Content = "Bitte Bauteil auswählen";
+            }
+        }
         #endregion
 
-       
+
 
         private void btn_Zurueck_Click(object sender, RoutedEventArgs e)
         {
@@ -854,8 +893,229 @@ namespace Schraubentechnik_GmbH_und_Co._KG
             lab_GewindedarstellungsHinweis.Visibility = Visibility.Hidden;
             Gewindedarstellung = "optisch";
         }
+
+        #endregion
+
+        #region AnfangsAuswahl
+        private void rBtn_Schraube_Checked(object sender, RoutedEventArgs e)
+        {
+            Auswahl_Schraube = true;
+            FinishAuswahl = true;
+
+        }
+
+        private void rBtn_Mutter_Checked(object sender, RoutedEventArgs e)
+        {
+            Auswahl_Mutter = true;
+            FinishAuswahl = true;
+        }
+
+        private void rBtn_Kugellager_Checked(object sender, RoutedEventArgs e)
+        {
+            Auswahl_Kugellager = true;
+            FinishAuswahl = true;
+        }
+
+
+
         #endregion
 
 
+        private void tvi_Auswahl_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #region MutterGewindegroesse
+        private void cBI_Mm1_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 1;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+
+        private void cBI_Mm1_2_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 1.2f;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+
+        private void cBI_Mm1_6_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 1.6f;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+
+        private void cBI_Mm2_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 2;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm2_5_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 2.5f;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm3_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 3;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm3_5_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 3.5f;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm4_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 4;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm5_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 5;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm6_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 6;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm7_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 7;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm8_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 8;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm9_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 9;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm10_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 10;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm12_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 12;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm14_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 14;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm16_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 16;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm20_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 20;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm24_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 24;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm30_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 30;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm36_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 36;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+        private void cBI_Mm42_Selected(object sender, RoutedEventArgs e)
+        {
+            float g = 42;
+            m.metrischeGewindegroesse = MassTabelle.getMetrischeGewindeG(g);
+            FinishMGewindegroesse = true;
+        }
+
+        private void rBtn_MOptischesGewinde_Checked(object sender, RoutedEventArgs e)
+        {
+            MGewindedarstellung = "optisch";
+            FinishMGewindedarstellung = true;
+            lab_Mutter_EingabenUeberpruefen.Visibility = Visibility.Hidden;
+        }
+
+        private void rBtn_MTechnischesGewinde_Checked(object sender, RoutedEventArgs e)
+        {
+            MGewindedarstellung = "technisch";
+            FinishMGewindedarstellung = true;
+            lab_Mutter_EingabenUeberpruefen.Visibility = Visibility.Hidden;
+        }
+
+        private void Btn_Mutter_Fertigstellen_Click(object sender, RoutedEventArgs e)
+        {
+            if (FinishMGewindegroesse == true && FinishMGewindedarstellung == true)
+            {
+                if (MGewindedarstellung == "technisch")
+                {
+                    CatiaControlM.CatiaStartenM(m, MGewindedarstellung);
+
+                }
+                else if (MGewindedarstellung == "optisch")
+                {
+                    CatiaControlM.CatiaStartenM(m, MGewindedarstellung);
+                }
+            }
+            else if (FinishMGewindegroesse == true && FinishMGewindedarstellung == false)
+            {
+                lab_Mutter_EingabenUeberpruefen.Content = "Bitte Gewindedarstellung auswählen!";
+                lab_Mutter_EingabenUeberpruefen.Visibility = Visibility.Visible;
+            }
+            else if (FinishMGewindegroesse == false && FinishMGewindedarstellung == true)
+            {
+                lab_Mutter_Warnung.Content = "Bitte zuerst Gewindegröße auswählen!";
+                lab_Mutter_Warnung.Visibility = Visibility.Visible;
+            }
+            else if (FinishMGewindegroesse == false && FinishMGewindedarstellung == false)
+            {
+                lab_Mutter_EingabenUeberpruefen.Content = "Bitte Gewindedarstellung auswählen!";
+                lab_Mutter_EingabenUeberpruefen.Visibility = Visibility.Visible;
+                lab_Mutter_Warnung.Content = "Bitte zuerst Gewindegröße auswählen!";
+                lab_Mutter_Warnung.Visibility = Visibility.Visible;
+            }
+            
+        }
+
+        private void tvi_Mutter_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
+
+    #endregion
 }

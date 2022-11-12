@@ -13,8 +13,10 @@ namespace Schraubentechnik_GmbH_und_Co._KG
         static void Main(string[] args)
         {
             Schraube s = new Schraube();
+            Mutter m = new Mutter();
             s.metrischeGewindegroesse = null;  //Um zu überprüfen ob schon eine Gewindegröße gesetzt wurde
-            new GUI_Zugriff(s);
+            m.metrischeGewindegroesse = null;
+            new GUI_Zugriff(s, m);
         }
 
 

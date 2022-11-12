@@ -37,7 +37,9 @@ namespace Schraubentechnik_GmbH_und_Co._KG
 
         public float MinSchaftlaengeRechnung(float mutterhoehe) //Berechnung der minimalen Schaftlänge
         {
-            float s = 3 * mutterhoehe;
+
+            double d = Math.Round( 1 * mutterhoehe);
+            float s = (float)d;
             return s;  //Rückgabe der minimalen Länge
         }
 
